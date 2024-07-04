@@ -1,103 +1,5 @@
-// let correo = "leop88567@gmail.com";
-// let contrasenia = "348fj43h4f";
-
-// let regCorreo =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
-// let regContrasenia = /^[a-zA-Z0-9\s.,!?;:'"()\-]+$/;
-
-// function Validar(){
-//     if(regCorreo.test(correo) == false){
-//         console.log("Direccion de correo no valida");
-//         return false;
-    
-//       }else if(regContrasenia.test(contrasenia) == false){
-//         console.log("Contraseña poco segura");
-//         return false;
-    
-//       }else{
-//         console.log("Todo biem");
-//         return true;
-//         //window.location = "\ForoDeDiscucion\maquetado\inicio.html";
-//       }
-// }
-// Validar()
-
-// ------------------------------------------------TEST ENVIO DE DATOS
-// document.addEventListener('DOMContentLoaded', (event) => {
-//     const formulario = document.getElementById('formularioRegistro');
-
-//     formulario.addEventListener('submit', function(event) {
-//         event.preventDefault(); // Evita el comportamiento predeterminado del formulario
-
-//         const formData = new FormData(formulario);
-
-//         const data = {};
-//         formData.forEach((value, key) => {
-//             data[key] = value;
-//         });
-
-//         // Enviar datos como JSON
-//         fetch('/ForoDeDiscucion/php/prueba.php', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(data)
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             // Manejar la respuesta del servidor
-//             console.log('Success:', data);
-//         })
-//         .catch((error) => {
-//             // Manejar errores
-//             console.error('Error:', error);
-//         });
-//     });
-// });
-// ----------------------------------------------------------TEST OPERADOR TERNAIO
-// age = 16;
-// let votable = (age > 18)? "Puede pasar":"No puede pasar";
-// console.log(votable);
-
-
-
-// document.addEventListener('DOMContentLoaded', (event) => {
-//   const formulario = document.getElementById('formularioRegistro');
-
-//   formulario.addEventListener('submit', function(event) {
-//     event.preventDefault(); 
-
-//     const formData = new FormData(formulario);
-    
-//     const data = {};
-//     formData.forEach((value, key) => {
-//       data[key] = value;
-//     });
-
-//     (ValidarCorreo(data["correo"])) == true ? mostrarErrorCoreo = "Correo no valido": true;
-//     (ValidarContrasenia(data["contrasenia"]) == true) ? mostrarErrorContrasenia.textContent = "Contraseña muy debil": true;
-
-//     // Enviar datos al servidor
-//     fetch('/ForoDeDiscucion/php/insercionFormulario.php', {
-//       method: 'POST',
-//       headers: {
-//           'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(data)
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       // Respuesta del servidor
-//     //   const errorCredenciales = document.getElementById("errorCredenciales")
-//     //   errorCredenciales.textContent = data;
-          
-//       console.log('Success:', data);
-//     })
-//     .catch((error) => {
-//         console.error('Error:', error);
-//     });
-//   });
-// });
+// Validar correo
+// RegExp obtenida de 
 function ValidarCorreo(correo){
   const mostrarErrorCoreo = document.getElementById("errorCorreo");
 
@@ -109,6 +11,7 @@ function ValidarCorreo(correo){
       return false;
   }
 }
+
 
 // Valida contraseña
 // RegExp obtenida de 
@@ -124,13 +27,6 @@ function ValidarContrasenia(contrasenia){
       return false;
   }
 }
-
-
-
-
-
-
-
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -164,8 +60,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
           .then(response => response.json())
           .then(data => {
             // Respuesta del servidor
-          //   const errorCredenciales = document.getElementById("errorCredenciales")
-          //   errorCredenciales.textContent = data;
                 
             console.log('Success:', data);
           })
@@ -175,10 +69,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         
        }
 
-     // Enviar datos al servidor
-
    });
 });
+
 
 
 
