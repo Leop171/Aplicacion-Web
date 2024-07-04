@@ -1,5 +1,13 @@
 <?php
-// include __DIR__. "/config.php";
+include __DIR__. "/config.php";
+
+ $correo = strval('leo345@gmail.com');
+ $contraseniaU = strval('12345');
+ $clave = 20;
+ $nombre = 'Leonaro1234';
+ $foto = "foto";
+ $descripcion = "Descripcion";
+ $fecha = "2024-01-01";
 
 header('Content-Type: application/json');
 
@@ -15,7 +23,20 @@ if ($data) {
     LimpiarCorreo($correo);
     LimpiarContrasenia($contrasenia);    
 
-        
+    $insertarUsuario = $conexion -> prepare("INSERT INTO foro.usuario (codigo, nombre, correo, contrasenia, foto, descripcion, fecha)
+    VALUES(:clave, :nombre, :correo, :contrasenia, :foto, :descripcion, :fecha);");
+
+    $insertarUsuario -> bindParam(':correo', $correo);
+    $insertarUsuario -> bindParam(':contrasenia', $contraseniaU);
+    $insertarUsuario -> bindParam(':clave', $clave);
+    $insertarUsuario -> bindParam(':nombre', $nombre);
+    $insertarUsuario -> bindParam(':foto', $foto);
+    $insertarUsuario -> bindParam(':descripcion', $descripcion);
+    $insertarUsuario -> bindParam(':fecha', $fecha);
+
+    $insertarUsuario -> execute();
+    // echo "Se inserto correctamente";
+    
     // Enviar una respuesta de vuelta al cliente
     echo json_encode([
         'status' => 'success',
