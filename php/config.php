@@ -7,10 +7,10 @@ $nombreServidor = "localhost";
 try{
     $conexion = new PDO("mysql:host=$nombreServidor; dbname = foro", $nombreUsuario, $contraseniaDB);
     $conexion -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Conexion exitosa";
+//    echo "Conexion exitosa";
 
 }catch(PDOException $error){
-    echo "Algo salio mal ". $error -> getMessage(); 
+//    echo "Algo salio mal ". $error -> getMessage(); 
 }
 
 
