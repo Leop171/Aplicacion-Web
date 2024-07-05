@@ -2,7 +2,7 @@
 include __DIR__. "/config.php";
 
 
-$clave = 23;
+$clave = 26;
 $nombre = 'Leonaro1234';
 $foto = "foto";
 $descripcion = "Descripcion";
@@ -26,6 +26,9 @@ try{
         elseif(!LimpiarContrasenia($contrasenia)){
             throw new Exception("Contrasenia poco segura");
         }    
+
+        // Se crea un hash de 60 caracteres por lo que no se puede almacenar en la columna actual VARCHAR(20)
+        // $contraseniaHash = password_hash($contrasenia, PASSWORD_BCRYPT);
     
         // Verificar que el correo no existe
         $buscarCorreo = $conexion->prepare("SELECT * FROM foro.usuario WHERE correo = :correo");    
@@ -40,7 +43,7 @@ try{
         VALUES(:clave, :nombre, :correo, :contrasenia, :foto, :descripcion, :fecha);");
     
         $insertarUsuario -> bindParam(':correo', $correo);
-        $insertarUsuario -> bindParam(':contrasenia', $contrasenia);
+        $insertarUsuario -> bindParam(':contrasenia', $contrasenia, PDO::PARAM_STR);
         $insertarUsuario -> bindParam(':clave', $clave);
         $insertarUsuario -> bindParam(':nombre', $nombre);
         $insertarUsuario -> bindParam(':foto', $foto);
@@ -49,6 +52,8 @@ try{
     
         $insertarUsuario -> execute();
         // echo "Se inserto correctamente";
+
+        
         
         // Enviar una respuesta de vuelta al cliente
         echo json_encode([
@@ -61,9 +66,9 @@ try{
 }catch(Exception $Error){
     echo json_encode([
         'status' => 'succes',
-        'message' => 'Error'
-        // 'correo' => $Error ->getMessage(),
-        // 'contrasenia' => $contrasenia
+        'message' => 'Error',
+        'correo' => $Error ->getMessage(),
+        'contrasenia' => $contrasenia
     ]);
 }
 
