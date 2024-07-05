@@ -53,17 +53,17 @@ try{
         // Enviar una respuesta de vuelta al cliente
         echo json_encode([
         'status' => 'success',
-        'message' => 'Datos recibidos correctamente',
-        'correo' => $correo,
-        'contrasenia' => $contrasenia
+        'message' => 'Datos recibidos correctamente'
+        // 'correo' => $correo,
+        // 'contrasenia' => $contrasenia
         ]);    
     }
 }catch(Exception $Error){
     echo json_encode([
         'status' => 'succes',
-        'message' => 'Error',
-        'correo' => $Error ->getMessage(),
-        'contrasenia' => $contrasenia
+        'message' => 'Error'
+        // 'correo' => $Error ->getMessage(),
+        // 'contrasenia' => $contrasenia
     ]);
 }
 
