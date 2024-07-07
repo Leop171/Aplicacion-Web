@@ -56,11 +56,18 @@ if ($data) {
 //         'message' => 'No se recibieron datos'
 //     ]);
 // }
+// echo $_SESSION["codigoUsuario"];
 
+// $fecha = Date('Y/m/d');
+// var_dump($fecha);
+$correo = 'leop88567@gmail.com';
+include __DIR__. "/config.php";
 
-$fecha = Date('Y/m/d');
-var_dump($fecha);
-
+        $buscarUsarioCreado = $conexion->prepare("SELECT * FROM foro.usuario WHERE correo = :correo"); 
+        $buscarUsarioCreado->bindParam(':correo', $correo);
+        $buscarUsarioCreado->execute();
+        $nuevoUsuario = $buscarUsarioCreado->fetch(PDO::FETCH_ASSOC);
+        echo $nuevoUsuario['codigo'];
 
 
 // --------------------------------------------------------------------------------------------------------
