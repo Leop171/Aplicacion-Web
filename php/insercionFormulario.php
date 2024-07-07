@@ -1,8 +1,7 @@
 <?php
 include __DIR__. "/config.php";
 
-
-$clave = 27;
+//$clave = 27;
 $nombre = 'Leonaro1234';
 $foto = "foto";
 $descripcion = "Descripcion";
@@ -38,13 +37,13 @@ try{
         if($buscarCorreo->rowCount() > 0){
             throw new Exception("El correo ya esta en uso");
         }
-    
-        $insertarUsuario = $conexion -> prepare("INSERT INTO foro.usuario (codigo, nombre, correo, contrasenia, foto, descripcion, fecha)
-        VALUES(:clave, :nombre, :correo, :contrasenia, :foto, :descripcion, :fecha);");
+        
+        $insertarUsuario = $conexion -> prepare("INSERT INTO foro.usuario (nombre, correo, contrasenia, foto, descripcion, fecha)
+        VALUES(:nombre, :correo, :contrasenia, :foto, :descripcion, :fecha);");
     
         $insertarUsuario -> bindParam(':correo', $correo);
         $insertarUsuario -> bindParam(':contrasenia', $contrasenia, PDO::PARAM_STR);
-        $insertarUsuario -> bindParam(':clave', $clave);
+    //    $insertarUsuario -> bindParam(':clave', $clave);
         $insertarUsuario -> bindParam(':nombre', $nombre);
         $insertarUsuario -> bindParam(':foto', $foto);
         $insertarUsuario -> bindParam(':descripcion', $descripcion);
@@ -53,7 +52,19 @@ try{
         $insertarUsuario -> execute();
         // echo "Se inserto correctamente";
 
-                
+        // Buscar nuevamente al usuario recien creado
+        $buscarUsarioCreado = $conexion->prepare("SELECT * FROM foro.usuario WHERE correo = :correo"); 
+        $buscarUsarioCreado->bindParam(':correo', $correo);
+        $buscarUsarioCreado->execute();
+        $nuevoUsuario = $buscarUsarioCreado->fetch(PDO::FETCH_ASSOC);
+        
+        if($nuevoUsuario){
+            throw new Exception($nuevoUsuario["codigo"]);
+        }
+       
+        session_start();
+        // Crear la sesion con la pk del usuario creado
+        $_SESSION["codigoUsuario"] = $nuevoUsuario["codigo"];
         
         // Enviar una respuesta de vuelta al cliente
         echo json_encode([
