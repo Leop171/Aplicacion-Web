@@ -2,11 +2,11 @@
 include __DIR__. "/config.php";
 
 
-$clave = 26;
+$clave = 27;
 $nombre = 'Leonaro1234';
 $foto = "foto";
 $descripcion = "Descripcion";
-$fecha = "2024-01-01";
+$fecha = date("Y/m/d");
 
 header('Content-Type: application/json');
 
@@ -53,7 +53,7 @@ try{
         $insertarUsuario -> execute();
         // echo "Se inserto correctamente";
 
-        
+                
         
         // Enviar una respuesta de vuelta al cliente
         echo json_encode([
