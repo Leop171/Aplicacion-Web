@@ -60,15 +60,16 @@ if ($data) {
 
 // $fecha = Date('Y/m/d');
 // var_dump($fecha);
-$correo = 'leop88567@gmail.com';
+// $correo = 'leop88567@gmail.com';
 include __DIR__. "/config.php";
 
-        $buscarUsarioCreado = $conexion->prepare("SELECT * FROM foro.usuario WHERE correo = :correo"); 
-        $buscarUsarioCreado->bindParam(':correo', $correo);
-        $buscarUsarioCreado->execute();
-        $nuevoUsuario = $buscarUsarioCreado->fetch(PDO::FETCH_ASSOC);
-        echo $nuevoUsuario['codigo'];
+//         $buscarUsarioCreado = $conexion->prepare("SELECT * FROM foro.usuario WHERE correo = :correo"); 
+//         $buscarUsarioCreado->bindParam(':correo', $correo);
+//         $buscarUsarioCreado->execute();
+//         $nuevoUsuario = $buscarUsarioCreado->fetch(PDO::FETCH_ASSOC);
+//         echo $nuevoUsuario['codigo'];
 
+header("Location:ForoDeDiscucion/php/insercionFormulario.php");
 
 // --------------------------------------------------------------------------------------------------------
 
