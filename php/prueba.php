@@ -31,31 +31,36 @@ if ($data) {
 
 
 // Funcion que recibe el correo y contraseña de registro
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 
-// Leer el JSON
-$input = file_get_contents("php://input");
-$datos = json_decode($input, true);
+// // Leer el JSON
+// $input = file_get_contents("php://input");
+// $datos = json_decode($input, true);
 
-if ($datos) {
-    $correo = $datos['correo'] ?? 'No email';
-    $contrasenia = $datos['contrasenia'] ?? 'No password';
+// if ($datos) {
+//     $correo = $datos['correo'] ?? 'No email';
+//     $contrasenia = $datos['contrasenia'] ?? 'No password';
 
-    // Aquí puedes hacer cualquier cosa con los datos, como guardarlos en una base de datos
+//     // Aquí puedes hacer cualquier cosa con los datos, como guardarlos en una base de datos
 
-    // Enviar una respuesta de vuelta al cliente
-    echo json_encode([
-        'status' => 'success',
-        'message' => 'Datos recibidos correctamente',
-        'correo' => $correo,
-        'contrasenia' => $contrasenia
-    ]);
-} else {
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'No se recibieron datos'
-    ]);
-}
+//     // Enviar una respuesta de vuelta al cliente
+//     echo json_encode([
+//         'status' => 'success',
+//         'message' => 'Datos recibidos correctamente',
+//         'correo' => $correo,
+//         'contrasenia' => $contrasenia
+//     ]);
+// } else {
+//     echo json_encode([
+//         'status' => 'error',
+//         'message' => 'No se recibieron datos'
+//     ]);
+// }
+
+
+$fecha = Date('Y/m/d');
+var_dump($fecha);
+
 
 
 // --------------------------------------------------------------------------------------------------------
