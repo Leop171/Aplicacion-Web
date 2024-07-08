@@ -69,7 +69,7 @@ include __DIR__. "/config.php";
 //         $nuevoUsuario = $buscarUsarioCreado->fetch(PDO::FETCH_ASSOC);
 //         echo $nuevoUsuario['codigo'];
 
-header("Location:ForoDeDiscucion/php/insercionFormulario.php");
+header("Location:\ForoDeDiscucion\maquetado\perfil.html");
 
 // --------------------------------------------------------------------------------------------------------
 
