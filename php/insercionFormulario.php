@@ -58,14 +58,15 @@ try{
         $buscarUsarioCreado->execute();
         $nuevoUsuario = $buscarUsarioCreado->fetch(PDO::FETCH_ASSOC);
         
-        if($nuevoUsuario){
-            throw new Exception($nuevoUsuario["codigo"]);
+        if(!$nuevoUsuario){
+            throw new Exception("No se puedo crear el usuario");
         }
        
         session_start();
         // Crear la sesion con la pk del usuario creado
         $_SESSION["codigoUsuario"] = $nuevoUsuario["codigo"];
-        
+    
+
         // Enviar una respuesta de vuelta al cliente
         echo json_encode([
         'status' => 'success',
@@ -73,6 +74,7 @@ try{
         // 'correo' => $correo,
         // 'contrasenia' => $contrasenia
         ]);    
+
     }
 }catch(Exception $Error){
     echo json_encode([
