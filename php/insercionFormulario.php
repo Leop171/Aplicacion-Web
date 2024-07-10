@@ -65,26 +65,35 @@ try{
         session_start();
         // Crear la sesion con la pk del usuario creado
         $_SESSION["codigoUsuario"] = $nuevoUsuario["codigo"];
-    
+        
+        header('Content-Type: application/json');
 
-        // Enviar una respuesta de vuelta al cliente
         echo json_encode([
-        'status' => 'success',
-        'message' => 'Datos recibidos correctamente'
-        // 'correo' => $correo,
-        // 'contrasenia' => $contrasenia
-        ]);    
+            'status' => 'Accediendo',
+            'message' => 'Accediendo'
+        ]);
+
+        exit();
+
+        // header('\ForoDeDiscucion\php\prueba.php');
+        // exit(); 
 
     }
 }catch(Exception $Error){
     echo json_encode([
-        'status' => 'succes',
+        'status' => 'Error',
         'message' => 'Error',
         'correo' => $Error ->getMessage(),
         'contrasenia' => $contrasenia
     ]);
 }
 
+header('Content-Type: application/json');
+echo json_encode($response);
+exit();
+
+// header("Location:\ForoDeDiscucion\maquetado\perfil.html");
+// exit();
 
 // if ($data) {
 //     $correo = $data['correo'] ?? 'No correo';
