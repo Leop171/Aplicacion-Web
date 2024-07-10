@@ -60,8 +60,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
           .then(response => response.json())
           .then(data => {
             // Respuesta del servidor
+            // maquetado\perfil.html
+            // \ForoDeDiscucion\maquetado\perfil.html
+
+            if(data.status === 'Accediendo'){
+              window.location.replace('/ForoDeDiscucion/maquetado/perfil.html')
+            }else{
+              console.log('salio mal', data);
+            }
                 
-            console.log('Success:', data);
+            // console.log('Success:', data);
           })
           .catch((error) => {
               console.error('Error:', error);
