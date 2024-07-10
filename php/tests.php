@@ -118,7 +118,7 @@ $foto = "foto";
 $descripcion = "Descripcion";
 $fecha = date("Y/m/d");
 
-$eCorreo = "leop8342@gmail.com";
+$eCorreo = "leop04586@gmail.com";
 $eContrasenia = "YtasrR534@#8T";
 
 $data = array("correo" => $eCorreo, "contrasenia" => $eContrasenia);
