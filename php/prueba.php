@@ -61,6 +61,10 @@ if ($data) {
 // $fecha = Date('Y/m/d');
 // var_dump($fecha);
 // $correo = 'leop88567@gmail.com';
+try{
+
+session_start();
+$codigo = $_SESSION["codigoUsuario"];
 include __DIR__. "/config.php";
 
 //         $buscarUsarioCreado = $conexion->prepare("SELECT * FROM foro.usuario WHERE correo = :correo"); 
@@ -69,7 +73,39 @@ include __DIR__. "/config.php";
 //         $nuevoUsuario = $buscarUsarioCreado->fetch(PDO::FETCH_ASSOC);
 //         echo $nuevoUsuario['codigo'];
 
-header("Location:\ForoDeDiscucion\maquetado\perfil.html");
+$obtenerUsuario = $conexion->prepare("SELECT codigo, nombre, correo, foto, descripcion, fecha FROM foro.usuario WHERE codigo = :codigo");
+    $obtenerUsuario->bindParam("codigo", $codigo, PDO::PARAM_STR);
+    $obtenerUsuario->execute();
+
+    $resultadoUsuario = $obtenerUsuario->fetch(PDO::FETCH_ASSOC);
+
+    $usuarioCodigo = $resultadoUsuario["codigo"];
+    $usuarioNombre = $resultadoUsuario["nombre"];
+    $usuarioCorreo = $resultadoUsuario["correo"];
+    $usuarioFoto = $resultadoUsuario["foto"];
+    $usuarioDescripcion = $resultadoUsuario["descripcion"];
+
+    // json_encode([
+    // "usuarioNombre" => $resultadoUsuario["nombre"],
+    // "foto" => $resultadoUsuario["foto"],
+    // "descripcion" => $resultadoUsuario["descripcion"],
+    // "correo" => $resultadoUsuario["correo"]
+    // ]);
+}catch(Exception $Error){
+    json_encode([
+        "usuarioNombre" => $Error -> getMessage(),
+        "foto" => "foto"
+        // "descripcion" =>"descripcion",
+        // "correo" => "correo"
+        ]);
+}
+
+    echo $usuarioCodigo;
+    echo $usuarioNombre;
+    echo $usuarioFoto;
+    echo $usuarioDescripcion;
+
+// header("Location:\ForoDeDiscucion\maquetado\perfil.html");
 
 // --------------------------------------------------------------------------------------------------------
 
@@ -157,12 +193,12 @@ $nombreServidor = "localhost";
 
 ?>
 
-<nav>
+<!-- <nav>
     <a href="\ForoDeDiscucion\maquetado\iniciar-sesion.html">Iniciar sesion</a>
     <a href="\ForoDeDiscucion\maquetado\registro.html">Registrarse</a>
     <a href="\ForoDeDiscucion\maquetado\perfil.html">Perfil</a>
     <a href="\ForoDeDiscucion\maquetado\inicio.html">Inicio</a>
-</nav>
+</nav> -->
 
 
 <!-- <> -->
