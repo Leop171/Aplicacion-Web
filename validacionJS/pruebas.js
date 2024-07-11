@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     errorCampos.textContent = "Correo no valido";
     }
     else if(!ValidarContrasenia(data["contrasenia"])){
-      errorCampos.textContent = "Contraseña no valida";
+      errorCampos.textContent = "Contraseña debe contener al menos 1 numero, 1 simbolo y 1 mayuscula";
     }
     else{
           fetch('/ForoDeDiscucion/php/insercionFormulario.php', {
@@ -64,15 +64,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
             // \ForoDeDiscucion\maquetado\perfil.html
 
             if(data.status === 'Accediendo'){
-              window.location.replace('/ForoDeDiscucion/maquetado/perfil.html')
+              window.location.replace('/ForoDeDiscucion/maquetado/perfil.php');
             }else{
-              console.log('salio mal', data);
+              errorCampos.textContent = data.message;
             }
-                
-            // console.log('Success:', data);
+
           })
           .catch((error) => {
-              console.error('Error:', error);
+             console.error('Error:', error);
           });
         
        }
