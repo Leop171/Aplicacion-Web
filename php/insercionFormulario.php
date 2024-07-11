@@ -75,22 +75,14 @@ try{
 
         exit();
 
-        // header('\ForoDeDiscucion\php\prueba.php');
-        // exit(); 
-
     }
 }catch(Exception $Error){
     echo json_encode([
         'status' => 'Error',
-        'message' => 'Error',
-        'correo' => $Error ->getMessage(),
-        'contrasenia' => $contrasenia
+        'message' => $Error ->getMessage()
     ]);
 }
 
-header('Content-Type: application/json');
-echo json_encode($response);
-exit();
 
 // header("Location:\ForoDeDiscucion\maquetado\perfil.html");
 // exit();
