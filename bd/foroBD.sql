@@ -40,10 +40,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Foro`.`etiqueta` ;
 
 CREATE TABLE IF NOT EXISTS `Foro`.`etiqueta` (
-  `codigo` INT NOT NULL,
+  `codigo` INT AUTO_INCREMENT PRIMARY KEY,
   `nombre` VARCHAR(20) NULL,
-  `tema` VARCHAR(20) NULL,
-  PRIMARY KEY (`codigo`))
+  `tema` VARCHAR(20) NULL,)
 ENGINE = InnoDB;
 
 
@@ -129,12 +128,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Foro`.`foro` ;
 
 CREATE TABLE IF NOT EXISTS `Foro`.`foro` (
-  `codigo` INT NOT NULL,
+  `codigo` INT AUTO_INCREMENT PRIMARY KEY,
   `nombre` VARCHAR(45) NULL,
   `fecha` DATETIME NULL,
   `tema` VARCHAR(40) NULL,
-  `descripcion` VARCHAR(200) NULL,
-  PRIMARY KEY (`codigo`))
+  `descripcion` VARCHAR(200) NULL,)
 ENGINE = InnoDB;
 
 
@@ -206,3 +204,5 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 -- CAMBIE DESDE MYSQL usuario.codigo AHORA SE AUTOINCREMENTA
+-- CAMBIE DESDE MYSQL etiqueta.codigo AHORA SE AUTOINCREMENTA
+-- CAMBIE DESDE MYSQL foro.codigo AHORA SE AUTOINCREMENTA
