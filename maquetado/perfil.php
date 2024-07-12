@@ -6,7 +6,8 @@ if(!isset($_SESSION["codigoUsuario"])){
     exit();
 }
 else{
-    include __DIR__. "\config.php";
+    include __DIR__. '/../php/config.php';
+    include __DIR__. "/../php/mysql.php";
 }
 ?>
 
@@ -23,10 +24,11 @@ else{
             <img src="" alt="Foto de Perfil">
         </div>
         <div class="informacion-personal">
-            <p id="usuario-nombre"></p>
-            <p id="usuario-correo"></p>
-            <p id="usuario-fecha"></p>
-
+            <p id="usuario-nombre"><?php echo htmlspecialchars($usuarioNombre) ?></p>
+            <p id="usuario-correo"><?php echo htmlspecialchars($usuarioCorreo) ?></p>
+            <p id="usuario-descripcion"><?php  echo htmlspecialchars($usuarioDescripcion) ?></p>
+            <p id="usuario-fecha"><p>Se unio: <?php echo htmlspecialchars($usuarioFecha)?></p>
+            <p><?php echo $_SESSION["codigoUsuario"]; ?></p>
         </div>
 
     </div>    
