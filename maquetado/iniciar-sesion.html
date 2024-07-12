@@ -2,28 +2,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilos/estilos-sesion.css">
+    <link rel="stylesheet" href="\ForoDeDiscucion\estilos\estilos-perfil.css">
     <title>Iniciar sesion</title>
 
 </head>
 <body>
     <div>
-        <form action="" class="iniciar-sesion">
-            <h1>Iniciar Sesion</h1>
-            <input type="text">
-            <input type="password" name="contasenia" id="">
-            <input type="submit">            
-        </form>
-
-        <a href="registro.html">No tienes una cuenta?</a>
-    </div>  
-
-    <nav>
-        <a href="\ForoDeDiscucion\maquetado\iniciar-sesion.html">Iniciar sesion</a>
-        <a href="\ForoDeDiscucion\maquetado\registro.html">Registrarse</a>
-        <a href="\ForoDeDiscucion\maquetado\perfil.html">Perfil</a>
-        <a href="\ForoDeDiscucion\maquetado\inicio.html">Inicio</a>
-    </nav>
+        <form  id="formularioRegistro" class="iniciar-sesion">
+           <h1>Inicia Sesion</h1>
+           <input type="" name="correo" id="correo" required>
+           <p id="errorCorreo"></p>
+           <input type="password" name="contrasenia" id="contrasenia" required>   
+           <p id="errorContrasenia"></p>
+           <input type="submit" id="enviar">
+           <p id="errorCampos"></p>
+       </form>
+       
+   </div> 
+   
+   <nav>
+       <a href="\ForoDeDiscucion\maquetado\iniciar-sesion.html">Iniciar sesion</a>
+       <a href="\ForoDeDiscucion\maquetado\registro.html">Registrarse</a>
+       <a href="\ForoDeDiscucion\maquetado\perfil.html">Perfil</a>
+       <a href="\ForoDeDiscucion\maquetado\inicio.html">Inicio</a>
+   </nav>
 
 </body>
 </html>
