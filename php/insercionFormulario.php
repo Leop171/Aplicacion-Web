@@ -27,7 +27,7 @@ try{
         }    
 
         // Se crea un hash de 60 caracteres por lo que no se puede almacenar en la columna actual VARCHAR(20)
-        // $contraseniaHash = password_hash($contrasenia, PASSWORD_BCRYPT);
+        $contraseniaHash = password_hash($contrasenia, PASSWORD_BCRYPT);
     
         // Verificar que el correo no existe
         $buscarCorreo = $conexion->prepare("SELECT * FROM foro.usuario WHERE correo = :correo");    
@@ -42,7 +42,7 @@ try{
         VALUES(:nombre, :correo, :contrasenia, :foto, :descripcion, :fecha);");
     
         $insertarUsuario -> bindParam(':correo', $correo);
-        $insertarUsuario -> bindParam(':contrasenia', $contrasenia, PDO::PARAM_STR);
+        $insertarUsuario -> bindParam(':contrasenia', $contraseniaHash,);
     //    $insertarUsuario -> bindParam(':clave', $clave);
         $insertarUsuario -> bindParam(':nombre', $nombre);
         $insertarUsuario -> bindParam(':foto', $foto);
