@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `Foro`.`usuario` (
   `codigo` INT AUTO_INCREMENT PRIMARY KEY,
   `nombre` VARCHAR(45) NOT NULL,
   `correo` VARCHAR(45) NULL,
-  `contrasenia` VARCHAR(40) NULL,
+  `contrasenia` VARCHAR(65) NULL,
   `foto` VARCHAR(40) NULL,
   `descripcion` VARCHAR(180) NULL,
   `fecha` DATETIME NULL)
@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS `Foro`.`etiqueta` ;
 CREATE TABLE IF NOT EXISTS `Foro`.`etiqueta` (
   `codigo` INT AUTO_INCREMENT PRIMARY KEY,
   `nombre` VARCHAR(20) NULL,
-  `tema` VARCHAR(20) NULL,)
+  `tema` VARCHAR(20) NULL)
 ENGINE = InnoDB;
 
 
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `Foro`.`foro` (
   `nombre` VARCHAR(45) NULL,
   `fecha` DATETIME NULL,
   `tema` VARCHAR(40) NULL,
-  `descripcion` VARCHAR(200) NULL,)
+  `descripcion` VARCHAR(200) NULL)
 ENGINE = InnoDB;
 
 
