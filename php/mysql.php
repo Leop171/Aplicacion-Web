@@ -14,7 +14,7 @@ $usuarioNombre = $resultadoUsuario["nombre"];
 $usuarioCorreo = $resultadoUsuario["correo"];
 $usuarioFoto = $resultadoUsuario["foto"];
 $usuarioDescripcion = $resultadoUsuario["descripcion"];
-
+$usuarioFecha = $resultadoUsuario["fecha"];
 
 
 
