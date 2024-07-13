@@ -42,12 +42,23 @@ Envia en JSON al servidor y espera la repuesta
 */
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  const formulario = document.getElementById('formularioRegistro');
+  const formularioRegistro = document.getElementById('formularioRegistro');
+  const formularioLogin = document.getElementById('formularioLogin');   
 
-  formulario.addEventListener('submit', function(event) {
+  if(formularioRegistro){
+    formularioRegistro.addEventListener('submit', RecibirRegistro);
+  }
+
+  if(formularioLogin){
+    formularioLogin.addEventListener('submit', RecibirLogin);
+  }
+});
+
+function RecibirRegistro(event){
+
     event.preventDefault(); 
 
-    const formData = new FormData(formulario);
+    const formData = new FormData(formularioRegistro);
     
     const data = {};
     formData.forEach((value, key) => {
@@ -76,8 +87,44 @@ document.addEventListener('DOMContentLoaded', (event) => {
     .catch((error) => {
         console.error('Error:', error);
     });
+};
+
+
+// Funcion que recibe el archivo de Formulario Login
+function RecibirLogin(event){
+
+  event.preventDefault(); 
+
+  const formData = new FormData(formularioLogin);
+  
+  const data = {};
+  formData.forEach((value, key) => {
+    data[key] = value;
   });
-});
+
+  (ValidarCorreo(data["correo"])) == true ? mostrarErrorCoreo = "Correo no valido": true;
+  (ValidarContrasenia(data["contrasenia"]) == true) ? mostrarErrorContrasenia.textContent = "Contraseña debe contener  al menos 1 signo, 1 letra mayuscula y 1 numero": true;
+
+  // Enviar datos al servidor
+  fetch('/ForoDeDiscucion/php/FormularioLogin.php', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Respuesta del servidor
+  //   const errorCredenciales = document.getElementById("errorCredenciales")
+  //   errorCredenciales.textContent = data;
+        
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+      console.error('Error:', error);
+  });
+};
 
 
 
