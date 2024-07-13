@@ -15,10 +15,10 @@ try{
     
         // Limpiar los valores recibidos
         if(!LimpiarCorreo($correo)){
-            throw new Exception("Correo no valido");
+            throw new Exception("Correo no valido php");
         }
         elseif(!LimpiarContrasenia($contrasenia)){
-            throw new Exception("Contrasenia poco segura");
+            throw new Exception("Contrasenia poco segura php");
         }    
     
         // Verificar que el correo ya esta registrado
@@ -30,10 +30,13 @@ try{
 
         if(!$resultado){
             throw new Exception("Correo no encontrado");
-        }elseif(password_verify($contrasenia, $resultado["contrasenia"])){
-            $_SESSION["codigoUsuario"] = $resultado["contrasenia"];
-        }        
-
+        }else{
+            if(!password_verify($contrasenia, $resultado["contrasenia"])){
+                throw new Exception("Contraseña Incorrecta");
+            }else{
+                $_SESSION["codigoUsuario"] = $resultado["codigo"];
+            }
+        }
             
         header('Content-Type: application/json');
 
