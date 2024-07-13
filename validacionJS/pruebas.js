@@ -28,15 +28,26 @@ function ValidarContrasenia(contrasenia){
   }
 }
 
-
 document.addEventListener('DOMContentLoaded', (event) => {
-  const formulario = document.getElementById("formularioRegistro");
-  const errorCampos = document.getElementById("errorCampos");
+  const formularioRegistro = document.getElementById('formularioRegistro');
+  const formularioLogin = document.getElementById('formularioLogin');
 
-  formulario.addEventListener('submit', function(event) {
+  if(formularioRegistro){
+    formularioRegistro.addEventListener('submit', RecibirRegistro);
+  }
+
+  if(formularioLogin){
+    formularioLogin.addEventListener('submit', RecibirLogin);
+  }
+});
+
+
+// Funcion que valida y envia el formulario de registro
+function RecibirRegistro(event){
+  
     event.preventDefault(); 
 
-    const formData = new FormData(formulario);
+    const formData = new FormData(formularioRegistro);
 
     const data = {};
     formData.forEach((value, key) => {
@@ -75,10 +86,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
           });
         
        }
-
-   });
-});
-
+};
 
 
 
