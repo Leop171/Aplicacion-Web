@@ -1,69 +1,40 @@
 <?php
-
-// $file = 1;
-header('Content-Type: application/json');
-
+include __DIR__. "/config.php";
+include __DIR__. "/mysql.php";
 
 
-// Leer los datos JSON del cuerpo de la solicitud
-$input = file_get_contents("php://input");
-$data = json_decode($input, true);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $text = $_POST["publicacionTexto"];
+    // $imagen = $_POST["publicacionArchivo"];
+    $imagen = $_FILES["publicacionArchivo"];
 
+    $valores = array();
 
-try{
-    if($data){
-        $texto = $data["publicacionTexto"] ?? "No texto";
+    $valores[0] = $text;
+    $valores[1] = $imagen;
 
-        if($file){
-            $imagen = "Si hay imagen";
-        }else{
-            $imagen = "No hay Imagen";
-        }
+    $carpeta = "./imagenes/". $usuarioNombre. "/";
+    $ubicacionFinal = $carpeta .$imagen["name"];
 
-        // Ruta temporal
-        // $rutaTemporal = $_FILES["publicacionArchivo"]["tmp_name"];
+    // $rutaCarpeta = dirname(__FILE__). "\imagenes/". $usuarioNombre;
 
-        // Ruta donde esta la carpeta que guarda las imagenes
-        // $obtenerRuta = dirname(__FILE__). "/imagenes";
-        
-        // Remplazar los \\ por / en la ruta
-        // $carpetaRuta = str_replace("\\", "/", $obtenerRuta);
- 
-        // Crear la ruta para el archivo por medio de su nombre
-        // $imagenRuta = $carpetaRuta. basename("ArchivoPrueba");
+    // $rutafinal = str_replace('\\', '/', $rutaCarpeta). "/". $imagen["name"];
 
-        // Mover el archivo a la carpeta creada
-        // move_uploaded_file($rutaTemporal, $carpetaRuta);
-        
-        echo json_encode([
-            "data" => $texto,
-            "imagen" => $imagen
-            // "obtenerRuta" => $obtenerRuta,
-            // "nuevaRuta" => $carpetaRuta,
-            // "imagenRuta" => $imagenRuta,
-            // "carpetaRuta" => $carpetaRuta,
-            // "VerificarImagen"  => $$verificarImagen
-            // "rutaTemporal" => $rutaTemporal
-        ]);
+    if(!file_exists($carpeta)){
+        mkdir($carpeta, 077, true);
     }
-}catch(Exception $Error){
-    echo json_encode([
-        "status" => "Error",
-        "Error" => $Error -> getMessage()
-    ]);
-};
 
-// $direccionTemporal = $_FILES["publicacionArchivo"]["tmp_name"];
-
-// $carpetaImagenes = dirname(__FILE__). "/imagenes";
-
-// $direccionDestino = str_replace("\\", "/", $carpetaImagenes). "/". $imagen;
-
-// echo $direccionDestino;
-// echo $carpetaImagenes;
-
-// if(!file_exists())
-
+    echo $carpeta;
+    if(move_uploaded_file($imagen["tmp_name"], $ubicacionFinal)){ // $ubicacionFinal
+        // var_dump($valores);
+        echo $ubicacionFinal. " Impresion PHP";
+    }else{
+        echo "Error";
+    }
+    
+    // echo $text;
+    // echo $imagen;
+}
 
 // <>
 
