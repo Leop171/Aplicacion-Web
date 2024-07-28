@@ -37,7 +37,7 @@ else{
         <a href="\ForoDeDiscucion\maquetado\iniciar-sesion.html">Iniciar sesion</a>
         <a href="\ForoDeDiscucion\maquetado\registro.html">Registrarse</a>
         <a href="\ForoDeDiscucion\maquetado\perfil.html">Perfil</a>
-        <a href="\ForoDeDiscucion\maquetado\inicio.html">Inicio</a>
+        <a href="\ForoDeDiscucion\maquetado\inicio.php">Inicio</a>
     </nav>
 
 </body>

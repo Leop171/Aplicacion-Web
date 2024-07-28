@@ -1,34 +1,39 @@
-.foros{
-    border-radius: 4%;
+/*
+Estilo para el formulario de publicacion
+
+    <div class="publicacionSubir">
+        <form action="publicacion.php" method="post" enctype="multipart/form-data">
+            <p>Publicar</p>
+            <textarea name="publicacionTexto" id="publicacionTexto" rows="10" cols="40"></textarea>
+            <input type="file" name="publicacionArchivo" placeholder="Foto">          
+            <button type="submit">Subir</button>
+        </form>
+    </div>   
+
+*/
+
+
+/*
+Estilos para las publicaciones
+*/
+
+
+/* #publicaciones{
+    width: 400px;
+    height: 100%;
     border: solid black 2px;
-    height: 100px;
-    width: 560px;
-}
+    border-radius: 2%;
+} */
 
-.feed{
-    border-radius: 4%;
-    border: solid black 2px;
-    height: 360px;
-    width: 480px;
-}
-
-.usuario{
-    border: solid blue 2px;
-    border-radius: 4%;
-    height: 140px;
-    width: 390px;
-}
-
-.usuario img{
-    border-radius: 50%;
-    border: solid black 2px;
-    height: 35px;
-    width: 35px;
-}
-
-.comentario .texto{
+.publicacion{
+    width: 360px;
+    height: 200px;
     border: 2px solid black;
-    border-radius: 4%;
+    border-radius: 2%;
 }
+
+
+
+
 
 

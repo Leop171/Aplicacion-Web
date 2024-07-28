@@ -1,6 +1,6 @@
 <?php
 
-//session_start();
+session_start();
 $codigo = $_SESSION["codigoUsuario"];
     
 $obtenerUsuario = $conexion->prepare("SELECT codigo, nombre, correo, foto, descripcion, fecha FROM foro.usuario WHERE codigo = :codigo");

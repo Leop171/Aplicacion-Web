@@ -1,23 +1,27 @@
-function ValidarArchivoTamanio(value){  
+function ValidarArchivoTamanio(imagen){  
   const tamanioMaximo = 4*1024*1024;
 
-  if(value.size <= tamanioMaximo){
-    return true; //value = "El archivo no debe pesar mas de 4MB";
+  if(imagen.size <= tamanioMaximo){
+    return true; // imagen = "El archivo no debe pesar mas de 4MB";
   }else{
     return false;
   }
 }
 
-function ValidarArchivoExtension(value){
+function ValidarArchivoExtension(imagen){
   const extensionPemritidas = /(.jpeg|.jpg|.png|.jfif|.JFIF)$/i;
 
-  valueName = value.name;
+  const imagenNombre = imagen.name;
     
-  if(extensionPemritidas.exec(valueName)){
-    return true; //value = "El archivo debe ser .jpeg, .jpg, .png, .gif, .jfif";
+  if(extensionPemritidas.exec(imagenNombre)){
+    return true; // imagen = "El archivo debe ser .jpeg, .jpg, .png, .gif, .jfif";
   }else{
     return false;
   }
+}
+
+function LimpiarComentario(texto){
+    return texto.replace(/[^a-zA-Z0-9 .,!?'"\n\r-]/g, '');
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
@@ -40,18 +44,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
       data[key] = value; 
                    
      });
-    console.log(data);
-    console.log(errorEsp);
 
-    value = data["publicacionArchivo"];
+    const imagen = data["publicacionArchivo"];
+    let texto = data["publicacionTexto"]
 
-    console.log(value);
+    console.log(imagen, texto);
 
-    if(!ValidarArchivoExtension(value)){
+    LimpiarComentario(texto);
+
+    console.log(texto)
+
+    if(!ValidarArchivoExtension(imagen)){
       // throw new Error("Solo se permiten .jpeg");
       errorEsp.textContent = "Solo se permiten archivos .jpeg|.jpg|.png|.jfif";
     }
-    else if (!ValidarArchivoTamanio(value)) {
+    else if (!ValidarArchivoTamanio(imagen)) {
       errorEsp.textContent = "El tamaño del archivo no puede superar 4MB";      
     }   
     else{
@@ -59,11 +66,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
         method: 'POST',
         body: formData
       })
-      .then(response => response.text()) //.json
+      .then(response => response.json()) //.json
       .then(data =>{
-        // Respuesta del servidor
-        
-        console.log("Succes", data, "Esto es JS");
+        if(data.status === 'Succes'){
+          window.location.replace('/ForoDeDiscucion/maquetado/inicio.php');
+        }else{
+          errorEsp.textContent = data.message;
+          console.log("Succes", data.status, "::::", data, "Esto es JS");
+        }      
+        // console.log("Succes", data, "Esto es JS");
           
       })
       .catch((error) => {
