@@ -8,31 +8,28 @@ fetch("/ForoDeDiscucion/php/tests.php")
             console.log("Error al recibir los datos");
         }
 
-        console.log(data);
+        data = Array(data);
+        console.log(typeof(data));
+
+        // data.forEach((element) => {
+        //     element.forEach((dato) => {
+        //         const publicacionHtml = `
+        //         <div class="publicacion">
+        //             <p>${(dato[0])}<p>
+        //             <p>${(dato[1])}</p>
+        //             <p>${(dato[2])}<p>
+        //             <p>${(dato[3])}</p>
+        //             <p>${(dato[4])}</p>
+        //         </div>
+        //      `;
+        //      publicacionesDiv.innerHTML += publicacionHtml;
+        //     });
+                
+        // });
 
         data.forEach((element) => {
-            element.forEach((dato) =>{
-                const publicacionHtml = `
-                <div class="publicacion">
-                    <p>${(dato[0])}<p>
-                    <p>${(dato[1])}</p>
-                    <p>${(dato[2])}<p>
-                    <p>${(dato[3])}</p>
-                    <p>${(dato[4])}</p>
-                </div>
-             `;
-             publicacionesDiv.innerHTML += publicacionHtml;
-            })
+            console.log(element[2]);
         });
-
-        
-        // data.message.forEach((item, index) => {
-        // console.log(`Index ${index}:`, item);
-        // });
-
-        // data.message.forEach((element) => {
-        //     console.log(element);
-        // });
 
 
         // data.message.forEach((publicacion) => {

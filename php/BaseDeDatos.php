@@ -5,11 +5,11 @@ $contraseniaDB = "";
 $nombreServidor = "localhost";
 
 try{
-    $conexion = new PDO("mysql:host=$nombreServidor; dbname = foro", $nombreUsuario, $contraseniaDB);
+    $conexion = new PDO("mysql:host=$nombreServidor; dbname = RedSocial", $nombreUsuario, $contraseniaDB);
     $conexion -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Conexion exitosa";
 
-    $sql = file_get_contents('C:\laragon\www\ForoDeDiscucion\bd\foroBD.sql');
+    $sql = file_get_contents('C:\laragon\www\ForoDeDiscucion\bd\RedSocial.sql');
 
     $conexion->exec($sql);
     echo "Script SQL ejecutado exitosamente.";

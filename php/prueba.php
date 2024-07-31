@@ -73,7 +73,7 @@ include __DIR__. "/config.php";
 //         $nuevoUsuario = $buscarUsarioCreado->fetch(PDO::FETCH_ASSOC);
 //         echo $nuevoUsuario['codigo'];
 
-$obtenerUsuario = $conexion->prepare("SELECT codigo, nombre, correo, foto, descripcion, fecha FROM foro.usuario WHERE codigo = :codigo");
+$obtenerUsuario = $conexion->prepare("SELECT codigo, nombre, correo, descripcion, fecha FROM foro.usuario WHERE codigo = :codigo");
     $obtenerUsuario->bindParam("codigo", $codigo, PDO::PARAM_STR);
     $obtenerUsuario->execute();
 
@@ -82,7 +82,6 @@ $obtenerUsuario = $conexion->prepare("SELECT codigo, nombre, correo, foto, descr
     $usuarioCodigo = $resultadoUsuario["codigo"];
     $usuarioNombre = $resultadoUsuario["nombre"];
     $usuarioCorreo = $resultadoUsuario["correo"];
-    $usuarioFoto = $resultadoUsuario["foto"];
     $usuarioDescripcion = $resultadoUsuario["descripcion"];
 
     // json_encode([

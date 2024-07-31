@@ -22,7 +22,7 @@ try{
         }    
     
         // Verificar que el correo ya esta registrado
-        $buscarCorreo = $conexion->prepare("SELECT * FROM foro.usuario WHERE correo = :correo");    
+        $buscarCorreo = $conexion->prepare("SELECT * FROM RedSocial.usuario WHERE correo = :correo");    
         $buscarCorreo->bindParam("correo", $correo, PDO::PARAM_STR);
         $buscarCorreo->execute();
     

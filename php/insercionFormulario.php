@@ -2,8 +2,7 @@
 include __DIR__. "/config.php";
 
 //$clave = 27;
-$nombre = 'Leonaro1234';
-$foto = "foto";
+$nombre = 'Leonardo';
 $descripcion = "Descripcion";
 $fecha = date("Y/m/d");
 
@@ -30,7 +29,7 @@ try{
         $contraseniaHash = password_hash($contrasenia, PASSWORD_BCRYPT);
     
         // Verificar que el correo no existe
-        $buscarCorreo = $conexion->prepare("SELECT * FROM foro.usuario WHERE correo = :correo");    
+        $buscarCorreo = $conexion->prepare("SELECT * FROM RedSocial.usuario WHERE correo = :correo");    
         $buscarCorreo->bindParam("correo", $correo, PDO::PARAM_STR);
         $buscarCorreo->execute();
     
@@ -38,14 +37,12 @@ try{
             throw new Exception("El correo ya esta en uso");
         }
         
-        $insertarUsuario = $conexion -> prepare("INSERT INTO foro.usuario (nombre, correo, contrasenia, foto, descripcion, fecha)
-        VALUES(:nombre, :correo, :contrasenia, :foto, :descripcion, :fecha);");
+        $insertarUsuario = $conexion -> prepare("INSERT INTO RedSocial.usuario (nombre, correo, contrasenia, descripcion, fecha)
+        VALUES(:nombre, :correo, :contrasenia, :descripcion, :fecha);");
     
         $insertarUsuario -> bindParam(':correo', $correo);
         $insertarUsuario -> bindParam(':contrasenia', $contraseniaHash,);
-    //    $insertarUsuario -> bindParam(':clave', $clave);
         $insertarUsuario -> bindParam(':nombre', $nombre);
-        $insertarUsuario -> bindParam(':foto', $foto);
         $insertarUsuario -> bindParam(':descripcion', $descripcion);
         $insertarUsuario -> bindParam(':fecha', $fecha);
     
@@ -53,7 +50,7 @@ try{
         // echo "Se inserto correctamente";
 
         // Buscar nuevamente al usuario recien creado
-        $buscarUsarioCreado = $conexion->prepare("SELECT * FROM foro.usuario WHERE correo = :correo"); 
+        $buscarUsarioCreado = $conexion->prepare("SELECT * FROM RedSocial.usuario WHERE correo = :correo"); 
         $buscarUsarioCreado->bindParam(':correo', $correo);
         $buscarUsarioCreado->execute();
         $nuevoUsuario = $buscarUsarioCreado->fetch(PDO::FETCH_ASSOC);
@@ -83,55 +80,6 @@ try{
     ]);
 }
 
-
-// header("Location:\ForoDeDiscucion\maquetado\perfil.html");
-// exit();
-
-// if ($data) {
-//     $correo = $data['correo'] ?? 'No correo';
-//     $contrasenia = $data['contrasenia'] ?? 'No contaseña';
-
-//     // Limpiar los valores recibidos
-//     LimpiarCorreo($correo);
-//     LimpiarContrasenia($contrasenia);    
-
-//     // Verificar que el correo no existe
-//     // $buscarCorreo = $conexion->prepare("SELECT * FROM foro.usuario WHERE correo = :correo");    
-//     // $buscarCorreo->bindParam("correo", $correo, PDO::PARAM_STR);
-//     // $buscarCorreo->execute();
-
-//     // if($buscarCorreo->rowCount() > 0){
-//     //     $data['correo'] = "Correo en uso";
-//     //     $data['contrasenia'] = "Contrasenia";        
-//     // }
-
-//     $insertarUsuario = $conexion -> prepare("INSERT INTO foro.usuario (codigo, nombre, correo, contrasenia, foto, descripcion, fecha)
-//     VALUES(:clave, :nombre, :correo, :contrasenia, :foto, :descripcion, :fecha);");
-
-//     $insertarUsuario -> bindParam(':correo', $correo);
-//     $insertarUsuario -> bindParam(':contrasenia', $contrasenia);
-//     $insertarUsuario -> bindParam(':clave', $clave);
-//     $insertarUsuario -> bindParam(':nombre', $nombre);
-//     $insertarUsuario -> bindParam(':foto', $foto);
-//     $insertarUsuario -> bindParam(':descripcion', $descripcion);
-//     $insertarUsuario -> bindParam(':fecha', $fecha);
-
-//     $insertarUsuario -> execute();
-//     // echo "Se inserto correctamente";
-    
-//     // Enviar una respuesta de vuelta al cliente
-//     echo json_encode([
-//         'status' => 'success',
-//         'message' => 'Datos recibidos correctamente',
-//         'correo' => $correo,
-//         'contrasenia' => $contrasenia
-//     ]);
-// } else {
-//     echo json_encode([
-//         'status' => 'error',
-//         'message' => 'No se recibieron datos'
-//     ]);
-// }
 
 
 // Limpiar contraseña
