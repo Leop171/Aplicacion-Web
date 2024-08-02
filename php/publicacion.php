@@ -11,6 +11,8 @@ try{
         $imagenNombre = $_FILES["publicacionArchivo"]["name"];
 
     }
+
+    $imagenNombre = str_replace(" ", "", $imagenNombre);
     
     $imagenExtension = strtolower(pathinfo($imagenNombre, PATHINFO_EXTENSION));
 
@@ -26,12 +28,13 @@ try{
 
     $texto = strip_tags($texto).PHP_EOL;
 
-    $carpeta = "./imagenes/". $usuarioNombre. "/";
-    $ubicacionFinal = $carpeta .$imagen["name"];
+    $carpeta = "../imagenes/". $usuarioNombre. "/";
+    $carpeta = str_replace("\\", "/", $carpeta);
+    // La ruta completa hacia la imagen, no se utiliza $carpeta por que es una ruta relativa y cambia cuando
+    // queramos ver la imagen desde otro archivo
+    $ubicacionFinal = $carpeta. time(). $imagenNombre;
+ 
 
-    //16,384
-
-    
     if(!file_exists($carpeta)){
         mkdir($carpeta, 077, true);
     }
@@ -48,22 +51,24 @@ try{
     $insertarPublicacion = $conexion -> prepare("INSERT INTO RedSocial.publicacion (fecha, texto, usuario_codigo, reaccion_codigo)
     VALUES(:fecha, :texto, :usuario_codigo, :reaccion_codigo)");
 
+    // Obtiene el utlimo codigo generado en .reaccion
+    $ultimoCodigoReaccion = $conexion->lastInsertId();
+
     $insertarPublicacion -> bindParam(":fecha", $fecha);
     // $insertarPublicacion -> bindParam(":codigo", $codigo);
     $insertarPublicacion -> bindParam(":texto", $texto);
     $insertarPublicacion ->bindParam(":usuario_codigo", $usuarioCodigo);
-    $insertarPublicacion -> bindParam(":reaccion_codigo", $etiqueta);
+    $insertarPublicacion -> bindParam(":reaccion_codigo", $ultimoCodigoReaccion);
 
     $insertarPublicacion -> execute();
 
-    // Obtiene el utlimo codigo generado en .publicacion
-    $ultimoCodigo = $conexion->lastInsertId();
-    
     // Insertar la imagen en imagen publicacion
+    $ultimoCodigoPublicacion = $conexion->lastInsertId();
+        
     $insertarImagen = $conexion -> prepare("INSERT INTO RedSocial.imagen_publicacion (direccion, publicacion_codigo) VALUES(:direccion, :publicacion_codigo)");
 
     $insertarImagen -> bindParam(":direccion", $ubicacionFinal);
-    $insertarImagen -> bindParam(":publicacion_codigo", $ultimoCodigo);    
+    $insertarImagen -> bindParam(":publicacion_codigo", $ultimoCodigoPublicacion);    
 
     $insertarImagen -> execute();
 

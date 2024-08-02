@@ -130,7 +130,7 @@ DROP TABLE IF EXISTS `RedSocial`.`imagen_publicacion` ;
 
 CREATE TABLE IF NOT EXISTS `RedSocial`.`imagen_publicacion` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
-  `direccion` VARCHAR(80) NULL,
+  `direccion` VARCHAR(120) NULL,
   `publicacion_codigo` INT NOT NULL,
   PRIMARY KEY (`codigo`, `publicacion_codigo`),
   INDEX `fk_publicacion_imagen_publicacion1_idx` (`publicacion_codigo` ASC) VISIBLE,

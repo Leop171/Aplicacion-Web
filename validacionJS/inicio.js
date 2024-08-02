@@ -8,71 +8,31 @@ fetch("/ForoDeDiscucion/php/tests.php")
             console.log("Error al recibir los datos");
         }
 
-        data = Array(data);
-        console.log(typeof(data));
-
-        // data.forEach((element) => {
-        //     element.forEach((dato) => {
-        //         const publicacionHtml = `
-        //         <div class="publicacion">
-        //             <p>${(dato[0])}<p>
-        //             <p>${(dato[1])}</p>
-        //             <p>${(dato[2])}<p>
-        //             <p>${(dato[3])}</p>
-        //             <p>${(dato[4])}</p>
-        //         </div>
-        //      `;
-        //      publicacionesDiv.innerHTML += publicacionHtml;
-        //     });
-                
-        // });
+        // data = Array(data);
+        // console.log(typeof(data));
+        console.log(data)
 
         data.forEach((element) => {
-            console.log(element[2]);
+            const publicacionHtml = `
+            <div class="publicacion">
+                <p>${(element[0])}<p>
+                <p>${(element[1])}<p>
+            <div class="imagenPerfil">
+                <img class="imagen" src="${(element[1])}" alt="Imagen">
+                <a href="${(element[1])}">Enlace</a>
+            </div>
+                <p>${(element[2])}<p>
+                <p>${(element[3])}</p>
+                <a href="C:/laragon/www/ForoDeDiscucion/php/imagenes/Leonardo/1722560397LicenciaSQL.jfif">A</a>
+            <div class="reacciones">
+            <button class="positivo">${(element[4])}</button>
+            <button class="negativo">${(element[5])}</button>
+            </div>
+
+         `;
+        publicacionesDiv.innerHTML += publicacionHtml;
+                
         });
-
-
-        // data.message.forEach((publicacion) => {
-        //     const publicacionHtml = `
-        //        <div class="publicacion">
-        //              <p>${(publicacion)}<p>
-        //         </div>`
-                     
-        //      publicacionesDiv.innerHTML += publicacionHtml;
-
-
-
-        //     <div class="publicacion">
-        //         <p>${(item[1])}<p>
-        //         <p>${(item)}</p>
-        //         <p>${(item)}<p>
-        //         <p>${(item)}</p>
-        //         <p>${(item)}</p>
-        //     </div>
-        // `;
-        // publicacionesDiv.innerHTML += publicacionHtml;
-    //  });
-
-
-
-        // data.message.forEach((item, index) => {
-        //     console.log(`Index ${index}:`, item);
-        // });
-        
-    
-        // quiza solo hace falta recibir el array en json                
-        // data.forEach(publicacion => {
-        //     const publicacionHtml = `
-        //         <div class="publicacion">
-        //             <p>${(publicacion[0])}<p>
-        //             <p>${(publicacion.fecha)}</p>
-        //             <p>${(publicacion.tema)}<p>
-        //             <p>${(publicacion.usuario_codigo)}</p>
-        //             <p>${(publicacion.etiqueta_codigo)}</p>
-        //         </div>
-        //     `;
-        //     publicacionesDiv.innerHTML += publicacionHtml;
-        // });
     })
     .catch(error => console.error('Error al cargar las publicaciones:', error));
 

@@ -24,7 +24,7 @@ if(!isset($_SESSION["codigoUsuario"])){
     <!-- include __DIR__. "/../php/mysql.php"; --> 
 
     <div id="publicaciones">
-
+        
     </div>
 
 
