@@ -16,14 +16,11 @@ fetch("/ForoDeDiscucion/php/tests.php")
             const publicacionHtml = `
             <div class="publicacion">
                 <p>${(element[0])}<p>
-                <p>${(element[1])}<p>
-            <div class="imagenPerfil">
-                <img class="imagen" src="${(element[1])}" alt="Imagen">
-                <a href="${(element[1])}">Enlace</a>
-            </div>
                 <p>${(element[2])}<p>
-                <p>${(element[3])}</p>
-                <a href="C:/laragon/www/ForoDeDiscucion/php/imagenes/Leonardo/1722560397LicenciaSQL.jfif">A</a>
+            <div class="publicacionImagen">
+                <img class="imagen" src="${(element[1])}" alt="Imagen">
+            </div>
+            <br>
             <div class="reacciones">
             <button class="positivo">${(element[4])}</button>
             <button class="negativo">${(element[5])}</button>
