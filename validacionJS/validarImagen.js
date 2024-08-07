@@ -1,6 +1,10 @@
 function ValidarArchivoTamanio(imagen){  
   const tamanioMaximo = 4*1024*1024;
 
+  if(imagen == null){
+    return true;
+  }
+
   if(imagen.size <= tamanioMaximo){
     return true; // imagen = "El archivo no debe pesar mas de 4MB";
   }else{
@@ -9,6 +13,11 @@ function ValidarArchivoTamanio(imagen){
 }
 
 function ValidarArchivoExtension(imagen){
+  if(imagen.name.trim() == ""){
+    imagen = null;
+    return true;
+  }
+
   const extensionPemritidas = /(.jpeg|.jpg|.png|.jfif|.JFIF)$/i;
 
   const imagenNombre = imagen.name;
@@ -56,7 +65,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     if(!ValidarArchivoExtension(imagen)){
       // throw new Error("Solo se permiten .jpeg");
-      errorEsp.textContent = "Solo se permiten archivos .jpeg|.jpg|.png|.jfif";
+      errorEsp.textContent = "Solo se permiten archivos .jpeg|.jpg|.png|.jfif JS";
     }
     else if (!ValidarArchivoTamanio(imagen)) {
       errorEsp.textContent = "El tamaño del archivo no puede superar 4MB";      
@@ -72,7 +81,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
           window.location.replace('/ForoDeDiscucion/maquetado/inicio.php');
         }else{
           errorEsp.textContent = data.message;
-          console.log("Succes", data.status, "::::", data, "Esto es JS");
+          console.log("Succes", data.status, "::::", data, "Esto es JS", imagen);
         }      
         // console.log("Succes", data, "Esto es JS");
           

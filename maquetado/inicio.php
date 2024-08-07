@@ -19,7 +19,7 @@ if(!isset($_SESSION["codigoUsuario"])){
 <body>
     
     <div class="foros">
-        <h1>Tus Foros</h1>
+        <h1>Tus Grupos</h1>
     </div>
     <!-- include __DIR__. "/../php/mysql.php"; --> 
 

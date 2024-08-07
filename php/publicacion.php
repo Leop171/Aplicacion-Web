@@ -2,46 +2,76 @@
 include __DIR__. "/config.php";
 include __DIR__. "/mysql.php";
 
-try{
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $texto = $_POST["publicacionTexto"] ?? NULL;
-        // $imagen = $_POST["publicacionArchivo"];
-        $imagen = $_FILES["publicacionArchivo"];
-        $imagenPeso = $_FILES["publicacionArchivo"]["size"];
-        $imagenNombre = $_FILES["publicacionArchivo"]["name"];
+// Funcion que valida el texto
+function validarTexto($texto){
 
+    if($texto === NULL){
+        return $texto;
     }
 
-    $imagenNombre = str_replace(" ", "", $imagenNombre);
-    
+    $texto = strip_tags($texto).PHP_EOL;
+
+    if(strlen($texto) >= 200){
+        return throw new Exception("Solo se permiten 200 caracteres");
+    }
+
+    return $texto;
+}
+
+
+// Funcion que valida la imagen
+function validarImagen($imagen){
+    if(isset($imagen)){
+        return;
+    }
+
+    $imagenNombre = $imagen["name"];
+    $imagenPeso = $imagen["size"];
+
     $imagenExtension = strtolower(pathinfo($imagenNombre, PATHINFO_EXTENSION));
 
     $extensionPermitida = "/jpg|jpeg|jfif|png/";
 
     if(!preg_match($extensionPermitida, $imagenExtension)){
-        throw new Exception("Solo se permite .jpg, .jpeg, .jfif, .png");
+        return throw new Exception("Solo se permite .jpg, .jpeg, .jfif, .png");
     }
 
     if($imagenPeso > 400000){
-        throw new Exception("El archivo debe pesar menos de 4mb");
+        return throw new Exception("El archivo debe pesar menos de 4mb");
     } 
+}
 
-    $texto = strip_tags($texto).PHP_EOL;
+
+try{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $texto = $_POST["publicacionTexto"] ?? null;
+        // $imagen = $_POST["publicacionArchivo"];
+        $imagen = $_FILES["publicacionArchivo"] ?? null;
+    }
+
+    validarTexto($texto);
+    validarImagen($imagen);
 
     $carpeta = "../imagenes/". $usuarioNombre. "/";
     $carpeta = str_replace("\\", "/", $carpeta);
-    // La ruta completa hacia la imagen, no se utiliza $carpeta por que es una ruta relativa y cambia cuando
-    // queramos ver la imagen desde otro archivo
-    $ubicacionFinal = $carpeta. time(). $imagenNombre;
- 
 
     if(!file_exists($carpeta)){
         mkdir($carpeta, 077, true);
+        }
+
+    // La ruta completa hacia la imagen, no se utiliza $carpeta por que es una ruta relativa y cambia cuando
+    // queramos ver la imagen desde otro archivo
+    if(isset($imagen)){
+        $ubicacionFinal = null;        
+    }else{
+        $imagenNombre = str_replace(" ", "", $imagen["name"]);
+        $ubicacionFinal = $carpeta. time(). $imagenNombre;
+        move_uploaded_file($imagen["tmp_name"], $ubicacionFinal);  
     }
 
+
+    
     $fecha = date("Y/m/d");
-    // $codigo = 1;
-    $etiqueta = 1;
 
     // Insertar las reacciones
     $insertarReaccion = $conexion -> prepare("INSERT INTO RedSocial.reaccion() VALUES()");
@@ -71,26 +101,16 @@ try{
     $insertarImagen -> bindParam(":publicacion_codigo", $ultimoCodigoPublicacion);    
 
     $insertarImagen -> execute();
+              
 
+    // header('Content-Type: application/json');
    
-
-
-    // La imagem debe ser lo ultimo en insertarse en caso de que algo falle
-    if(move_uploaded_file($imagen["tmp_name"], $ubicacionFinal)){ // $ubicacionFinal
-        // var_dump($valores);S
-        
-    header('Content-Type: application/json');
-
     echo json_encode([
         "status" => "Succes",
         "message" => "Succes"
     ]);
             
-    }
-        
-        // echo $text;
-        // echo $imagen;
-
+    
 }
 catch(Exception $Error){
         echo json_encode([

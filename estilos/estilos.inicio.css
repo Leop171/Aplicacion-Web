@@ -16,22 +16,33 @@ Estilo para el formulario de publicacion
 /*
 Estilos para las publicaciones
 */
-
-.publicacion{
-    width: 300px;
-    height: 400px;
-    border: 2px solid black;
+#publicaciones{
+    width: 320;
+    margin: auto;
+    border: 1px solid black;
     border-radius: 2%;
 }
 
-.publicacionImagen .imagen{
-    border: solid 2px black;
+.publicacion{
+    width: 300px;
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho y la altura */
+    margin: auto 4px; /* Espacio entre el texto y la imagen */
+    border: 2px solid black;
     border-radius: 2%;
+    margin: auto;
+    margin-bottom: 6px;
+}
+
+.publicacionImagen .imagen{
     width: 296px;
     margin: auto;
     height: 100px;
-    border: solid black;
-    border-radius: 2%;
+}
+
+.publicacionTexto .texto {
+    width: 100%; /* Ajusta el ancho del contenedor de texto al contenedor principal */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho y la altura */
+    margin-bottom: 10px; /* Espacio entre el texto y la imagen */
 }
 
 .reacciones{

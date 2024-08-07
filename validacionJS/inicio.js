@@ -13,18 +13,28 @@ fetch("/ForoDeDiscucion/php/tests.php")
         console.log(data)
 
         data.forEach((element) => {
+            let imagenHtml = '';
+            if (element[1]) {
+                imagenHtml = `<img class="imagen" src="${(element[1])}" alt="Imagen">`;
+            }
+            if(element[2]){
+                textoHtml = `<p class="texto">${(element[2])}<p>`;
+            }
             const publicacionHtml = `
             <div class="publicacion">
-                <p>${(element[0])}<p>
-                <p>${(element[2])}<p>
+            <p>${(element[0])}<p>
             <div class="publicacionImagen">
-                <img class="imagen" src="${(element[1])}" alt="Imagen">
+                ${(imagenHtml)}
             </div>
-            <br>
+            <div class="publicacionTexto">
+                ${(textoHtml)}
+            </div>
             <div class="reacciones">
             <button class="positivo">${(element[4])}</button>
             <button class="negativo">${(element[5])}</button>
             </div>
+            <br>
+
 
          `;
         publicacionesDiv.innerHTML += publicacionHtml;
