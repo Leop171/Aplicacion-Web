@@ -23,6 +23,9 @@ else{
         <div class="foto-usuario">
             <img src="" alt="Foto de Perfil">
         </div>
+        <input type="file" name="actulizarFoto" class="foto-actualizar" id="actulizarFoto">
+
+        </div>
         <div class="informacion-personal">
             <p id="usuario-nombre"><?php echo htmlspecialchars($usuarioNombre) ?></p>
             <p id="usuario-correo"><?php echo htmlspecialchars($usuarioCorreo) ?></p>

@@ -1,18 +1,21 @@
 <?php
 
-$texto = "Ahora si <div></div>";
+$texto = "";
+function validarTexto(&$texto){
+    if(($texto) == ""){
+        return $texto = null;
+                
+    }
+    $texto = strip_tags($texto).PHP_EOL;
 
-function validarTexto($texto){
+    if(strlen($texto) >= 200){
+        echo ("Solo se permiten 200 caracteres");
+    }
 
-$texto = strip_tags($texto).PHP_EOL;
-
-if(strlen($texto) >= 20){
-     echo("Solo se permiten 20 caracteres");
+    return $texto;
 }
-
-echo $texto;
-}
-
 validarTexto($texto);
+var_dump($texto);
+
 
 ?>

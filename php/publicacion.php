@@ -3,10 +3,11 @@ include __DIR__. "/config.php";
 include __DIR__. "/mysql.php";
 
 // Funcion que valida el texto
-function validarTexto($texto){
+function validarTexto(&$texto){
 
-    if($texto === NULL){
-        return $texto;
+    if(($texto) == ""){
+        return $texto = null;
+        
     }
 
     $texto = strip_tags($texto).PHP_EOL;
@@ -16,13 +17,15 @@ function validarTexto($texto){
     }
 
     return $texto;
+
 }
 
 
 // Funcion que valida la imagen
-function validarImagen($imagen){
-    if(isset($imagen)){
-        return;
+function validarImagen(&$imagen){
+
+    if($imagen["name"] == ""){
+        return $imagen = null;        
     }
 
     $imagenNombre = $imagen["name"];
@@ -39,19 +42,23 @@ function validarImagen($imagen){
     if($imagenPeso > 400000){
         return throw new Exception("El archivo debe pesar menos de 4mb");
     } 
+
+    return $imagen;
+
 }
 
 
 try{
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $texto = $_POST["publicacionTexto"] ?? null;
+        $texto = $_POST["publicacionTexto"]; 
         // $imagen = $_POST["publicacionArchivo"];
-        $imagen = $_FILES["publicacionArchivo"] ?? null;
+        $imagen = $_FILES["publicacionArchivo"];
     }
 
     validarTexto($texto);
     validarImagen($imagen);
 
+    
     $carpeta = "../imagenes/". $usuarioNombre. "/";
     $carpeta = str_replace("\\", "/", $carpeta);
 
@@ -61,15 +68,13 @@ try{
 
     // La ruta completa hacia la imagen, no se utiliza $carpeta por que es una ruta relativa y cambia cuando
     // queramos ver la imagen desde otro archivo
-    if(isset($imagen)){
-        $ubicacionFinal = null;        
+    if(!isset($imagen)){
+        $ubicacionFinal = null;    
     }else{
         $imagenNombre = str_replace(" ", "", $imagen["name"]);
         $ubicacionFinal = $carpeta. time(). $imagenNombre;
         move_uploaded_file($imagen["tmp_name"], $ubicacionFinal);  
     }
-
-
     
     $fecha = date("Y/m/d");
 
@@ -105,15 +110,15 @@ try{
 
     // header('Content-Type: application/json');
    
-    echo json_encode([
-        "status" => "Succes",
-        "message" => "Succes"
+    var_dump([
+        "status" => $imagen,
+        "message" => $texto
     ]);
             
     
 }
 catch(Exception $Error){
-        echo json_encode([
+        var_dump([
             "status" => "Error",
             "message" => $Error -> getMessage()
         ]);

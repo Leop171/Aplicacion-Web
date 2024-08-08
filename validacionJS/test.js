@@ -105,13 +105,23 @@
 // });
 
 
-const Pruebas = [
-  [2, 3, 4, 5, 6, 7],
-  ["Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete"]
-]
-
-Pruebas.forEach((elemento ) =>{
-  console.log(elemento);
-})
+let imagen = "NOmbre.pedf";
 
 
+function ValidarArchivoExtension(imagen){
+  if(imagen.trim() == ""){
+    return true;
+  }
+
+  const extensionPemritidas = /(.jpeg|.jpg|.png|.jfif|.JFIF)$/i;
+
+  const imagenNombre = imagen;
+    
+  if(!extensionPemritidas.exec(imagenNombre)){
+    throw `Solo se permitren extensiones${(extensionPemritidas)} JS`;
+  }
+
+  return imagen;
+}
+
+ValidarArchivoExtension(imagen);
