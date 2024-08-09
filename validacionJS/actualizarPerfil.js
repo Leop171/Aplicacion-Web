@@ -1,8 +1,3 @@
-import { ValidarArchivoTamanio } from './validaciones.js';
-import { ValidarArchivoExtension } from './validaciones.js';
-import { ValidarTexto } from './validaciones.js';
-
-
 document.addEventListener("DOMContentLoaded", (event) => {
     const formularioPublicacion = document.getElementById("formularioPublicacion");
 
@@ -36,7 +31,7 @@ function RecibirPublicacion(event){
     console.log(data);
     console.log(imagen, texto);
 
-    ValidarTexto(texto);
+    LimpiarComentario(texto);
 
     ValidarArchivoExtension(imagen);
     ValidarArchivoTamanio(imagen);
@@ -66,18 +61,3 @@ function RecibirPublicacion(event){
 
 };
 
-
-// <>
-
-
-
-
-
-
-
-
-
-
-
-
- 

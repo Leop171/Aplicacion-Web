@@ -1,52 +1,7 @@
 <?php
 include __DIR__. "/config.php";
 include __DIR__. "/mysql.php";
-
-// Funcion que valida el texto
-function validarTexto(&$texto){
-
-    if(($texto) == ""){
-        return $texto = null;
-        
-    }
-
-    $texto = strip_tags($texto).PHP_EOL;
-
-    if(strlen($texto) >= 200){
-        return throw new Exception("Solo se permiten 200 caracteres");
-    }
-
-    return $texto;
-
-}
-
-
-// Funcion que valida la imagen
-function validarImagen(&$imagen){
-
-    if($imagen["name"] == ""){
-        return $imagen = null;        
-    }
-
-    $imagenNombre = $imagen["name"];
-    $imagenPeso = $imagen["size"];
-
-    $imagenExtension = strtolower(pathinfo($imagenNombre, PATHINFO_EXTENSION));
-
-    $extensionPermitida = "/jpg|jpeg|jfif|png/";
-
-    if(!preg_match($extensionPermitida, $imagenExtension)){
-        return throw new Exception("Solo se permite .jpg, .jpeg, .jfif, .png");
-    }
-
-    if($imagenPeso > 400000){
-        return throw new Exception("El archivo debe pesar menos de 4mb");
-    } 
-
-    return $imagen;
-
-}
-
+include __DIR__. "/validaciones.php";
 
 try{
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,7 +13,6 @@ try{
     validarTexto($texto);
     validarImagen($imagen);
 
-    
     $carpeta = "../imagenes/". $usuarioNombre. "/";
     $carpeta = str_replace("\\", "/", $carpeta);
 
@@ -110,15 +64,15 @@ try{
 
     // header('Content-Type: application/json');
    
-    var_dump([
-        "status" => $imagen,
-        "message" => $texto
+    echo json_encode([
+        "status" => "Succes",
+        "message" => "Succes"
     ]);
             
     
 }
 catch(Exception $Error){
-        var_dump([
+        echo json_encode([
             "status" => "Error",
             "message" => $Error -> getMessage()
         ]);

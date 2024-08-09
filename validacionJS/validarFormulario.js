@@ -1,45 +1,83 @@
-
-//   }else{
-//     window.location = "\ForoDeDiscucion\maquetado\inicio.html";
-//   }
-// });
-
-// Validar correo
-// RegExp obtenida de 
-function ValidarCorreo(correo){
-    const mostrarErrorCoreo = document.getElementById("errorCorreo");
-
-    let regCorreo =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-
-    if(regCorreo.test(correo)){
-        return true;
-    }else{
-        mostrarErrorCoreo.textContent = "Correo no valido";
-        return false;
-    }
-}
-
-// Valida contraseña
-// RegExp obtenida de 
-function ValidarContrasenia(contrasenia){
-    const mostrarErrorContrasenia = document.getElementById("errorContrasenia");
-
-    let regContrasenia = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-
-    if(regContrasenia.test(contrasenia)){
-        return true;
-    }
-    else{
-        mostrarErrorContrasenia.textContent = "Contraseña no valida";
-        return false;
-    }
-}
-
 /*
 Cuando el formulario se cargue obtener todos los campos
 Llama las funciones para validar los campos
 Envia en JSON al servidor y espera la repuesta
 */
+
+/*
+ESTE SCIPT NO ESTA SIENDO UTILZADO POR NINGUN .html
+*/
+
+/*
+ESTE SCIPT NO ESTA SIENDO UTILZADO POR NINGUN .html
+*/
+
+/*
+ESTE SCIPT NO ESTA SIENDO UTILZADO POR NINGUN .html
+*/
+
+/*
+ESTE SCIPT NO ESTA SIENDO UTILZADO POR NINGUN .html
+*/
+
+/*
+ESTE SCIPT NO ESTA SIENDO UTILZADO POR NINGUN .html
+*/
+
+/*
+ESTE SCIPT NO ESTA SIENDO UTILZADO POR NINGUN .html
+*/
+
+/*
+ESTE SCIPT NO ESTA SIENDO UTILZADO POR NINGUN .html
+*/
+
+/*
+ESTE SCIPT NO ESTA SIENDO UTILZADO POR NINGUN .html
+*/
+
+/*
+ESTE SCIPT NO ESTA SIENDO UTILZADO POR NINGUN .html
+*/
+/*
+ESTE SCIPT NO ESTA SIENDO UTILZADO POR NINGUN .html
+*/
+
+// VALIDAR FORMULARIO JS
+// Validar correo
+// RegExp obtenida de 
+function ValidarCorreo(correo){
+  const mostrarErrorCoreo = document.getElementById("errorCorreo");
+
+  let regCorreo =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+  if(regCorreo.test(correo)){
+      return true;
+  }else{
+      mostrarErrorCoreo.textContent = "Correo no valido";
+      return false;
+  }
+}
+
+// Valida contraseña
+// RegExp obtenida de 
+function ValidarContrasenia(contrasenia){
+  const mostrarErrorContrasenia = document.getElementById("errorContrasenia");
+
+  let regContrasenia = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+  if(regContrasenia.test(contrasenia)){
+      return true;
+  }
+  else{
+      mostrarErrorContrasenia.textContent = "Contraseña no valida";
+      return false;
+  }
+}
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
   const formularioRegistro = document.getElementById('formularioRegistro');
@@ -55,6 +93,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function RecibirRegistro(event){
+
+  
 
     event.preventDefault(); 
 
@@ -85,7 +125,7 @@ function RecibirRegistro(event){
       console.log('Success:', data);
     })
     .catch((error) => {
-        console.error('Error:', error);
+      
     });
 };
 

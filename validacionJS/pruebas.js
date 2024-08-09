@@ -1,30 +1,6 @@
-// Validar correo
-// RegExp obtenida de 
-function ValidarCorreo(correo){
+// import { ValidarCorreo } from './validaciones.js';
+// import { ValidarContrasenia } from './validaciones.js';
 
-  let regCorreo =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-
-  if(regCorreo.test(correo)){
-      return true;
-  }else{
-      return false;
-  }
-}
-
-
-// Valida contraseña
-// RegExp obtenida de 
-function ValidarContrasenia(contrasenia){
-
-  let regContrasenia = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-
-  if(regContrasenia.test(contrasenia)){
-      return true;
-  }
-  else{
-      return false;
-  }
-}
 
 document.addEventListener('DOMContentLoaded', (event) => {
   const formularioRegistro = document.getElementById('formularioRegistro');
@@ -42,101 +18,102 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 // Funcion que valida y envia el formulario de registro
 function RecibirRegistro(event){
-  
-    event.preventDefault(); 
-    const errorCampos = document.getElementById("errorCampos");
+    try{
+        event.preventDefault(); 
+        const errorCampos = document.getElementById("errorCampos");
+    
+        let formData = new FormData(formularioRegistro);
 
-    const formData = new FormData(formularioRegistro);
+        const data = {};
+        formData.forEach((value, key) => {
+        data[key] = value;
+        });
 
-    const data = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
+        const correo = data["correo"];
+        const contrasenia = data["contrasenia"];
   
-   if(!ValidarCorreo(data["correo"])){
-    errorCampos.textContent = "Correo no valido JS";
-    }
-    else if(!ValidarContrasenia(data["contrasenia"])){
-      errorCampos.textContent = "Contraseña debe contener al menos 1 numero, 1 simbolo y 1 mayuscula JS";
-    }
-    else{
-          fetch('/ForoDeDiscucion/php/insercionFormulario.php', {
+        // ValidarCorreo(correo);
+        // ValidarContrasenia(contrasenia);
+
+        fetch('/ForoDeDiscucion/php/insercionFormulario.php', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
-          },
+        },
             body: JSON.stringify(data)
-          })
-          .then(response => response.json())
-          .then(data => {
+        })
+        .then(response => response.json())
+        .then(data => {
             // Respuesta del servidor
             // maquetado\perfil.html
             // \ForoDeDiscucion\maquetado\perfil.html
 
-            if(data.status === 'Accediendo'){
-              window.location.replace('/ForoDeDiscucion/maquetado/perfil.php');
-            }else{
-              errorCampos.textContent = data.message;
-            }
+        if(data.status === 'Accediendo'){
+          window.location.replace('/ForoDeDiscucion/maquetado/perfil.php');
+        }else{
+          errorCampos.textContent = data.message;
+        }
 
-          })
-          .catch((error) => {
-             console.error('Error:', error);
-          });
+      })
+      .catch((error) => {
+        errorCampos.textContent = error;    
+      });
         
-       }
+}catch(err){
+    const errorCampos = document.getElementById("errorCampos");
+    errorCampos.textContent = err;
+    }
 };
 
+
+
+
+// Funcion que valida y envia el formulario de login
 function RecibirLogin(event){
+    try{
+        event.preventDefault(); 
+        const errorCampos = document.getElementById("errorCampos");
+    
+        let formData = new FormData(formularioLogin);
+
+        const data = {};
+        formData.forEach((value, key) => {
+        data[key] = value;
+        });
+
+        const correo = data["correo"];
+        const contrasenia = data["contrasenia"];
   
-  event.preventDefault(); 
-  const errorCampos = document.getElementById("errorCampos");
+        // ValidarCorreo(correo);
+        // ValidarContrasenia(contrasenia);
 
-  const formData = new FormData(formularioLogin);
-
-  const data = {};
-  formData.forEach((value, key) => {
-    data[key] = value;
-  });
-
- if(!ValidarCorreo(data["correo"])){
-  errorCampos.textContent = "Correo no valido JS";
-  }
-  else if(!ValidarContrasenia(data["contrasenia"])){
-    errorCampos.textContent = "Contraseña debe contener al menos 1 numero, 1 simbolo y 1 mayuscula JS";
-  }
-  else{
         fetch('/ForoDeDiscucion/php/FormularioLogin.php', {
-          method: 'POST',
-          headers: {
-          'Content-Type': 'application/json'
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
         },
-          body: JSON.stringify(data)
+            body: JSON.stringify(data)
         })
         .then(response => response.json())
         .then(data => {
-          // Respuesta del servidor
-          // maquetado\perfil.html
-          // \ForoDeDiscucion\maquetado\perfil.html
+            // Respuesta del servidor
+            // maquetado\perfil.html
+            // \ForoDeDiscucion\maquetado\perfil.html
 
-          if(data.status === 'Accediendo'){
-            window.location.replace('/ForoDeDiscucion/maquetado/perfil.php');
-          }else{
-            errorCampos.textContent = data.message;
-          }
+        if(data.status === 'Accediendo'){
+          window.location.replace('/ForoDeDiscucion/maquetado/perfil.php');
+        }else{
+          errorCampos.textContent = data.message;
+        }
 
-        })
-        .catch((error) => {
-           console.error('Error:', error);
-        });
-      
-     }
+      })
+      .catch((error) => {
+        errorCampos.textContent = error;    
+      });
+        
+}catch(err){
+    const errorCampos = document.getElementById("errorCampos");
+    errorCampos.textContent = err;
+    }
 };
-
-
-
-
-
-
-
 
