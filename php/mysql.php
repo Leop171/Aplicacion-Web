@@ -2,8 +2,8 @@
 
 session_start();
 $codigo = $_SESSION["codigoUsuario"];
-    
-$obtenerUsuario = $conexion->prepare("SELECT codigo, nombre, correo, descripcion, fecha FROM RedSocial.usuario WHERE codigo = :codigo");
+
+$obtenerUsuario = $conexion->prepare("SELECT * FROM RedSocial.vInicio WHERE codigo = :codigo");
 $obtenerUsuario->bindParam("codigo", $codigo, PDO::PARAM_STR);
 $obtenerUsuario->execute();
 
@@ -14,6 +14,7 @@ $usuarioNombre = $resultadoUsuario["nombre"];
 $usuarioCorreo = $resultadoUsuario["correo"];
 $usuarioDescripcion = $resultadoUsuario["descripcion"];
 $usuarioFecha = $resultadoUsuario["fecha"];
+$usuarioFoto = $resultadoUsuario["direccion"];
 
 
 

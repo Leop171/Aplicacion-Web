@@ -16,40 +16,50 @@ Estilo para el formulario de publicacion
 /*
 Estilos para las publicaciones
 */
-#publicaciones{
-    width: 320;
-    margin: auto;
-    border: 1px solid black;
-    border-radius: 2%;
-}
 
 .publicacion{
     width: 300px;
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho y la altura */
-    margin: auto 4px; /* Espacio entre el texto y la imagen */
     border: 2px solid black;
     border-radius: 2%;
     margin: auto;
     margin-bottom: 6px;
 }
 
-.publicacionImagen .imagen{
-    width: 296px;
-    margin: auto;
-    height: 100px;
+.imagenPerfil{
+    width: 40px;
+    height: 40px;
+    border-radius: 2%;
+    border: 2px black solid;
+    border-radius: 40%;
+    margin: 2px 4px;
+}
+
+.publicacionNombre{
+    margin: 1px 4px;
 }
 
 .publicacionTexto .texto {
-    width: 100%; /* Ajusta el ancho del contenedor de texto al contenedor principal */
+    width: 282px; /* Ajusta el ancho del contenedor de texto al contenedor principal */
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho y la altura */
-    margin-bottom: 10px; /* Espacio entre el texto y la imagen */
+    margin-bottom: 4px; /* Espacio entre el texto y la imagen */
+    word-wrap: break-word;
+    margin: 1px 4px;
+}
+
+.publicacionImagen .imagen{
+    width: 282px;
+    margin: 1px 4px;
+    height: 120px;
+    border-radius: 2%;
+    border: 2px black solid;
 }
 
 .reacciones{
-    border: solid 1px black;
     border-radius: 2%;
-    width: 296px;
+    width: 282px;
     height: 22px;
+    margin: 4px 4px;
 }
 
 .reacciones button{

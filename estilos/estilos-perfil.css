@@ -1,9 +1,11 @@
-.foto-usuario{
+.foto-usuario img{
     border: solid 2px black;
     height: 130px;
     width: 130px;
     border-radius: 50%;
 }
+
+
 
 
 

@@ -30,7 +30,7 @@ else{
         </div>
         <button type="submit"></button>
     </form>
-    <script src="/ForoDeDiscucion/validacionJS/validarImagen.js"></script>
+    <script type="module" src="/ForoDeDiscucion/validacionJS/validarImagen.js"></script>
 
 </body>
 </html>

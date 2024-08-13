@@ -1,5 +1,5 @@
-// import { ValidarCorreo } from './validaciones.js';
-// import { ValidarContrasenia } from './validaciones.js';
+import { ValidarCorreo } from './validaciones.js';
+import { ValidarContrasenia } from './validaciones.js';
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -32,8 +32,8 @@ function RecibirRegistro(event){
         const correo = data["correo"];
         const contrasenia = data["contrasenia"];
   
-        // ValidarCorreo(correo);
-        // ValidarContrasenia(contrasenia);
+        ValidarCorreo(correo);
+        ValidarContrasenia(contrasenia);
 
         fetch('/ForoDeDiscucion/php/insercionFormulario.php', {
             method: 'POST',
@@ -84,8 +84,8 @@ function RecibirLogin(event){
         const correo = data["correo"];
         const contrasenia = data["contrasenia"];
   
-        // ValidarCorreo(correo);
-        // ValidarContrasenia(contrasenia);
+        ValidarCorreo(correo);
+        ValidarContrasenia(contrasenia);
 
         fetch('/ForoDeDiscucion/php/FormularioLogin.php', {
             method: 'POST',

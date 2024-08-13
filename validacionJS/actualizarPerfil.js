@@ -1,22 +1,27 @@
-document.addEventListener("DOMContentLoaded", (event) => {
-    const formularioPublicacion = document.getElementById("formularioPublicacion");
+import {ValidarArchivoTamanio} from './validaciones.js';
+import {ValidarArchivoExtension} from './validaciones.js';
 
-    if(formularioPublicacion){
-      formularioPublicacion.addEventListener('submit', RecibirPublicacion);
+let fotoPerfil;
+
+document.addEventListener("DOMContentLoaded", (event) => {
+    fotoPerfil = document.getElementById('actualizarFoto');
+
+    if(fotoPerfil){
+      fotoPerfil.addEventListener('submit', EnviarFoto);
     }
 
 });
 
-// Voy a convertir esto en una funcion
 
-
-function RecibirPublicacion(event){
+function EnviarFoto(event){
   try{
     event.preventDefault();
 
-    let errorEsp = document.getElementById("errorCampos")
+    const errorEsp = document.getElementById("errorCampos");
 
-    const formData = new FormData(formularioPublicacion);
+    console.log(fotoPerfil);
+
+    let formData = new FormData(fotoPerfil);
 
     // const file = {};
     const data = {};
@@ -24,26 +29,23 @@ function RecibirPublicacion(event){
       data[key] = value; 
                    
      });
-
-    let texto = data["publicacionTexto"]
-    const imagen = data["publicacionArchivo"];
-
     console.log(data);
-    console.log(imagen, texto);
 
-    LimpiarComentario(texto);
+    const imagen = data["enviarFoto"];
+    console.log(imagen);
 
-    ValidarArchivoExtension(imagen);
     ValidarArchivoTamanio(imagen);
+    ValidarArchivoExtension(imagen);
     
-      fetch('/ForoDeDiscucion/php/publicacion.php', {
+    
+      fetch('/ForoDeDiscucion/php/actualizarPerfil.php', {
         method: 'POST',
         body: formData
       })
       .then(response => response.json()) //.json
       .then(data =>{
         if(data.status === 'Succes'){
-          window.location.replace('/ForoDeDiscucion/maquetado/inicio.php');
+          window.location.replace('/ForoDeDiscucion/maquetado/perfil.php');
         }else{
           errorEsp.textContent = data.message;
           console.log("Succes", data.status, "::::", data, "Esto es JS");
@@ -51,12 +53,12 @@ function RecibirPublicacion(event){
           
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error + "Error del servidor");
       });
 
   }catch(err){
     let errorEsp = document.getElementById("errorCampos");
-    errorEsp.textContent = err;
+    errorEsp.textContent = err + "Es en el catch final";
   }
 
 };

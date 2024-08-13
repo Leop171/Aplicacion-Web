@@ -18,6 +18,8 @@ try{
     echo "Algo salio mal ". $error -> getMessage(); 
 }
 
+// SIMEPRE DESPUES DE HACER UNA COSULTA SE DEBE CERRAR LA CONEXION CON LA BASE DE DATOS!
+
 
 // Crear la base de datos con PDO
 // $dataBase = "CREATE DATABASE foroDiscucion";

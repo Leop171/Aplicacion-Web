@@ -21,9 +21,13 @@ else{
 <body>
     <div class="espacio-personal">
         <div class="foto-usuario">
-            <img src="" alt="Foto de Perfil">
+            <img src="<?php echo ($usuarioFoto)?>" alt="Foto de Perfil" class="fotoPerfil" id="foto-perfil">
         </div>
-        <input type="file" name="actulizarFoto" class="foto-actualizar" id="actulizarFoto">
+        <form id="actualizarFoto" method="post">
+            <input type="file" name="enviarFoto">
+            <input type="submit">
+        </form>
+
 
         </div>
         <div class="informacion-personal">
@@ -32,6 +36,7 @@ else{
             <p id="usuario-descripcion"><?php  echo htmlspecialchars($usuarioDescripcion) ?></p>
             <p id="usuario-fecha"><p>Se unio: <?php echo htmlspecialchars($usuarioFecha)?></p>
             <p><?php echo $_SESSION["codigoUsuario"]; ?></p>
+            <p id="errorCampos"></p>
         </div>
 
     </div>    
@@ -42,6 +47,8 @@ else{
         <a href="\ForoDeDiscucion\maquetado\perfil.html">Perfil</a>
         <a href="\ForoDeDiscucion\maquetado\inicio.php">Inicio</a>
     </nav>
+
+    <script  type="module" src="/ForoDeDiscucion/validacionJS/actualizarPerfil.js"></script>
 
 </body>
 </html>

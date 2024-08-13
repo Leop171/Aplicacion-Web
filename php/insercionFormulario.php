@@ -46,6 +46,17 @@ try{
         $insertarUsuario -> execute();
         // echo "Se inserto correctamente";
 
+        // Insertar su foto de perfil
+        $direccion = "../imagenesPerfil/default/icono-usuario.png";
+        $ultimoCodigoUsuario = $conexion->lastInsertId();
+
+        $insertImagenPerfil = $conexion -> prepare("INSERT INTO RedSocial.imagen_usuario (direccion, usuario_codigo) VALUES(:direccion, :usuario_codigo)");
+
+        $insertImagenPerfil -> bindParam(':direccion', $direccion);
+        $insertImagenPerfil -> bindParam(':usuario_codigo', $ultimoCodigoUsuario);
+        $insertImagenPerfil -> execute();
+
+
         // Buscar nuevamente al usuario recien creado
         $buscarUsarioCreado = $conexion->prepare("SELECT * FROM RedSocial.usuario WHERE correo = :correo"); 
         $buscarUsarioCreado->bindParam(':correo', $correo);
