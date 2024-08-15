@@ -1,0 +1,47 @@
+.publicar{
+    height: 410px;
+    width: 280px;
+    border-radius: 2%;
+    border: solid 2px black;
+    text-align: center;
+    margin: auto;
+}
+
+.publicacionTexto{
+    width: 270px; 
+    height: 200px;
+    box-sizing: border-box;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.botonArchivo{
+    /* padding: 8px 16px; */
+    /* background-color: #dee5eb; */
+    color: black;
+    cursor: pointer;
+    border: solid black 1px;
+    border-radius: 10%;
+}
+
+.enlaces{
+    margin: auto 8px;
+    height: 30px;
+    width: 320px;
+    margin: auto;
+    text-align: center;
+}
+
+
+
+/* <div class="publicar">
+<form name="formularioPublicacion" id="formularioPublicacion" method="post" enctype="multipart/form-data">
+    <input type="text" name="publicacionTexto">
+    <input type="file" name="publicacionArchivo">
+    <p id="errorCampos"></p>
+    <div id="previsualizarImagen">
+        <p><?php echo $_SESSION["codigoUsuario"] ?></p>
+    </div>
+    <button type="submit"></button>
+</form>
+</div> */

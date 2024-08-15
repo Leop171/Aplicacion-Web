@@ -1,0 +1,19 @@
+.formularioEnvio{
+    height: 410px;
+    width: 280px;
+    border-radius: 2%;
+    border: solid 2px black;
+    text-align: center;
+    margin: auto;
+}
+
+.enlaces{
+    margin: auto 8px;
+    height: 30px;
+    width: 320px;
+    margin: auto;
+    text-align: center;
+}
+
+
+
