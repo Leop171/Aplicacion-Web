@@ -228,6 +228,17 @@ CREATE TABLE IF NOT EXISTS `RedSocial`.`usuario_amigo` (
 ENGINE = InnoDB;
 
 
+/*Creacion de la consulta de inicio*/
+CREATE VIEW vInicio
+AS
+SELECT u.codigo, u.nombre, u.correo, u.descripcion,  u.fecha, iu.direccion 
+FROM RedSocial.usuario AS u
+JOIN RedSocial.imagen_usuario AS iu ON u.codigo = iu.usuario_codigo
+
+
+
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

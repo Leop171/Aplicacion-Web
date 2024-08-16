@@ -46,8 +46,8 @@ try{
         $insertarUsuario -> execute();
         // echo "Se inserto correctamente";
 
-        // Insertar su foto de perfil
-        $direccion = "uploads/imagen_perfil/default/icono-usuario.png";
+        // Insertar su foto de perfil 
+        $direccion = "../../uploads/imagen_perfil/default/icono-usuario.png";
         $ultimoCodigoUsuario = $conexion->lastInsertId();
 
         $insertImagenPerfil = $conexion -> prepare("INSERT INTO RedSocial.imagen_usuario (direccion, usuario_codigo) VALUES(:direccion, :usuario_codigo)");
