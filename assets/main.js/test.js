@@ -105,23 +105,22 @@
 // });
 
 
-let imagen = "NOmbre.pedf";
 
+// Texto no mayor a 20 caracteres
+// Texto en UTF-8
+// Limpiar de caracteres especiales
+// No permite espacios
 
-function ValidarArchivoExtension(imagen){
-  if(imagen.trim() == ""){
-    return true;
-  }
+const direccion = "../../uploads/imagen_perfil/Leonardo/1723751197LicenciaSQL.jfif";
+let usuarioCodigo = 5;
+let contador = 5;
 
-  const extensionPemritidas = /(.jpeg|.jpg|.png|.jfif|.JFIF)$/i;
-
-  const imagenNombre = imagen;
-    
-  if(!extensionPemritidas.exec(imagenNombre)){
-    throw `Solo se permitren extensiones${(extensionPemritidas)} JS`;
-  }
-
-  return imagen;
+while(contador < 1006){
+    console.log(`INSERT INTO imagen_usuario (direccion, usuario_codigo) VALUES ('${(direccion)}', '${(usuarioCodigo)}');`);
+    contador++;
+    usuarioCodigo++;
 }
 
-ValidarArchivoExtension(imagen);
+
+
+

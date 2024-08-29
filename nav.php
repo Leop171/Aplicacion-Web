@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="./assets/css/nav.css">
 <div class="enlaces">
-   <nav">
+   <nav>
       <a href="perfil.php">
          <img src="assets/imagenes/usuario.png" alt="">
       </a>

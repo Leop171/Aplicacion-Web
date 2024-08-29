@@ -74,3 +74,22 @@ export function ValidarContrasenia(contrasenia){
   return contrasenia;
 }
 
+
+// Validar Busqueda
+// 
+export function ValidarBusqueda(texto){
+  // Se valida que es null antes de entrar en la funcion
+  texto = texto.replace(/\s/, "");
+
+  texto = texto.replace(/[^a-zA-Z0-9]/g, "");
+
+  if(texto.length >= 20){
+      throw "Nombre de usuario no puede contener mas de 20 caracteres";
+  }    
+
+  arroba = "@";
+
+  texto = arroba + texto;
+
+  return texto;
+}

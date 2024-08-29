@@ -198,7 +198,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `RedSocial`.`amigo` ;
 
 CREATE TABLE IF NOT EXISTS `RedSocial`.`amigo` (
-  `codigo` INT NOT NULL,
+  `codigo` INT NOT NULL AUTO_INCREMENT,
   `fecha` DATETIME NULL,
   PRIMARY KEY (`codigo`))
 ENGINE = InnoDB;
@@ -212,6 +212,7 @@ DROP TABLE IF EXISTS `RedSocial`.`usuario_amigo` ;
 CREATE TABLE IF NOT EXISTS `RedSocial`.`usuario_amigo` (
   `usuario_codigo` INT NOT NULL,
   `amigo_codigo` INT NOT NULL,
+  `estado` CHAR(1) NOT NULL ;
   PRIMARY KEY (`usuario_codigo`, `amigo_codigo`),
   -- INDEX `fk_usuario_has_amigo_amigo1_idx` (`amigo_codigo` ASC) VISIBLE,
   -- INDEX `fk_usuario_has_amigo_usuario1_idx` (`usuario_codigo` ASC) VISIBLE,
@@ -236,8 +237,24 @@ FROM RedSocial.usuario AS u
 JOIN RedSocial.imagen_usuario AS iu ON u.codigo = iu.usuario_codigo
 
 
+CREATE VIEW vPublicacion AS
+SELECT i.direccion, p.texto, iu.direccion AS perfil, u.nombre,  
+r.positivo, r.negativo 
+FROM publicacion AS p JOIN imagen_publicacion AS i
+ON i.publicacion_codigo = p.codigo 
+JOIN usuario AS u ON u.codigo = p.usuario_codigo 
+JOIN reaccion AS r ON r.codigo = p.reaccion_codigo
+JOIN imagen_usuario AS iu ON p.usuario_codigo  = iu.usuario_codigo LIMIT 10
 
 
+CREATE VIEW vPublicacionPerfil AS
+SELECT i.direccion, p.texto, iu.direccion AS perfil, u.nombre,  
+r.positivo, r.negativo 
+FROM publicacion AS p JOIN imagen_publicacion AS i
+ON i.publicacion_codigo = p.codigo 
+JOIN usuario AS u ON u.codigo = p.usuario_codigo 
+JOIN reaccion AS r ON r.codigo = p.reaccion_codigo
+JOIN imagen_usuario AS iu ON p.usuario_codigo  = iu.usuario_codigo LIMIT 10;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

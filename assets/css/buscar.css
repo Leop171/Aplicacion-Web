@@ -1,0 +1,24 @@
+.busqueda{
+    width: 300px;
+    height: 450px;
+    border: 2px solid black;
+    border-radius: 2%;
+    margin: auto;
+    margin-bottom: 6px;
+}
+
+.buscar{
+    border: solid 1px black;
+    border-radius: 2%;
+    height: 28px;
+    width: 240px;
+    margin: 8px 8px;
+}
+
+.enviar{
+    height: 28px;
+    width: 30px;
+    border: solid black 1px;
+    border: 2%;
+}
+
