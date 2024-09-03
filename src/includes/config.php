@@ -1,12 +1,19 @@
 <?php
 
-$nombreUsuario = "root";
-$contraseniaDB = "";
-$nombreServidor = "localhost";
 
+
+// CAMBIE EL NOMBRE DE LA BASE DE DATOS MOMENTANEAMENTE
+// DEBO REGRESARLO A: dbname = RedSocial
 try{
-    $conexion = new PDO("mysql:host=$nombreServidor; dbname = RedSocial", $nombreUsuario, $contraseniaDB);
-    $conexion -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    function Conexion(){
+        $nombreUsuario = "root";
+        $contraseniaDB = "";
+        $nombreServidor = "localhost";
+
+        $conexion = new PDO("mysql:host=$nombreServidor; dbname = test", $nombreUsuario, $contraseniaDB);
+        $conexion -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conexion;
+    }
 //    echo "Conexion exitosa";
 
 }catch(PDOException $error){
