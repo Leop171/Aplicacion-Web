@@ -1,35 +1,37 @@
 <?php
-
+include "src\services\create_test.php";
 
 try{
-    // Recibir la URI
     $uri = $_SERVER["REQUEST_URI"];
 
+    $data = $_SERVER["REQUEST_METHOD"];
     // Evaluar si URI no esta vacia
 
-    // Dividir la URI en partes
-    $uriPartes = explode("/", $uri);
+    $uriBase = "/ForoDeDiscucion/";
 
-    // Quitar el primer / de la URI
-    array_shift($uriPartes);
+    $endpoint = ["create_test.php" => "create_test.php"];
+    $data = array();
 
-    $dominio = $uriPartes[0];
-    $ruta = $uriPartes[1];
+    // Una array con la URL completa, contiene una unica clave path
+    $uriPartes = parse_url($uri);
+    var_dump($uriPartes);
 
-    echo $ruta;
+    // Extraer el nombre del endpoint
+    $endpointSolicitado = str_replace($uriBase, "", $uriPartes["path"]);
 
-    if($ruta[0] == "@" & strlen($ruta) <= 20){
-        ValidarUsuario($ruta);
-        return;
-    }else{
-        ValidarRuta($ruta);  
-        return;
+    if(empty($endpointSolicitado)){
+        $endpointSolicitado = "/";
     }
 
-    echo "El codigo llego al final del if-esle";
+    var_dump($endpointSolicitado);
+
+    if(!array_key_exists($endpointSolicitado, $endpoint)){
+        echo "Error 404";
+    }
+
 }
 catch(Exception $Error){
-    echo "Error : ". $Error ->getMessage();
+    echo "Error : ". $Error -> getMessage();
 }
 
 function ValidarUsuario($ruta){

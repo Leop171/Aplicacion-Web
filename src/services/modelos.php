@@ -1,8 +1,12 @@
 <?php
-include "../includes/config.php";
+// include "../includes/config.php";
+// namespace model;
+// include "../includes/config.php";
+// include "src\includes\config.php";
+include_once ($_SERVER["DOCUMENT_ROOT"]. "/ForoDeDiscucion/rutas.php");
+include (SRC. "includes/config.php");
 
-
-function CrearRegistro($codigo, $nombre){
+function UsuarioInsertar($codigo, $nombre){
     
     $conexion = Conexion();
     
@@ -16,8 +20,9 @@ function CrearRegistro($codigo, $nombre){
         echo "Insercion fallida";
     }
     
-
 }
+
+
 
 // <>
 
