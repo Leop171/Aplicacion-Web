@@ -10,7 +10,7 @@ try{
         $contraseniaDB = "";
         $nombreServidor = "localhost";
 
-        $conexion = new PDO("mysql:host=$nombreServidor; dbname = test", $nombreUsuario, $contraseniaDB);
+        $conexion = new PDO("mysql:host=$nombreServidor; dbname=RedSocial", $nombreUsuario, $contraseniaDB);
         $conexion -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conexion;
     }
