@@ -29,6 +29,9 @@ try{
         echo "Error 404";
     }
 
+    // PUEDO UTILIZAR IS FILE PARA BUSCAR EL ENDPOINT?
+    // SI EL ARCHIVO EXISTE LLAMO A LA FUNCION QUE CONTIENE EL SWITCH DEL CONTROLADOR?
+
 }
 catch(Exception $Error){
     echo "Error : ". $Error -> getMessage();

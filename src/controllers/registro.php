@@ -1,0 +1,45 @@
+<?php
+include_once($_SERVER["DOCUMENT_ROOT"]. "/ForoDeDiscucion/rutas.php");
+include(MODELS. "model_registro.php");
+include(UTILS. "validacion.php");
+
+$input = file_get_contents("php://input");
+$data = json_decode($input, true);
+
+
+switch($_SERVER["REQUEST_METHOD"]){
+    case "POST":
+        PeticionInsertarUsuario($data);
+        break;
+};
+
+
+function PeticionInsertarUsuario($data){
+    try{
+        $nombre = $data["nombre"] ?? throw new Exception("4010");
+        $correo = $data["correo"] ?? throw new Exception("4003");
+        $contrasenia = $data["contrasenia"] ?? throw new Exception("4004");
+
+        ValidarNombre($nombre);
+        ValidarCorreo($correo);
+        ValidarContrasenia($contrasenia);
+
+
+        InsertarAcceso($data["nombre"], $data["correo"], password_hash($data["contrasenia"], PASSWORD_BCRYPT));   
+        
+        var_dump(DevolverEstado("4000"));
+    
+    }catch(Exception $Error){
+        if($Error -> getCode() == 45000){
+
+            var_dump($Error -> getMessage());
+        }else{
+            var_dump(DevolverEstado($Error -> getMessage()));
+        }
+        
+    }
+}
+
+
+
+?>

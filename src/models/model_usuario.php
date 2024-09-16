@@ -1,52 +1,48 @@
 <?php
-include($_SERVER["DOCUMENT_ROOT"]. "rutas.php");
-// include(SRC. "/models/model_usuario.php");
 
+use function PHPSTORM_META\map;
 
-// MODELOS USUARIO
-function InsertarUsuario($codigo, $nombre){
+include_once($_SERVER["DOCUMENT_ROOT"]. "/ForoDeDiscucion/rutas.php");
+include_once(UTILS. "config.php");
+// include_once(UTILS. "respuesta_modelo.php");
 
-    $conexion = Conexion();
-    
-    $declaracion = $conexion->prepare("CALL spInsertUsuario(:nombre, :correo, :contrasenia)");
-    $declaracion ->bindParam(":nombre", $nombre);
-    $declaracion ->bindParam(":correo", $correo);
-    $declaracion->bindParam(":contrasenia", $contrasenia);
-    
-    if($declaracion ->execute()){
-        echo "Insercion exitosa";
-    }else{
-        echo "Insercion fallida";
+// codigo, nombre, descripcion, direccion
+
+function ObtenerUsuario($nombre){
+    try{
+        $conexion = Conexion();
+
+        $usuarioObtener = $conexion ->prepare("CALL spSelectUsuario(:nombre)");
+        $usuarioObtener ->bindParam(":nombre", $nombre);
+        $usuarioObtener ->execute();
+        $resultado = $usuarioObtener ->fetchAll(PDO::FETCH_ASSOC);
+        $usuarioObtener ->closeCursor();
+        
+        var_dump($resultado);
+
+    }catch(PDOException $Error){
+        echo $Error -> getMessage();
     }
-    
 }
 
-function ActualizarUsuario(){
+function ActualizarUsuario($codigo, $nombre, $descripcion, $direccion){
+    try{
+    
+        $conexion = Conexion();
+        
+        $usuarioActualizar = $conexion ->prepare("CALL spUpdateUsuario(:codigo, :nombre, :descripcion, :direccion)");
+        $usuarioActualizar->bindParam(":codigo", $codigo);
+        $usuarioActualizar->bindParam(":nombre", $nombre);
+        $usuarioActualizar->bindParam(":descripcion", $descripcion);
+        $usuarioActualizar->bindParam(":direccion", $direccion);
+        $usuarioActualizar->execute();
+        $usuarioActualizar->closeCursor();
 
-    $conexion = Conexion();
+    }catch(PDOException $Error){
+        echo $Error ->getMessage();
 
-    $declaracion  = $conexion->prepare("CALL spUpdateUsuario()");
-
-    if($declaracion->execute()){
-        echo "Insercion exitosa";
-    }else{
-        echo "Insercion fallida";
     }
-
 }
 
-function ObtenerUsuario(){
-
-    $conexion = Conexion();
-
-    $declaracion = $conexion->prepare("CALL spSelectUsuario()");
-
-    if($declaracion->execute()){
-        echo "Insercion exitosa";
-    }else{
-        echo "Insercion fallida";
-    }
-
-}
-
+// <>
 ?>

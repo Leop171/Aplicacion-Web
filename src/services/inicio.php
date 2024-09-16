@@ -16,7 +16,7 @@ try{
     while($fila = $resultado -> fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)){
         array_push($datos, $fila);
     }
-
+    
     echo json_encode($datos);
 
 }catch(Exception $e){

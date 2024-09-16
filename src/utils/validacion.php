@@ -1,20 +1,24 @@
 <?php
 // FORMULARIO LOGIN Y INSERCION FORMULARIO
 // Limpiar contraseña
-function LimpiarContrasenia($contrasenia){
+
+use function PHPSTORM_META\type;
+
+function ValidarContrasenia($contrasenia){
     $expresionRegular = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/";
 
-    if(!preg_match($expresionRegular, $contrasenia)){
-        throw new Exception("La contraseña debe contener mas de 8 caracteres, 1 mayuscula, 1 numero y 1 signo PHP");    
+     if(!preg_match($expresionRegular, $contrasenia)){
+        throw new Exception("4004");    
     }
+
     return $contrasenia;
 }
 
 // Limpiar el correo 
-function LimpiarCorreo($correo){
+function ValidarCorreo($correo){
 
     if(!filter_var($correo, FILTER_VALIDATE_EMAIL)){
-        throw new Exception("Correo no valido PHP");
+        throw new Exception("4003");
     }
 
     return $correo;
@@ -22,17 +26,15 @@ function LimpiarCorreo($correo){
 
 // PUBLICACION 
 // Funcion que valida el texto
-function validarTexto(&$texto){
-
-    if(($texto) == ""){
+function ValidarTexto(&$texto){
+    
+    if(trim($texto) == ""){
         return $texto = null;
         
     }
 
-    $texto = strip_tags($texto).PHP_EOL;
-
     if(strlen($texto) >= 200){
-        return throw new Exception("Solo se permiten 200 caracteres");
+        return throw new Exception("4007");
     }
 
     return $texto;
@@ -40,10 +42,9 @@ function validarTexto(&$texto){
 }
 
 // Funcion que valida la imagen
-function validarImagen(&$imagen){
-
-    if($imagen["name"] == ""){
-        return $imagen = null;        
+function ValidarImagen(&$imagen){
+    if(trim($imagen["name"]) == ""){
+        return $imagen = null;
     }
 
     $imagenNombre = $imagen["name"];
@@ -54,18 +55,30 @@ function validarImagen(&$imagen){
     $extensionPermitida = "/jpg|jpeg|jfif|png/";
 
     if(!preg_match($extensionPermitida, $imagenExtension)){
-        return throw new Exception("Solo se permite .jpg, .jpeg, .jfif, .png");
+        return throw new Exception("4008");
     }
 
     if($imagenPeso > 400000){
-        return throw new Exception("El archivo debe pesar menos de 4mb");
+        return throw new Exception("4009");
     } 
 
     return $imagen;
 
 }
 
+function ValidarNombre($nombre){
+
+    $simboloValidos = array("-", "_");
+
+    if(!ctype_alnum(str_replace($simboloValidos, "", $nombre))){
+        throw new Exception("4010");
+    }
+
+    return $nombre;
+
+}
 
 
+// validarImagen("imagen.jpg");
 
 ?>

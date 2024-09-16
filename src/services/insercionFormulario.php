@@ -19,8 +19,8 @@ try{
         $contrasenia = $data['contrasenia'] ?? 'No contaseña';
     
         // Limpiar los valores recibidos
-        LimpiarCorreo($correo);
-        LimpiarContrasenia($contrasenia);
+        ValidarCorreo($correo);
+        ValidarContrasenia($contrasenia);
 
         // Se crea un hash de 60 caracteres por lo que no se puede almacenar en la columna actual VARCHAR(20)
         $contraseniaHash = password_hash($contrasenia, PASSWORD_BCRYPT);

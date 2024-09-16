@@ -16,8 +16,8 @@ try{
         $contrasenia = $data['contrasenia'] ?? 'No contaseña';
     
         // Limpiar los valores recibidos
-        LimpiarCorreo($correo);
-        LimpiarContrasenia($contrasenia);    
+        ValidarCorreo($correo);
+        ValidarContrasenia($contrasenia);    
     
         // Verificar que el correo ya esta registrado
         $buscarCorreo = $conexion->prepare("SELECT * FROM RedSocial.usuario WHERE correo = :correo");    

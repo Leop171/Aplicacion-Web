@@ -1,7 +1,5 @@
 <?php
 
-
-
 // CAMBIE EL NOMBRE DE LA BASE DE DATOS MOMENTANEAMENTE
 // DEBO REGRESARLO A: dbname = RedSocial
 try{
