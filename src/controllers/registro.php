@@ -13,6 +13,15 @@ switch($_SERVER["REQUEST_METHOD"]){
         break;
 };
 
+/*
+Crear la funcion con array como parametro
+Iniciar el bloque try-catch
+Verificar que los datos se hayan enviado y no sean null
+Validar los datos recibidos
+Llamar al modelo
+Devolver el estado
+Codigo del catch
+*/
 
 function PeticionInsertarUsuario($data){
     try{

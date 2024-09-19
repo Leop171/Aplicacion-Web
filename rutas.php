@@ -7,6 +7,6 @@ define("ASSETS", SRC. "assets/");
 define("UTILS", SRC. "utils/");
 define("UPLOADS", RAIZ. "uploads/");
 define("IMAGEN_PUBLICACION", UPLOADS. "imagen_publicacion/");
-
+define("IMAGEN_RESPUESTA", UPLOADS. "imagen_respuesta/");
 
 ?>

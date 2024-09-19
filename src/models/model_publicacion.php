@@ -33,9 +33,9 @@ function SelectPublicacion(){
 
         var_dump($resultado);
 
-        // TENGO QUE GUARDARLO CON GIT
-        // MAÑANA SI O SI COMIENZO EL CURSO DE C#
-        // OBLIGATORIAMENTE DEBO COMENZAR A PREPARARME PARA LA ENTREVISTA TECINICA
+        // TENGO QUE GUARDARLO CON GIT -
+        // MAÑANA SI O SI COMIENZO EL CURSO DE C# 
+        // OBLIGATORIAMENTE DEBO COMENZAR A PREPARARME PARA LA ENTREVISTA TECINICA 
 
         
     }catch(PDOException $Error){

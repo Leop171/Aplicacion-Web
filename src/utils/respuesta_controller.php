@@ -5,7 +5,7 @@ function DevolverEstado($codigo){
 
     $estado = array(
         "4001" => array (
-            "estado" => true,
+            "estado" => false,
             "codigo" => 200,
             "mensaje" => "Completado"
         ),

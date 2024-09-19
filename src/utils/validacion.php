@@ -71,7 +71,7 @@ function ValidarNombre($nombre){
     $simboloValidos = array("-", "_");
 
     if(!ctype_alnum(str_replace($simboloValidos, "", $nombre))){
-        throw new Exception("4010");
+        return throw new Exception("4010");
     }
 
     return $nombre;
@@ -79,6 +79,17 @@ function ValidarNombre($nombre){
 }
 
 
-// validarImagen("imagen.jpg");
+ValidarCodigo("3");
+
+function ValidarCodigo($codigo){
+
+    if(is_numeric($codigo)){
+        return $codigo = (int)$codigo;    
+    }else{
+        return throw new Exception("4014");
+    } 
+    
+}
+
 
 ?>

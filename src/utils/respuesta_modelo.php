@@ -58,7 +58,26 @@ function DevolverEstado($codigo){
             "codigo" => 4010,
             "mensaje" => "Nombre debe contener almenos 1 numero y 1 signo"
         ),
-
+        "4011" => array(
+            "estado" => false,
+            "codigo" => 4011,
+            "mensaje" => "No hay concidencias"
+        ),
+        "4012" => array(
+            "estado" => false,
+            "codigo" => 4012,
+            "mensaje" => "Nombre no puede estar vacio"
+        ),
+        "4013" => array(
+            "estado" => false,
+            "codigo" => 4013,
+            "mensaje" => "Publicacion no existe"
+        ),
+        "4014" => array(
+            "estado" => false,
+            "codigo" => 4014,
+            "mensaje" => "Usuario no valido"
+        ),
 
 
 
