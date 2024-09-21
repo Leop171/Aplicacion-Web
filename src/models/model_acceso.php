@@ -32,7 +32,7 @@ function SeleccionarAcceso($correo, $contrasenia){
         }    
 
     }catch(PDOException $Error){
-        echo $Error -> getMessage();       
+        echo(json_encode($Error -> getMessage()));       
     }
     
 }

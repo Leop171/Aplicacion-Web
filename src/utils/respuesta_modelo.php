@@ -79,6 +79,12 @@ function DevolverEstado($codigo){
             "mensaje" => "Usuario no valido"
         ),
 
+        "4015" => array(
+            "estado" => false,
+            "codigo" => 4014,
+            "mensaje" => "Erro de prueba"
+        ),
+
 
 
         "5000" => array(

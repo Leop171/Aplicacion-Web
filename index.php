@@ -1,5 +1,5 @@
 <?php
-include "src\services\create_test.php";
+// include "src\services\create_test.php";
 
 try{
     $uri = $_SERVER["REQUEST_URI"];
@@ -54,8 +54,8 @@ function ValidarUsuario($ruta){
 }
 
 function ValidarRuta($ruta){
-    $rutasPermitidas = array("acceder.php", "buscar.php", "inicio.php", "perfil.php", "publicar.php", "registro.php", 
-    "testRutas.php");
+    // Este array no debe contener el nombre de las rutas fijas si no de los controladores
+    $rutasPermitidas = array("acceder.php", "buscar.php", "inicio.php", "perfil.php", "publicar.php", "registro.php", "testRutas.php");
 
     $caracteresValidos = array("_", ".");
 

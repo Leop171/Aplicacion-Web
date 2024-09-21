@@ -1,7 +1,8 @@
 <?php
 include_once($_SERVER["DOCUMENT_ROOT"]. "/ForoDeDiscucion/rutas.php");
 include(MODELS. "model_acceso.php");
-// include(UTILS. "respuesta_modelo.php");
+include_once(UTILS. "respuesta_modelo.php");
+include_once(UTILS. "validacion.php");
 
 
 $input = file_get_contents("php://input");
@@ -24,14 +25,14 @@ function PeticionSeleccionarAcceso($data){
         ValidarContrasenia($contrasenia);
 
         SeleccionarAcceso($data["correo"], $data["contrasenia"]);
-        var_dump(DevolverEstado("4000"));
+        var_dump(json_encode(DevolverEstado("4000")));
 
     }catch(Exception $Error){
 
         if($Error -> getCode() == 45000){
-            var_dump($Error -> getMessage()); 
+            echo(json_encode($Error -> getMessage())); 
         }else{
-            var_dump(DevolverEstado($Error -> getMessage()));
+            echo(json_encode(DevolverEstado($Error -> getMessage())));
         }
     }
 
