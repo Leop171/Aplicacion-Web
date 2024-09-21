@@ -16,10 +16,11 @@ switch ($_SERVER["REQUEST_METHOD"]){
 
 function PeticionInsertarPublicacion(){
     try{
-        $codigo = $_POST["codigo"] ?? throw new Exception("5000");
+        $codigo = $_POST["codigo"] ?? throw new Exception("4014");
         $texto = $_POST["texto"] ?? NULL;
         $imagen = $_FILES["imagen"] ?? NULL;
 
+        ValidarCodigo($codigo);
         ValidarTexto($texto);
         ValidarImagen($imagen);
         
@@ -44,14 +45,14 @@ function PeticionInsertarPublicacion(){
 
         InsertarPublicacion($codigo, $texto, $ubicacionFinal);
 
-        var_dump(DevolverEstado("4000"));
+        echo(json_encode(DevolverEstado("4000")));
 
     }catch(Exception $Error){
         if($Error -> getCode() == 45000){
 
-            var_dump($Error -> getMessage());
+            echo(json_encode($Error -> getMessage()));
         }else{
-            var_dump(DevolverEstado($Error -> getMessage()));
+            echo(json_encode(DevolverEstado($Error -> getMessage())));
         }
 
     } 

@@ -16,7 +16,7 @@ function InsertarPublicacion($codigo, $texto, $ubicacionFinal){
         $publicacionInsertar ->closeCursor();
 
     }catch(PDOException $Error){
-        echo $Error ->getMessage();
+        echo json_encode($Error ->getMessage());
 
     } 
 }
@@ -39,7 +39,7 @@ function SelectPublicacion(){
 
         
     }catch(PDOException $Error){
-        echo $Error -> getMessage();
+        echo json_encode($Error -> getMessage());
     }
 }
 
