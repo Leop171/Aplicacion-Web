@@ -84,7 +84,11 @@ function DevolverEstado($codigo){
             "codigo" => 4014,
             "mensaje" => "Erro de prueba"
         ),
-
+        "4016" => array(
+            "estado" => false,
+            "codigo" => 4016,
+            "mensaje" => "Nombre de usuario no debe contener mas 20 caracteres"
+        ),
 
 
         "5000" => array(

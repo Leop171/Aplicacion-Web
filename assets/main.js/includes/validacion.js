@@ -1,4 +1,9 @@
 /// VALIDAR IMAGEN.JS
+
+/*
+Se debe crear un array especifico que guarde todos los mensajes de error
+*/
+
 export function ValidarArchivoTamanio(imagen){  
     const tamanioMaximo = 4*1024*1024;
   
@@ -7,13 +12,12 @@ export function ValidarArchivoTamanio(imagen){
     }
   
     if(imagen.size >= tamanioMaximo){
-      throw `El archivo no debe pesar mas de 4mb JS`;
+      throw "1009";
     }
   
     return imagen;
 }
 
-  
 export function ValidarArchivoExtension(imagen){
     if(imagen.name.trim() == ""){
       return true;
@@ -24,7 +28,7 @@ export function ValidarArchivoExtension(imagen){
     const imagenNombre = imagen.name;
       
     if(!extensionPemritidas.exec(imagenNombre)){
-      throw `Solo se permitren extensiones${(extensionPemritidas)} JS`;
+      throw "1008";
     }
   
     return imagen;
@@ -38,7 +42,7 @@ export function ValidarTexto(texto){
       texto = texto.replace(/[^a-zA-Z0-9 .,!?'"\n\r-]/g, '');
   
       if(texto.length >= 200){
-        throw "El texto tiene mas de 200 caracteres JS";
+        throw "1007";
       }  
   
       return texto;
@@ -54,7 +58,7 @@ export function ValidarCorreo(correo){
   let regCorreo =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
   if(!regCorreo.test(correo)){
-    throw "Correo no valido JS";
+    throw "1003";
   }
 
   return correo;
@@ -68,7 +72,7 @@ export function ValidarContrasenia(contrasenia){
   let regContrasenia = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
   if(!regContrasenia.test(contrasenia)){
-    throw "Contraseña debe contener al menos 1 numero, 1 simbolo y 1 mayuscula JS";
+    throw "1004";
   }
 
   return contrasenia;
@@ -84,7 +88,7 @@ export function ValidarBusqueda(texto){
   texto = texto.replace(/[^a-zA-Z0-9]/g, "");
 
   if(texto.length >= 20){
-      throw "Nombre de usuario no puede contener mas de 20 caracteres";
+      throw "1016";
   }    
 
   arroba = "@";
@@ -93,3 +97,16 @@ export function ValidarBusqueda(texto){
 
   return texto;
 }
+
+
+// Validar que el codigo de usuario se una session correcta
+export function ValidarCodigo(codigo){
+
+  if(!Number.isInteger(codigo)){
+      throw("1014");
+  }
+
+  return true;
+
+}
+
