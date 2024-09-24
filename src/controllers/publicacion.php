@@ -16,7 +16,7 @@ switch ($_SERVER["REQUEST_METHOD"]){
 
 function PeticionInsertarPublicacion(){
     try{
-        $codigo = $_POST["codigo"] ?? throw new Exception("4014");
+        $codigo = $_POST["codigo"] ?? throw new Exception("4014"); // Los archivos no esta llegando
         $texto = $_POST["texto"] ?? NULL;
         $imagen = $_FILES["imagen"] ?? NULL;
 

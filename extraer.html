@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en"></html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,14 +6,13 @@
 </head>
 <body>
     <!-- action="src\controllers\acceso.php" -->
-    <form id="formulario1" method="post">
+    <form id="formulario1" method="get" enctype="multipart/form-data">
         <h1>Prueba</h1>
-        <input type="text" name="correo" id="correo">
-        <input type="text" name="contrasenia" id="contrasenia">
+        <input type="text" name="codigo" id="codigo">
         <input type="submit" name="submit" id="submit">
         <p id="errorCampos"></p>
     </form>
 
-    <script type="module" src="assets\peticiones.js\prueba.js"></script>
+    <script type="module" src="assets\peticiones.js\extraer.js"></script>
 </body>
 </html>

@@ -32,6 +32,7 @@ Devolver el estado
 Codigo del catch
 */
 
+// Los controladores con metodo GET no pueden recibir $data ya que no se envia en el cuerpo de la peticion
 function PeticionSeleccionarGuardado($data){
     try{
         $codigo = $data["codigo"] ?? throw new Exception("4014");
@@ -40,14 +41,14 @@ function PeticionSeleccionarGuardado($data){
 
         SeleccionarGuardado($codigo);
 
-        var_dump(DevolverEstado("4000"));
+        echo json_encode(DevolverEstado("4000"));
 
     }catch(Exception $Error){
         if($Error ->getCode() == 45000){
 
-            var_dump($Error -> getMessage());
+            echo json_encode($Error -> getMessage());
         }else{
-            var_dump(DevolverEstado($Error ->getMessage()));
+            echo json_encode(DevolverEstado($Error ->getMessage()));
         } 
 
     }
@@ -65,14 +66,14 @@ function PeticionInsertarGuardado($data){
 
         InsertarGuardado($codigoUsuario, $direccion ,$codigoPublicacion, );
 
-        var_dump(DevolverEstado("4000"));
+        echo json_encode(DevolverEstado("4000"));
 
     }catch(PDOException $Error){
         if($Error ->getCode() == 45000){
 
-            var_dump($Error -> getMessage());
+            echo json_encode($Error -> getMessage());
         }else{
-            var_dump(DevolverEstado($Error ->getMessage()));
+            echo json_encode(DevolverEstado($Error ->getMessage()));
         } 
 
     }

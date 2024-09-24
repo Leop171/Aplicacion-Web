@@ -96,15 +96,16 @@ const data = {
 // Validar que el codigo de usuario se una session correcta
 function ValidarCodigo(codigo){
 
-    if(!Number.isInteger(codigo)){
-        throw("4014");
+    if(isNaN(codigo)){
+        return console.log("No es un entero");
     }
 
-    return true;
+    console.log("Si es un entero");
+    // return true;
   
 }
 
-ValidarCodigo(-1);
+ValidarCodigo("[]");
 
 
 function ValidarCorreo(correo){

@@ -1,3 +1,13 @@
+import { ValidarArchivoExtension, ValidarCorreo } from "../main.js/includes/validacion.js";
+import { ValidarArchivoTamanio } from "../main.js/includes/validacion.js";
+import { ValidarTexto } from "../main.js/includes/validacion.js";
+import { ValidarBusqueda } from "../main.js/includes/validacion.js";
+import { ValidarContrasenia } from "../main.js/includes/validacion.js";
+import { ValidarCodigo } from "../main.js/includes/validacion.js";
+import { DevolverRespuesta } from "../main.js/includes/respuestas.js";
+
+let formulario = "";
+
 document.addEventListener("DOMContentLoaded", (event) => {
     formulario = document.getElementById("formulario1");
 
@@ -9,17 +19,53 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 
 
+function validaciones(clave, valor){
+  switch(clave){
+      case "texto":
+          ValidarTexto(valor);
+          break;
+      case "imagen":
+          ValidarArchivoExtension(valor);
+          // ValidarArchivoExtension(valor);
+          break;
+      case "imagen":
+          ValidarArchivoTamanio(valor);
+          break;
+      case "busqueda":
+          ValidarBusqueda(valor);
+          break;
+      case "contrasenia":
+          ValidarContrasenia(valor);
+          break;
+      case "correo":
+          ValidarCorreo(valor);
+          break;
+      case "codigo":
+          ValidarCodigo(valor);
+          break;
+  };
+
+
+  // throw "2000";
+
+}
+
+
 function BuscarUsuario(event){
     try{
       event.preventDefault();
   
       let errorEsp = document.getElementById("errorCampos");
   
+      const metodo = formulario.method;
       const formData = new FormData(formulario);
   
       // const file = {};
       const data = {};
       formData.forEach((value, key) => {
+
+        validaciones(key, value);
+
         data[key] = value; 
                      
        });
@@ -27,7 +73,7 @@ function BuscarUsuario(event){
        console.log(data);
       
         fetch('src/controllers/acceso.php', {
-          method: 'POST',
+          method: metodo,
           headers: {
             'Content-Type': 'application/json'
         },
@@ -38,11 +84,12 @@ function BuscarUsuario(event){
         .then(response => response.json()) //.json
         .then(data =>{
           if(data.estado === true){
-            window.location.replace('inicio.php');
-          }else{
-            console.log(data.mensaje);
-            errorEsp.textContent = data.mensaje;
+
             console.log(data);
+             // window.location.replace('inicio.php');
+          }else{
+            errorEsp.textContent = data.mensaje;
+            console.log("Succes", data.estado, "::::", data, "Esto es JS");
           }      
             
         })
@@ -52,7 +99,7 @@ function BuscarUsuario(event){
   
     }catch(err){
       let errorEsp = document.getElementById("errorCampos");
-      errorEsp.textContent = err;
+      errorEsp.textContent = DevolverRespuesta(err);
     }
   
 };

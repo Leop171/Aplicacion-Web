@@ -102,11 +102,13 @@ export function ValidarBusqueda(texto){
 // Validar que el codigo de usuario se una session correcta
 export function ValidarCodigo(codigo){
 
-  if(!Number.isInteger(codigo)){
+  if(isNaN(codigo)){
       throw("1014");
   }
 
-  return true;
+  return codigo;
 
 }
+
+
 

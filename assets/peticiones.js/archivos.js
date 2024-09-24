@@ -50,18 +50,7 @@ function validaciones(clave, valor){
           break;
   };
 
-
-  throw "2000";
-
-/*
-ValidarArchivoExtension
-ValidarArchivoTamanio
-ValidarTexto
-ValidarBusquedad
-ValidarContrasnia
-ValidarCorreo
-ValidarCodigo
-*/
+  // throw "2000";
 
 }
 
@@ -82,6 +71,7 @@ function BuscarUsuario(event){
     const data = {};
     formData.forEach((value, key) => {
 
+      console.log(key, value);
       validaciones(key, value);
 
       data[key] = value;
@@ -89,34 +79,17 @@ function BuscarUsuario(event){
                    
      });
 
-/*
-----------------------------------------------------------------------------
-for(let dato  in data){
-    evaluar = dato;
-    validaciones(dato, data[dato]);
-    
-}
-
-ENVIAR LA CLAVE Y LOS PARAMETROS
-
-clave = "correo"
-valor = correo@gmail.com
-
-----------------------------------------------------------------------------
-
-*/
-
 
     console.log(data);
     
       fetch('src/controllers/publicacion.php', {
         method: metodo,
-        body: formData
+        body: formData // Sigo creando data{} si el que envio es formData?
       })
       .then(response => response.json()) //.json
       .then(data =>{
-        if(data.status === 'Succes'){
-            console.log(data);
+        if(data.status === 'Succes'){ // Puedo eliminar esta seccion y solo dejar un if en caso de error
+            console.log(data); // Una forma en la respuesta de servidor para saber si devolvio registros
 
         }else{
           errorEsp.textContent = data.mensaje;
@@ -125,7 +98,8 @@ valor = correo@gmail.com
           
       })
       .catch((error) => {
-        console.log(error);
+        // En caso de un erro al enviar la solicitud?????
+        errorEsp.textContent = "No se pudo conectar al servidor :(";
       });
 
   }catch(err){

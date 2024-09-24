@@ -43,7 +43,7 @@ function SeleccionarGuardado($codigo){
         $resultado = $guardadoSeleccionar ->fetch(PDO::FETCH_ASSOC);
         $guardadoSeleccionar ->closeCursor();
         
-        var_dump($resultado);
+        echo json_encode($resultado);
 
     }catch(PDOException $Error){
         echo $Error ->getMessage();
