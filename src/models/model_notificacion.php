@@ -2,6 +2,7 @@
 include_once($_SERVER["DOCUMENT_ROOT"]. "/ForoDeDiscucion/rutas.php");
 include_once(UTILS. "config.php");
 include_once(UTILS. "respuesta_modelo.php");
+include_once(UTILS. "session.php");
 
 /*
 Crear la funcion

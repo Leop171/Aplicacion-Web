@@ -89,6 +89,12 @@ function DevolverEstado($codigo){
             "codigo" => 4016,
             "mensaje" => "Nombre de usuario no debe contener mas 20 caracteres"
         ),
+        "4017" => array(
+            "estado" => false,
+            "codigo" => 4017,
+            "mensaje" => "Inicia session para realizar esta accion"
+        ),
+
 
 
         "5000" => array(

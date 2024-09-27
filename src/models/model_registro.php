@@ -26,13 +26,21 @@ function InsertarAcceso($nombre, $correo, $contrasenia){
         if($NombreBuscar->rowCount() > 0){
             throw new Exception("4002");
         }
-    
-        $GuardarUsuario = $conexion->prepare("CALL spInsertUsuario(:nombre, :correo, :contrasenia)");
+
+
+        $GuardarUsuario = $conexion->prepare("CALL spInsertUsuario(:nombre, :correo, :contrasenia, @resultado)");
         $GuardarUsuario ->bindParam(":nombre", $nombre);
         $GuardarUsuario->bindParam(":correo", $correo);
         $GuardarUsuario->bindParam(":contrasenia", $contrasenia);
         $GuardarUsuario->execute();
+        $RecuperarCodigo = $GuardarUsuario ->fetch(PDO::FETCH_ASSOC);
         $GuardarUsuario->closeCursor();
+
+        // Leer el ultimo id insertado y colocarlo en una variable
+        session_start();
+        $_SESSION["__usuario_codigo"] = $RecuperarCodigo;
+
+
 
     }catch(PDOException $Error){
         

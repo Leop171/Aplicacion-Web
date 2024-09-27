@@ -3,6 +3,7 @@ include_once($_SERVER["DOCUMENT_ROOT"]. "/ForoDeDiscucion/rutas.php");
 include(MODELS. "model_guardado.php");
 include_once(UTILS. "respuesta_modelo.php");
 include_once(UTILS. "validacion.php");
+include_once(UTILS. "session.php");
 
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
@@ -35,7 +36,10 @@ Codigo del catch
 // Los controladores con metodo GET no pueden recibir $data ya que no se envia en el cuerpo de la peticion
 function PeticionSeleccionarGuardado($data){
     try{
-        $codigo = $data["codigo"] ?? throw new Exception("4014");
+        // session_start();
+        $codigo = $_SESSION["codigoUsuario"] ?? throw new Exception("4017");
+        // $codigo = $data["codigo"] ?? throw new Exception("4014");
+
 
         ValidarCodigo($codigo);
 

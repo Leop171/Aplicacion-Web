@@ -36,6 +36,12 @@ function PeticionInsertarUsuario($data){
 
         InsertarAcceso($data["nombre"], $data["correo"], password_hash($data["contrasenia"], PASSWORD_BCRYPT));   
         
+        // Un consulta que lee el utlimo id insertado y lo coloca como codigo de session
+        
+        // session_start();
+        // Crear la sesion con la pk del usuario creado
+        // $_SESSION["codigoUsuario"] = $nuevoUsuario["codigo"];
+
         var_dump(DevolverEstado("4000"));
     
     }catch(Exception $Error){

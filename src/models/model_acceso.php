@@ -27,6 +27,7 @@ function SeleccionarAcceso($correo, $contrasenia){
                 throw new Exception("4006");
             }else{
                 // Crear el inicio de session para el usuario
+                $_SESSION["codigoUsuario"] = $datosUsuario["codigo"];
                 throw new Exception("4000");
             }
         }    
