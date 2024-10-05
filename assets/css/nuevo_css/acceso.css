@@ -1,0 +1,42 @@
+.acceder{
+    height: 80%;
+    min-height: 400px;
+    width: 300px;
+    border-radius: 2%;
+    border: solid 2px black;
+    text-align: center;
+    margin: auto;
+}
+
+img{
+    height: 40px;
+    width: 40px;
+    margin: 4px 20px;
+}
+
+input{
+    height: 30px;
+    width: 160px;
+    margin: 4px;
+}
+
+#enlace{
+    text-decoration: none;
+}
+
+/*
+
+    <div>
+        <form class="acceso" id="accesp">
+            <h1>Acceso</h1>
+            <!-- Hace falta que valida el nombre -->
+            <input type="text" name="nombre" id="nombre" >
+            <input type="email" name="correo" id="correo">
+            <input type="password" name="contrasenia" id="contrasenia">
+            <p id="errorCampos"></p>
+        </form>
+    </div>
+
+
+*/
+

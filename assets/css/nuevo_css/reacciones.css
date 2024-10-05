@@ -1,0 +1,26 @@
+.reacciones{
+    width: 100%;
+    height: 24px;
+    border: solid 1px black;
+    border-radius: 2%;
+    position: sticky;
+    text-align: right;
+}
+
+.imagen-reaccion{
+    height: 18px;
+    width: 10%;
+    margin: 2px 2px;
+}
+
+
+
+/*
+<div class="reacciones" id="reacciones">
+    <img src="/ForoDeDiscucion/assets/imagenes/subir.png" alt="imagen-reaccion">
+    <img src="/ForoDeDiscucion/assets/imagenes/bajar.png" alt="imagen-reaccion">
+    <img src="/ForoDeDiscucion/assets/imagenes/comentario.png" alt="imagen-respuesta">
+    <img src="/ForoDeDiscucion/assets/imagenes/guardar.png" alt="imagen-guardado">
+</div>
+
+*/

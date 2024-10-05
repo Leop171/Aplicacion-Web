@@ -1,0 +1,98 @@
+/*
+.publicacion{
+    width: 300px;
+    box-sizing: border-box; // Incluye el padding y el borde en el ancho y la altura
+    border: 2px solid black;
+    border-radius: 2%;
+    margin: auto;
+    margin-bottom: 6px;
+}
+*/
+
+.publicacion{
+    width: 50%;
+    min-width: 400px;
+    max-height: 600px;
+    border: solid black 1px;
+    border-radius: 1%;
+    margin: auto;
+    margin-bottom: 6px;
+}
+
+#informacion-usuario{
+    width: 98%;
+    height: 80px;
+}
+
+#imagen-usuario{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 2%;
+    border: 1px black solid;
+    border-radius: 40%;
+    margin: 1px 2px;
+    background-color: azure;
+}
+
+
+#nombre-usuario{
+    margin: 1px 2px;
+    right: 0;
+}
+
+#fecha{
+    width: 80px;
+    margin: 1px 2px;
+    left: 0px;
+}
+
+#texto-publicacion{
+    width: 98%;
+    margin: 4px auto;
+    height: auto;
+    border-radius: 2%;
+    border: 1px black solid;
+}
+
+#imagen-publicacion{
+    width: 100%;
+    margin: 2px auto;
+    height: 50%;
+    /*height: 120px;*/
+    border-radius: 2%;
+    border: 1px black solid;
+    background-color: aliceblue;
+}
+
+.reacciones{
+    width: 100%;
+    height: 24px;
+    border: solid 1px black;
+    border-radius: 2%;
+    position: sticky;
+    text-align: center;
+}
+
+.reaccion{
+    height: 20px;
+    width: 23%;
+    margin: 2px 2px;
+}
+
+/*
+<div class="publicacion" id="publicacion">
+    <img class="publicacion" src="" alt="imagen-usuario" id="imagen-usuario">
+    <p class="publicacion" id="fecha">28/09/2024</p>
+    <p class="publicacion" id="nombre-usuario">Usuario</p>
+    <p class="publicacion" id="texto-publicacion">Texto</p>
+    <img class="publicacion" id="imagen-publicacion"src="" alt="imagen publicacion">
+</div>
+<div class="reacciones">
+    <input type="submit" value="Subir" id="reaccion-subir">
+    <input type="submit" value="Bajar" id="reaccion-bajar">
+    <input type="submit" value="comentario" id="reaccion-comentario">
+    <input type="submit" value="Guardar" id="reaccion-guardar">
+</div>
+*/
+

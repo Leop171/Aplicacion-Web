@@ -1,0 +1,19 @@
+.barra-inferior{
+    height: 60px;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    /* border: 1px black solid; */
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 100%;
+    /* bottom:0; */
+    background-color: white;
+}
+
+.imagen-menu{
+    height: 4vh;
+    width: 20px;
+    margin: 4px 14px;
+}
+

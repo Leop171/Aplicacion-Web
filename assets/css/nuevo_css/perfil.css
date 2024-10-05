@@ -1,0 +1,73 @@
+.perfil{
+    width: 100%;
+    height: 84%;
+    max-width: 600px;
+    min-width: 300px;
+    /* border: solid blue 2px; */
+    margin: auto;
+}
+
+
+.imagenes{
+    width: 100%;
+    height: 200px;
+    max-width: 600px;
+    background-color: azure;
+    border: solid black 1px;
+    position: relative;
+    display: inline-block;
+}
+
+
+#imagen-portada{
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    display: block;
+    border: solid 1px black;    
+} 
+
+
+#imagen-perfil{
+    position: absolute;
+    width: 18%;
+    height: 50%;
+    max-width: 110px;
+    max-height: 110px;
+    background-color: azure;
+    bottom: 0;
+    left: 0;
+    border: solid 1px black;
+    border-radius: 50%;
+}
+
+#usuario-nombre{
+    display: inline-block;
+    margin: 10px 10px;
+}
+
+
+
+/* 
+
+<div class="perfil" id="perfil">
+        <div class="imagenes">
+            <img src="/ForoDeDiscucion/assets/imagenes/tortuga.png" alt="imagen-portada" id="imagen-portada">
+            <img src="/ForoDeDiscucion/assets/imagenes/usuario.png" alt="imagen-perfil" id="imagen-perfil">
+        </div>
+        <div>
+            <p id="usuario-nombre">Usuario</p>
+            <button>Enviar Solicitud</button>
+        </div>
+        <div class="publicacion" id="publicacion">
+            <img class="publicacion" src="" alt="imagen-usuario" id="imagen-usuario">
+            <p class="publicacion" id="fecha">28/09/2024</p>
+            <p class="publicacion" id="nombre-usuario">Usuario</p>
+            <p class="publicacion" id="texto-publicacion">Texto</p>
+            <img class="publicacion" id="imagen-publicacion"src="" alt="imagen publicacion">
+        </div>
+
+        </div>
+ 
+*/
+

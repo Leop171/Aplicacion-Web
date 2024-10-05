@@ -6,6 +6,12 @@ import { ValidarContrasenia } from "../main.js/includes/validacion.js";
 import { ValidarCodigo } from "../main.js/includes/validacion.js";
 import { DevolverRespuesta } from "../main.js/includes/respuestas.js";
 
+/*
+ESTA PETICION ESTA ENCARGADA DE EXTRAER DATA EN LAS PETCIONES GET
+*/
+
+
+
 let formulario = "";
 
 document.addEventListener("DOMContentLoaded", (event) => {
@@ -82,7 +88,7 @@ function BuscarUsuario(event){
         })
     
 
-        .then(response => response.json()) //.json
+        .then(response => response.text()) //.json
         .then(data =>{
           if(data.estado === true){
 

@@ -1,0 +1,81 @@
+.notificaciones{
+    width: 100%;
+    height: 84%;
+    max-width: 600px;
+    min-width: 300px;
+    max-height: 800px;
+    margin: auto;
+    border-radius: 2%;
+}
+
+.busqueda{
+    width: 98%;
+    height: 34px;
+    border-radius: 2%;
+    margin: 10px auto;    
+    text-align: center;
+}
+
+#busqueda-texto{
+    height: 30px;
+    width: 240px;
+    margin: 2px auto;
+}
+
+#busqueda-boton{
+    height: 30px;
+    width: 60px; 
+    margin: 2px auto; 
+}
+
+#notificacion{
+    height: 44px;
+    width: 98%;
+    margin: 20px auto;
+    border: solid 1px black;
+    background-color: azure;
+}
+
+
+#imagen{
+    height: 90%;
+    width: 12%;
+    display: inline-block;
+    margin: 2px auto;
+    vertical-align: middle;
+}
+
+
+#usuario-nombre{
+    padding: 0px;
+    display: inline-block;    
+}
+
+#fecha{
+    margin: 2px 20px;
+    display: inline-block;
+}
+
+
+
+
+
+
+/*
+
+<div class="notificaciones">
+        <div class="busqueda">
+
+        <input type="search" name="buscar" id="busqueda-texto" placeholder="Buscar Notificacion">
+        <input type="submit" id="busqueda-boton">
+                
+        </div>
+        <div id="notificacion">
+                <img id="imagen" src="/ForoDeDiscucion/assets/imagenes/usuario.png" alt="imagen notificacion">
+                <p id="usuario-nombre">Usuario Nombre</p>
+                <p id="fecha">30/09/2024</p>    
+                        
+        </div>
+    </div>
+
+*/

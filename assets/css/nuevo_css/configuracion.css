@@ -1,0 +1,34 @@
+.configuracion{
+    width: 100%;
+    height: 84%;
+    max-width: 600px;
+    min-width: 300px;
+    max-height: 800px;
+    margin: auto;
+    border-radius: 2%;
+    /* border: solid 2px black; */
+}
+
+
+.enlace{
+    margin: 8px 10px;
+}
+
+.configuracion-enlace{
+    text-decoration: none;
+}
+
+
+/*
+
+<div class="configuracion" id="configuracion">
+    <h1>Configuracion</h1>
+    <p class="enlace" id="actualizar"><a href="">Actualizar mi informacion</a></p>
+    <p class="enlace" id="guardado"><a href="">Elementos guardados</a></p>
+    <p class="enlace" id="reacciones"><a href="">Publicacion que te han gustado</a></p>
+    <p class="enlace" id="comentarios"><a href="">Publicacion que has comentado</a></p>
+    <p class="enlace" id="amigos"><a href="">Ver mis amigos</a></p>
+    <p class="enlace" id="eliminar-cuenta"><a href="">Eliminar mi cuenta</a></p>
+</div>
+
+*/

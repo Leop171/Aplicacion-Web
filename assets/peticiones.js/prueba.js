@@ -6,6 +6,10 @@ import { ValidarContrasenia } from "../main.js/includes/validacion.js";
 import { ValidarCodigo } from "../main.js/includes/validacion.js";
 import { DevolverRespuesta } from "../main.js/includes/respuestas.js";
 
+/*
+ESTA PETICION ENVIA SOLICITUDES POST
+*/
+
 let formulario = "";
 
 document.addEventListener("DOMContentLoaded", (event) => {

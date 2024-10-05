@@ -11,6 +11,10 @@ import { DevolverRespuesta } from "../main.js/includes/respuestas.js";
 // import { ValidarCorreo } from "../main.js/includes/validacion.js";
 
 
+/*
+ESTA PETICION ENVIA ARCHIVOS POR POST
+*/
+
 let formulario = "";
 
 
