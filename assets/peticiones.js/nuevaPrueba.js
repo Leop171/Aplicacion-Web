@@ -5,6 +5,7 @@ let formulario = "";
 
 document.addEventListener("DOMContentLoaded", (event) => {
     formulario = document.getElementsByTagName("form").envio;
+    console.log(formulario);
 
     // YA CAPTURA EL FOMULARIO POR LA ETIQUETA, CREO...
 

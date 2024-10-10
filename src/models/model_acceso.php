@@ -27,13 +27,15 @@ function SeleccionarAcceso($correo, $contrasenia){
                 throw new Exception("4006");
             }else{
                 // Crear el inicio de session para el usuario
-                $_SESSION["codigoUsuario"] = $datosUsuario["codigo"];
+                session_start();
+                $_SESSION["__usuario_codigo"] = $datosUsuario["codigo"];
                 throw new Exception("4000");
             }
         }    
 
     }catch(PDOException $Error){
         echo(json_encode($Error -> getMessage()));       
+        // Mensaje de error generico "No es posible acceder en estos momentos"
     }
     
 }

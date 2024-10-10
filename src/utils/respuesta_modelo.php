@@ -2,9 +2,9 @@
 
 
 
-function DevolverEstado($codigo){
+function DevolverEstado($codigo, $data = NULL){
     // ESTA MATRIZ GUARDA LA RESPUESTA COMPLETA DEL SERVIDOR
-    $respuesta = array();    
+    $respuesta = array("estado" => NULL, "data" => NULL);    
 
 
     $estado = array(
@@ -16,7 +16,8 @@ function DevolverEstado($codigo){
         "4001" => array (
             "estado" => false,
             "codigo" => 4001,
-            "mensaje" => "Correo en uso"
+            "mensaje" => "Correo en uso",
+            "data"=> NULL
         ),
         "4002" => array(
             "estado" => false,
@@ -31,7 +32,7 @@ function DevolverEstado($codigo){
         "4004" => array(
             "estado" => false,
             "codigo" => 4004,
-            "mensaje" => "Contraseña debe contener al menos 8 caracteres, 1 mayuscula, 1 numero y 1 signo"
+            "mensaje" => "Contrase\u00d1a debe contener al menos 8 caracteres, 1 mayuscula, 1 numero y 1 signo"
         ),
         "4005" => array(
             "estado" => false,
@@ -61,7 +62,7 @@ function DevolverEstado($codigo){
         "4010" => array(
             "estado" => false,
             "codigo" => 4010,
-            "mensaje" => "Nombre debe contener almenos 1 numero y 1 signo"
+            "mensaje" => "Nombre de usuario solo debe contener letras o numeros, no debe contener mas de 20 caracteres"
         ),
         "4011" => array(
             "estado" => false,
@@ -105,16 +106,20 @@ function DevolverEstado($codigo){
         "5000" => array(
             "estado" => false,
             "codigo" => 1003,
-            "mensaje" => "Algo salio mal, recarga la pagina y vuelve a intentarlo"
+            "mensaje" => "Algo salio mal, recarga la pagina y vuelve a intentarlo",
+            "data"=>"Un codigo 5000.."
         )
     );    
 
     if(!array_key_exists($codigo, $estado)){
-        $codigo = "c500";
+        $codigo = "5000"; // c500
     }
 
-    array_push($respuesta, $estado[$codigo]);
-    return $respuesta;
+    $estado[$codigo[3]] = $data;
+    // $respuesta["data"] = $data;
+    // array_push($respuesta, $estado[$codigo]);
+    // array_push($respuesta, $data);
+    return $estado[$codigo];
 
 }
 

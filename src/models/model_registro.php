@@ -44,7 +44,9 @@ function InsertarAcceso($nombre, $correo, $contrasenia){
 
     }catch(PDOException $Error){
         
-        echo $Error -> getMessage();
+        // echo $Error -> getMessage();
+        echo "ErrorDelMoedlo";
+        // var_dump("5000"); // Si el error llego al modelo es por que no fue controlado en el controlador, imprime un error generico
                 
     }
         

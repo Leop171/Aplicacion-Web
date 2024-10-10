@@ -7,7 +7,8 @@
 </head>
 <body>
     <div class="acceder">
-        <form class="acceso" id="accesp">
+         <!-- class="registro" name="formulario" id="registro" method="post" -->
+        <form class="acceso" name="formulario" id="acceso" method="post">
             <h1>Bienvenido</h1>
             <img src="/ForoDeDiscucion/assets/imagenes/tortuga.png" alt="">
             <br><br>
@@ -21,5 +22,6 @@
         </form>
     </div>
     
+    <script src="/ForoDeDiscucion/assets/peticiones.js/prueba.js" type="module"></script>
 </body>
 </html>

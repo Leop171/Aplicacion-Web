@@ -3,7 +3,7 @@ export function DevolverRespuesta(codigo){
         "1000":"Completado",
         "1001":"Correo un uso",
         "1002":"Nombre en uso",
-        "1003":"Correo en uso",
+        "1003":"Correo no valido",
         "1004":"Contraseña debe contener al menos 8 caracterees, 1 mayuscula, 1 numero y 1 signo",
         "1005":"Corre no registrado",
         "1006":"Contraseña incorrecta",
@@ -16,7 +16,7 @@ export function DevolverRespuesta(codigo){
         "1013":"Publicacion ya no existe",
         "1014":"Usuario no valido",
         "1015":"Error de prueba",
-        "1016":"Nombre de usuario no debe contener mas de 200 caracteres",
+        "1016":"Nombre de usuario solo debe contener letras o numeros, no debe contener mas de 20 caracteres",
 
         "2000":"Error, vuelve a intentarlo"
     }
@@ -25,7 +25,9 @@ export function DevolverRespuesta(codigo){
         return respuesta[codigo];
     }
 
+    console.log(codigo);
     return console.log("No hay codigo");
+    
 
 }
 

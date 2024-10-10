@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="acceder">
-        <form class="registro" id="registro">
+     <div class="acceder"> <!--class="registro  id="formulario1"-->
+         <form class="registro" name="formulario" id="registro" method="post">  <!--id="registro" -->
             <h1>Registro</h1>
             <img src="/ForoDeDiscucion/assets/imagenes/tortuga.png" alt="">
             <br><br>
@@ -21,6 +21,7 @@
             <!-- POLITICA DE PRIVACIADAD -->
         </form>
     </div>
-    
+
+    <script src="/ForoDeDiscucion/assets/peticiones.js/prueba.js" type="module"></script>
 </body>
 </html>

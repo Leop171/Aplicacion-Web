@@ -85,15 +85,17 @@ export function ValidarBusqueda(texto){
   // Se valida que es null antes de entrar en la funcion
   texto = texto.replace(/\s/, "");
 
-  texto = texto.replace(/[^a-zA-Z0-9]/g, "");
+  if(!texto.replace(/[^a-zA-Z0-9]/g, "") === ""){
+    throw "1016";
+  };
 
   if(texto.length >= 20){
       throw "1016";
   }    
 
-  arroba = "@";
+  // arroba = "@";
 
-  texto = arroba + texto;
+  // texto = "@" + texto;
 
   return texto;
 }
@@ -110,5 +112,16 @@ export function ValidarCodigo(codigo){
 
 }
 
+// VALIDAR BUSQUEDA REALIZA EL TRABAJO DE VALIDAR NOMBRE
+// Validar que sea un nombre de usuario correcto
+// export function ValidarNombre(nombre){
+  
+//   if(nombre.length >= 20){
+//     throw "1021";    
+//   }
+
+//   return nombre.replace(/[A-Z][a-z][0-9]/g, "") === "";
+
+// }
 
 

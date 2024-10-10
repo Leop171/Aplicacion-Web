@@ -40,15 +40,15 @@ function PeticionSeleccionarNotificacion(){
 
         SeleccionarNotificacion($codigo);
 
-        var_dump(DevolverEstado("4000"));    
+        var_dump(DevolverEstado("4000")); // Si todo salio bien se envia el codigo 4000 con la data
         
 
     }catch(Exception $Error){
         if($Error ->getCode() == 45000){
 
-            var_dump($Error -> getMessage());
+            var_dump($Error -> getMessage()); // En este caso se deberia imprimir un codigo de error generico
         }else{
-            var_dump(DevolverEstado($Error ->getMessage()));
+            var_dump(DevolverEstado($Error ->getMessage())); // Si ocurre un error no se envia respuesta con data, solo el error
         }        
     }
 

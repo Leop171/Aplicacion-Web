@@ -25,10 +25,11 @@ function SeleccionarNotificacion($codigo){
         $resultado = $notificacionSeleccion ->fetch(PDO::FETCH_ASSOC);
         $notificacionSeleccion ->closeCursor();
 
-        DevolverEstado($resultado);
+        DevolverEstado($resultado); // Modelo no deberia cargar ni retornar respuesta, ese es trabajo del controlador
 
     }catch(PDOException $Error){
-        echo $Error ->getMessage();
+        echo $Error ->getMessage(); // Si el modelo lanza error es por que no fue controlado en el servidor, imprimir error generico
+        // var_dump(DevolverEstado("5000"));
     }
 }
 

@@ -42,14 +42,15 @@ function PeticionInsertarUsuario($data){
         // Crear la sesion con la pk del usuario creado
         // $_SESSION["codigoUsuario"] = $nuevoUsuario["codigo"];
 
-        var_dump(DevolverEstado("4000"));
+        echo json_encode(DevolverEstado("4000")); // Por se un registro se envia solo el codigo de estado sin data
     
     }catch(Exception $Error){
         if($Error -> getCode() == 45000){
 
-            var_dump($Error -> getMessage());
+            // var_dump($Error -> getMessage());
+            echo "ErroDelcontrolador";
         }else{
-            var_dump(DevolverEstado($Error -> getMessage()));
+            echo json_encode(DevolverEstado($Error -> getMessage()));
         }
         
     }

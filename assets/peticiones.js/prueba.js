@@ -12,33 +12,40 @@ ESTA PETICION ENVIA SOLICITUDES POST
 
 
 
-// let formulario = "";
+let formulario = "";
+let endPoint = "";
 
-// document.addEventListener("DOMContentLoaded", (event) => {
-//     formulario = document.getElementById("formulario1");
+document.addEventListener("DOMContentLoaded", (event) => {
+    formulario = document.getElementsByTagName("form").formulario; // Obtener el formulario por etiqueta y clase
 
-//     if(formulario){
-//         formulario.addEventListener('submit', BuscarUsuario);
-//     }
+    console.log(formulario);
 
-// });
+    if(formulario){
+        endPoint = formulario.id;
+        // console.log(endPointFinal);
+        // formulario.addEventListener('submit', PeticionPost);
+        switch(endPoint){
+          case "registro":
+          case "acceso":
+            formulario.addEventListener('submit', PeticionPost);
+            break;
+        }
+
+    }
+
+
+});
 
 
 
-console.log(window.location.pathname);
+// console.log(window.location.pathname);
 
+// ELIMANRE LAS VALIDACIONES SOBRE IMAGENES YA QUE SE CREARA UNA PETICION UNICA PARA CARGAR ARCHIVOS
 
 function validaciones(clave, valor){
   switch(clave){
       case "texto":
           ValidarTexto(valor);
-          break;
-      case "imagen":
-          ValidarArchivoExtension(valor);
-          // ValidarArchivoExtension(valor);
-          break;
-      case "imagen":
-          ValidarArchivoTamanio(valor);
           break;
       case "busqueda":
           ValidarBusqueda(valor);
@@ -52,6 +59,8 @@ function validaciones(clave, valor){
       case "codigo":
           ValidarCodigo(valor);
           break;
+      case "nombre":
+          ValidarBusqueda(valor);
   };
 
 
@@ -59,8 +68,8 @@ function validaciones(clave, valor){
 
 }
 
-
-function BuscarUsuario(event){
+// Como parametro tambien puede recibir endPoint hacia donde va
+function PeticionPost(event){
     try{
       event.preventDefault();
   
@@ -81,7 +90,9 @@ function BuscarUsuario(event){
 
        console.log(data);
       
-        fetch('src/controllers/acceso.php', {
+       let endPointBase = "/ForoDeDiscucion/src/controllers/";
+
+        fetch("/ForoDeDiscucion/src/controllers/" + endPoint + ".php", {
           method: metodo,
           headers: {
             'Content-Type': 'application/json'
@@ -98,7 +109,7 @@ function BuscarUsuario(event){
              // window.location.replace('inicio.php');
           }else{
             errorEsp.textContent = data.mensaje;
-            console.log("Succes", data.estado, "::::", data, "Esto es JS");
+            console.log("Succes", data.estado, "::::", data, "Esto es JS"); // Esta impresion sirve para ver la data que recibe el cliente 
           }      
             
         })
