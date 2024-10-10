@@ -1,6 +1,11 @@
 <?php
 
+
+
 function DevolverEstado($codigo){
+    // ESTA MATRIZ GUARDA LA RESPUESTA COMPLETA DEL SERVIDOR
+    $respuesta = array();    
+
 
     $estado = array(
         "4000" => array (
@@ -108,8 +113,11 @@ function DevolverEstado($codigo){
         $codigo = "c500";
     }
 
-    return($estado[$codigo]);
+    array_push($respuesta, $estado[$codigo]);
+    return $respuesta;
 
 }
+
+
 
 ?>

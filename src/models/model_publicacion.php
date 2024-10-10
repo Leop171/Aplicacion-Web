@@ -31,7 +31,9 @@ function SelectPublicacion(){
         $resultado = $publicacionObtener ->fetchAll(PDO::FETCH_ASSOC);
         $publicacionObtener ->closeCursor();
 
-        var_dump($resultado);
+        // var_dump($resultado);
+        // var_dump(json_encode($resultado));
+        echo json_encode($resultado);
 
         // TENGO QUE GUARDARLO CON GIT -
         // MAÑANA SI O SI COMIENZO EL CURSO DE C# 

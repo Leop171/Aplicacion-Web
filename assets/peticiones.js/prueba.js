@@ -10,17 +10,22 @@ import { DevolverRespuesta } from "../main.js/includes/respuestas.js";
 ESTA PETICION ENVIA SOLICITUDES POST
 */
 
-let formulario = "";
 
-document.addEventListener("DOMContentLoaded", (event) => {
-    formulario = document.getElementById("formulario1");
 
-    if(formulario){
-        formulario.addEventListener('submit', BuscarUsuario);
-    }
+// let formulario = "";
 
-});
+// document.addEventListener("DOMContentLoaded", (event) => {
+//     formulario = document.getElementById("formulario1");
 
+//     if(formulario){
+//         formulario.addEventListener('submit', BuscarUsuario);
+//     }
+
+// });
+
+
+
+console.log(window.location.pathname);
 
 
 function validaciones(clave, valor){

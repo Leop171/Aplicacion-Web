@@ -2,7 +2,7 @@
 include_once($_SERVER["DOCUMENT_ROOT"]. "/ForoDeDiscucion/rutas.php");
 include_once(UTILS. "config.php");
 include_once(UTILS. "respuesta_modelo.php");
-include_once(UTILS. "session.php");
+// include_once(UTILS. "session.php");
 
 /*
 Crear la funcion
@@ -25,7 +25,7 @@ function SeleccionarNotificacion($codigo){
         $resultado = $notificacionSeleccion ->fetch(PDO::FETCH_ASSOC);
         $notificacionSeleccion ->closeCursor();
 
-        var_dump($resultado);
+        DevolverEstado($resultado);
 
     }catch(PDOException $Error){
         echo $Error ->getMessage();

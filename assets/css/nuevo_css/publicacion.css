@@ -8,11 +8,19 @@
     margin-bottom: 6px;
 }
 */
+.publicaciones{
+    height: auto;
+    width: 100%;
+    margin: 9vh auto;
+}
+
 
 .publicacion{
-    width: 50%;
+    /* position:relative; */
+    width: 70%;
     min-width: 400px;
-    max-height: 600px;
+    max-width: 610px;
+    max-height: 800px;
     border: solid black 1px;
     border-radius: 1%;
     margin: auto;
@@ -42,7 +50,7 @@
 }
 
 #fecha{
-    width: 80px;
+    width: 160px;
     margin: 1px 2px;
     left: 0px;
 }
@@ -52,7 +60,6 @@
     margin: 4px auto;
     height: auto;
     border-radius: 2%;
-    border: 1px black solid;
 }
 
 #imagen-publicacion{
@@ -65,7 +72,7 @@
     background-color: aliceblue;
 }
 
-.reacciones{
+/* .reacciones{
     width: 100%;
     height: 24px;
     border: solid 1px black;
@@ -77,6 +84,21 @@
 .reaccion{
     height: 20px;
     width: 23%;
+    margin: 2px 2px;
+} */
+
+.reacciones{
+    width: 100%;
+    height: 24px;
+    border: solid 1px black;
+    border-radius: 2%;
+    /* position: sticky; */
+    text-align: right;
+}
+
+.imagen-reaccion{
+    height: 18px;
+    width: 10%;
     margin: 2px 2px;
 }
 

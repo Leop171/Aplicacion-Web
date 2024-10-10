@@ -63,7 +63,10 @@ function PeticionSeleccionarPublicacion(){
     try{
         SelectPublicacion();
 
-        var_dump("4000");
+        // echo json_encode(DevolverEstado("4000"));
+        // var_dump(DevolverEstado("4000"));
+        // var_dump(json_encode(DevolverEstado("4000")));
+        // var_dump(json_encode(DevolverEstado("4000")));
     }catch(Exception $Error){
         if($Error -> getCode() == 4500){
             var_dump($Error -> getMessage());            
