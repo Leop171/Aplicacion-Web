@@ -33,22 +33,28 @@ Codigo del catch
 
 function PeticionSeleccionarNotificacion(){
     try{
-                
-        $codigo = $_SESSION["codigoUsuario"] ?? throw new Exception("4017");
         
-        ValidarCodigo($codigo);
+        session_start();
+        $codigo = $_SESSION["__usuario_codigo"] ?? throw new Exception("4017"); // VERIFICAR QUE LA SESSION EXISTA
+        
+        ValidarCodigo($codigo); // VERIFICAR QUE EL CODIGO DE SESSION SE VALIDO
 
-        SeleccionarNotificacion($codigo);
-
-        var_dump(DevolverEstado("4000")); // Si todo salio bien se envia el codigo 4000 con la data
+        // $respuestaModelo = SeleccionarNotificacion($codigo); 
+        $respuestaModelo = SeleccionarNotificacion($codigo); 
+        
+                                            // EJECUTAR EL MODELO Y GUARDAR LA RESPUESTA EN UNA VARIABLE
+        // SI EL MODELO TIENE UN ERROR SE EJECUTARA EN SU BLOQUE TRY-CATCH Y LA EJECUCION SE DETENDAR SIN SALIR DEL MODELO
+        // SI LA EJECUCION SALIO DEL MODELO SOLO PUEDE DEVOLVER FALSE O UN ARRAY CON LA DATA, SI ES FALSE EL CLIENTE PRESENTA EL MENSAJE DONDE
+        // DICE QUE NO HAY DATA PARA MOSTRAR, DE LO CONTRARIO TENDRA UN ARRAY PARA RECORRER
+        echo json_encode(DevolverEstado("4000", $respuestaModelo));
         
 
     }catch(Exception $Error){
         if($Error ->getCode() == 45000){
 
-            var_dump($Error -> getMessage()); // En este caso se deberia imprimir un codigo de error generico
+            echo json_encode($Error -> getMessage()); // En este caso se deberia imprimir un codigo de error generico
         }else{
-            var_dump(DevolverEstado($Error ->getMessage())); // Si ocurre un error no se envia respuesta con data, solo el error
+            echo json_encode(DevolverEstado($Error ->getMessage())); // Si ocurre un error no se envia respuesta con data, solo el error
         }        
     }
 

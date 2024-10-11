@@ -1,12 +1,19 @@
-.notificaciones{
+.contenedor-principla{
     width: 100%;
-    height: 84%;
+    height: auto;
     max-width: 600px;
     min-width: 300px;
     max-height: 800px;
-    margin: auto;
+    margin: 9vh auto;
     border-radius: 2%;
+    border: solid black 2px;
 }
+
+/*
+    height: auto;
+    width: 100%;
+    margin: 9vh auto;
+*/
 
 .busqueda{
     width: 98%;
@@ -28,14 +35,23 @@
     margin: 2px auto; 
 }
 
+.notificaciones{
+    height: auto;
+    width: 98%;
+    margin: 0px auto;
+}
+
 #notificacion{
     height: 44px;
     width: 98%;
-    margin: 20px auto;
+    margin: 6px auto;
     border: solid 1px black;
     background-color: azure;
 }
 
+#errorCampos{
+    text-align: center;
+}
 
 #imagen{
     height: 90%;

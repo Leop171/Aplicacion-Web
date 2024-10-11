@@ -79,7 +79,7 @@ function ValidarNombre($nombre){
 }
 
 
-ValidarCodigo("3");
+// ValidarCodigo("3");
 
 function ValidarCodigo($codigo){
 

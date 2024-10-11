@@ -1,60 +1,49 @@
+// import { DevolverRespuesta } from "../main.js/includes/respuestas.js";
+
 try{
 
     fetch("/ForoDeDiscucion/src/controllers/notificacion.php")
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
-            const publicacionesDiv = document.getElementById('notificaciones');
-            publicacionesDiv.innerHTML = ''; // Limpiar contenido previo
+            const publicacionesDiv = document.getElementById("notificaciones");
+            let errorEsp = document.getElementById("errorCampos");
+            // Limpiar contenido previo
     
-            if(data.status === "Error"){
-                console.log("Error al recibir los datos");
-            }
-            
+            if(data[0]["estado"] == true){            
+            publicacionesDiv.innerHTML = '';
             console.log(data) // Se debe eliminar cuando todo funcione al 100 solo es para ver la data que se carga
     
             const rutaBase = "ForoDeDiscucion";
     
             let imagenHtml = ``;
             
-            data.forEach(element => {
+            data[1].forEach(element => {
                 console.log(element); // Se debe eliminar cuando todo funcione al 100 solo sirve para ver las iteraciones del bucle sobre la data
-                
-                // if(element[0]){
-                //     imagenHtml = `<img class="publicacion" id="imagen-publicacion" src="${(element["direccion"])} alt="Imagen de la publicacion">`;
-                // }
-                // src="/ForoDeDiscucion/assets/imagenes/tortuga.png" 
 
-                /*
                 const publicacionHtml = `
-                <div class="publicacion" id="publicacion">
-                    <div class="informacion-usuario" id="informacion-usuario">
-                        <img src="${(element["direccion"])}" alt="imagen usuario" id="imagen-usuario">
-                        <p id="nombre-usuario">${(element["nombre"])}</p>
-                        <p id="fecha">${(element["fecha"])}</p>
+                    <div id="notificacion">
+                        <img id="imagen" src"${(element["imagen"])}" alt="imagenes_notificaciones">
+                        <p id="usuario-nombre">${(element["texto"])}</p>
+                        <p id="fecha">${(element["fecha"])}<p>
                     </div>
-                
-                    <p id="texto-publicacion">${(element["texto"])}</p>
-                    <img id="imagen-publicacion"src="/ForoDeDiscucion/assets/imagenes/tortuga.png" alt="image publicacion">
-                    <div class="reacciones">
-                        <div class="reacciones" id="reacciones">
-                        <img src="/ForoDeDiscucion/assets/imagenes/subir.png" alt="imagen-reaccion" class="imagen-reaccion">
-                        <img src="/ForoDeDiscucion/assets/imagenes/bajar.png" alt="imagen-reaccion" class="imagen-reaccion">
-                        <img src="/ForoDeDiscucion/assets/imagenes/comentario.png" alt="imagen-respuesta" class="imagen-reaccion">
-                        <img src="/ForoDeDiscucion/assets/imagenes/guardar.png" alt="imagen-guardado" class="imagen-reaccion">    
-                    </div>
-                                                                    
-                </div>
-    
-            `;*/
-    
+                `;
+
             // <>
             publicacionesDiv.innerHTML += publicacionHtml;
             });
-    
+
+        }else{
+            errorEsp.textContent = data[0]["mensaje"];
+            console.log("Succes", data.estado, "::::", data, "Esto es JS"); // Esta impresion sirve para ver la data que recibe el cliente               
+        }
+
+
         })
         .catch(error => console.log(error));
         // .catch(error => console.log('Error al cargar las publicaciones:',  JSON.stringify(error)));
     }catch(err){
         console.log("Error en el try principla" + err);
+        let errorEsp = document.getElementById("errorCampos");
+        // errorEsp.textContent = DevolverRespuesta(err);
     }
-    
+

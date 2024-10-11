@@ -7,22 +7,27 @@
 </head>
 <body>
     <?php include __DIR__. "/_barra_superior.php" ?>
-    <div class="notificaciones" id="notificaciones">
+    <div class="contenedor-principla" id="contenedor-principal">
         <div class="busqueda">
 
         <input type="search" name="buscar" id="busqueda-texto" placeholder="Buscar Notificacion">
         <input type="submit" id="busqueda-boton">
         
+        </div>        
+        <p id="errorCampos"></p>            
+        
+        <div class="notificaciones" id="notificaciones">
+            <!-- <div id="notificacion"> -->
+            <!-- <p id="mensaje-vacio">Cuando tengas una notificacion aparecera aqui</p> -->            
+            <!-- <img id="imagen" src="/ForoDeDiscucion/assets/imagenes/usuario.png" alt="imagen notificacion">
+            <p id="usuario-nombre">Usuario Nombre</p>
+            <p id="fecha">30/09/2024</p> -->                            
+            <!-- </div> -->
         </div>
-        <div id="notificacion">
-                <img id="imagen" src="/ForoDeDiscucion/assets/imagenes/usuario.png" alt="imagen notificacion">
-                <p id="usuario-nombre">Usuario Nombre</p>
-                <p id="fecha">30/09/2024</p>    
-                        
-        </div>
+        
     </div>
     <?php include __DIR__. "/_barra_inferior.php" ?>
 
-    <script src="/ForoDeDiscucion/assets/peticiones.js/SinFormulario.js/notificacion.js"></script>
+    <script type="module" src="/ForoDeDiscucion/assets/peticiones.js/SinFormulario.js/notificacion.js"></script>
 </body>
 </html>

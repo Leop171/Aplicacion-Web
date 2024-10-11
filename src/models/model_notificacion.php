@@ -15,6 +15,8 @@ Cerar la ejecucion
 Codigo catch
 */
 
+// var_dump(SeleccionarNotificacion(16));
+
 function SeleccionarNotificacion($codigo){
     try{
         $conexion = Conexion();
@@ -22,11 +24,14 @@ function SeleccionarNotificacion($codigo){
         $notificacionSeleccion = $conexion ->prepare("CALL spSelectNotificacion(:codigo)");
         $notificacionSeleccion ->bindParam(":codigo", $codigo);
         $notificacionSeleccion ->execute();
-        $resultado = $notificacionSeleccion ->fetch(PDO::FETCH_ASSOC);
+        $resultado = $notificacionSeleccion ->fetchAll(PDO::FETCH_ASSOC);
         $notificacionSeleccion ->closeCursor();
 
-        DevolverEstado($resultado); // Modelo no deberia cargar ni retornar respuesta, ese es trabajo del controlador
-
+        // EL MODELO SOLO RETORNA EL RESULTADO DE LA CONSULTAD, EN CASO DE ERROR DEBE LANZAR UNO GENERICO
+        // return $resultado;
+        // echo json_encode($resultado); // ESTO SI FUNCIONA
+        return $resultado; // ESTO SI FUNCIONA
+        
     }catch(PDOException $Error){
         echo $Error ->getMessage(); // Si el modelo lanza error es por que no fue controlado en el servidor, imprimir error generico
         // var_dump(DevolverEstado("5000"));

@@ -1,5 +1,4 @@
-import { ValidarArchivoExtension, ValidarCorreo } from "../main.js/includes/validacion.js";
-import { ValidarArchivoTamanio } from "../main.js/includes/validacion.js";
+import { ValidarCorreo } from "../main.js/includes/validacion.js";
 import { ValidarTexto } from "../main.js/includes/validacion.js";
 import { ValidarBusqueda } from "../main.js/includes/validacion.js";
 import { ValidarContrasenia } from "../main.js/includes/validacion.js";

@@ -1,16 +1,25 @@
 <?php
+/*
+ESTE ARCHIVO CONTIENE LA FUNCION QUE DEBE SER LLAMADA EN CADA RESPUESTA PERSONALIZADA DEL SERVIDOR
+EL PRIMER PARAMETRO ES EL CODGIO DE RESPUESTA QUE SE DEBE ENVIAR (OBLIGATORIO)
+EL SEGUNDO PARAMETRO DEBE SER UN ARRAY CON LA DATA ADJUNTA EN LA RESPUESTA (OPCIONAL)
 
+LA FUNCION SE DEBE LLAMAR CADA VEZ QUE EL SERVIDOR ENVIA DATA O LANZA UN ERROR
 
+*/
 
-function DevolverEstado($codigo, $data = NULL){
+// echo json_encode(DevolverEstado("4000", array("clave" => "valor"))); ASI ES COMO SE DEBE LLAMAR LA FUNCION DESDE UN CONTROLADOR
+
+function DevolverEstado($codigo, $data=NULL){
     // ESTA MATRIZ GUARDA LA RESPUESTA COMPLETA DEL SERVIDOR
-    $respuesta = array("estado" => NULL, "data" => NULL);    
+    // $respuesta = array("estado" => NULL, "data" => NULL);
+    $respuesta = array(/*=> array()*/);
 
 
     $estado = array(
         "4000" => array (
             "estado" => true,
-            "codigo" => 4000,
+            "codigo" => "4000",
             "mensaje" => "Completado"
         ),
         "4001" => array (
@@ -115,11 +124,21 @@ function DevolverEstado($codigo, $data = NULL){
         $codigo = "5000"; // c500
     }
 
-    $estado[$codigo[3]] = $data;
+    // $respuesta[] = $estado[$codigo]; // SI CARGAR EL ESTADO DE FORMA CORRECTA
+    // $respuesta[] = $data;
+    // $respuesta[] = $data;
+    // $respuesta[] = $data;
+    array_push($respuesta, $estado[$codigo]);
+    array_push($respuesta, $data);
+
+    // return ($estado[$codigo]);
+    return $respuesta;
+
+    // CARGAR LA DATA EN UN ARRAY DE RESPUESTA
+    // $respuesta["estado"] = $estado[$codigo];
     // $respuesta["data"] = $data;
-    // array_push($respuesta, $estado[$codigo]);
-    // array_push($respuesta, $data);
-    return $estado[$codigo];
+
+    // return $respuesta;
 
 }
 
