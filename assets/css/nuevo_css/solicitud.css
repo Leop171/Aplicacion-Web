@@ -1,11 +1,14 @@
-.solicitudes{
+.contenedor-principal{
     width: 100%;
-    height: 84%;
+    height: auto;
     max-width: 600px;
-    min-width: 200px;
+    min-width: 300px;
     max-height: 800px;
-    margin: auto;
+    margin: 9vh auto;
+    border-radius: 2%;
+    border: solid 2px black;
 }
+
 
 .solicitud-busqueda{
     width: 98%;
@@ -15,11 +18,13 @@
     text-align: center;
 }
 
+
 #busqueda-texto{
     height: 30px;
     width: 240px;
     margin: 2px auto;
 }
+
 
 #busqueda-boton{
     height: 30px;
@@ -27,21 +32,36 @@
     margin: 2px auto; 
 }
 
+
+#errorCampos{
+    text-align: center;
+}
+
+
+.solicitudes{
+    height: auto;
+    width: 98%;
+    margin: 0px auto;
+}
+
+
 #solicitud{
     height: 44px;
     width: 98%;
-    margin: 20px auto;
+    margin: 6px auto;
     border: solid 1px black;
     background-color: azure;
 }
 
 
 #imagen{
-    height: 90%;
-    width: 12%;
+    height: 28px;
+    width: 8%;
     display: inline-block;
-    margin: 2px auto;
+    margin: 2px 4px;
     vertical-align: middle;
+    border: solid black 1px;
+    border-radius: 40%;
 }
 
 
@@ -50,31 +70,12 @@
     display: inline-block;    
 }
 
-/* #fecha{
-    margin: 2px 10px;
-    display: inline-block;
-} */
 
 .botones{
     height: 26px;
     width: 20%;
     right: 0;
+    margin: 4px 2px;
 }
 
-/*
-<div class="solicitudes">
-        <div class="solicitud-busqueda">
-
-        <input type="search" name="buscar" id="busqueda-texto" placeholder="Buscar Solicitud">
-        <input type="submit" id="busqueda-boton">
-                
-        </div>
-        <div id="solicitud">
-                <img id="imagen" src="/ForoDeDiscucion/assets/imagenes/usuario.png" alt="imagen solicitud">
-                <p id="usuario-nombre">Usuario Nombre</p>
-                <p id="fecha">30/09/2024</p>
-                        
-        </div>
-    </div>
-*/
 

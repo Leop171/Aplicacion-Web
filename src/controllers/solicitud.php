@@ -10,7 +10,7 @@ $data = json_decode($input, true);
 
 switch ($_SERVER["REQUEST_METHOD"]){
     case "GET":
-        PeticionSeleccionarSolicitud($data);
+        PeticionSeleccionarSolicitud();
         break;
     case "POST":
         PeticionInsertarSolicitud($data);
@@ -24,21 +24,23 @@ switch ($_SERVER["REQUEST_METHOD"]){
 }
 
 
-function PeticionSeleccionarSolicitud($data){
+function PeticionSeleccionarSolicitud(){
     try{
-        $codigo = $data["codigoReceptor"] ?? throw new Exception("4014");
+        session_start();
+        $codigo = $_SESSION["__usuario_codigo"] ?? throw new Exception("4017"); // VERIFICAR QUE LA SESSION EXISTA        
 
         ValidarCodigo($codigo);
 
-        SeleccionarSolicitud($codigo);
+        $respuestaModelo = SeleccionarSolicitud($codigo);
 
-        var_dump(DevolverEstado("4000"));
+        echo json_encode(DevolverEstado("4000", $respuestaModelo));
+
     }catch(Exception $Error){
         
         if($Error -> getCode() == 45000){
-            var_dump(DevolverEstado("5000"));
+            echo json_encode(DevolverEstado("5000")); // SI LA EJECUCION EN EL PROCESO GENERA UN ERROR NO CONTROLADO SE IMRPIME UN ERROR GENERICO
         }else{
-            var_dump(DevolverEstado($Error -> getMessage()));
+            echo json_encode(DevolverEstado($Error -> getMessage()));
         }
 
     }

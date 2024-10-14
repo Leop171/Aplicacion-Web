@@ -26,10 +26,10 @@ function SeleccionarSolicitud($codigo){
         $solicitudSeleccionar = $conexion ->prepare("CALL spSelectSolicitud(:codigo)");
         $solicitudSeleccionar ->bindParam(":codigo", $codigo);
         $solicitudSeleccionar ->execute();
-        $resultado = $solicitudSeleccionar ->fetch(PDO::FETCH_ASSOC);
+        $resultado = $solicitudSeleccionar ->fetchAll(PDO::FETCH_ASSOC);
         $solicitudSeleccionar ->closeCursor();
 
-        var_dump($resultado);
+        return $resultado;
 
     }catch(PDOException $Error){
         echo $Error ->getMessage();

@@ -106,7 +106,7 @@ function PeticionPost(event){
 
             console.log(data);
              // window.location.replace('inicio.php');
-          }else{
+          }else{ // debo cambiarlo a data[1] para poder acceder correctamente a la respuesta
             errorEsp.textContent = data.mensaje;
             console.log("Succes", data.estado, "::::", data, "Esto es JS"); // Esta impresion sirve para ver la data que recibe el cliente 
           }      

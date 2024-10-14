@@ -6,22 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-    <?php include __DIR__. "/_barra_superior.php" ?>
-    <div class="amigos">
-        <div class="busqueda">
-        <input type="search" name="buscar" id="busqueda-amigo" placeholder="Buscar Amigo">
-        <input type="submit" id="busqueda-boton" value="Buscar">
+    <?php include __DIR__. "/_barra_superior.php" ?>    
+    <div class="contenedor-principal" id="contenedor-principal">
+       <div class="busqueda">
+            <input type="search" name="buscar" id="busqueda-amigo" placeholder="Buscar Amigo">
+            <input type="submit" id="busqueda-boton" value="Buscar">
         </div>
 
-        <div id="amigo">
-            <img src="/ForoDeDiscucion/assets/imagenes/usuario.png" alt="imagen usuario" id="imagen">
-            <p id="usuario-nombre">Nombre Usuario</p>
-            <input type="submit" value="Eliminar" id="boton-eliminar">
+        <p id="errorCampos"></p>
+        <div class="amigos" id="amigos">
 
-        </div>
+        </div>    
+    </div>
 
-    </div>    
-
+    
     <?php include __DIR__. "/_barra_inferior.php" ?>
+
+    <script type="module" src="/ForoDeDiscucion/assets/peticiones.js/SinFormulario.js/amigo.js"></script>
 </body>
 </html>

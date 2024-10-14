@@ -14,6 +14,8 @@ Cerar la ejecucion
 Codigo catch
 */
 
+// SeleccionarAmigo(15);
+
 function SeleccionarAmigo($codigo){
 
     try{
@@ -22,10 +24,10 @@ function SeleccionarAmigo($codigo){
         $amigoSeleccionar = $conexion->prepare("CALL spSelectAmigo(:codigo)");
         $amigoSeleccionar ->bindParam(":codigo", $codigo);
         $amigoSeleccionar ->execute();
-        $resultado = $amigoSeleccionar ->fetch(PDO::FETCH_ASSOC);
-        $amigoSeleccionar ->closeCursor();
+        $resultado = $amigoSeleccionar ->fetchAll(PDO::FETCH_ASSOC);
+        // $amigoSeleccionar ->closeCursor();
 
-        var_dump($resultado);
+        return $resultado;
 
     }catch(PDOException $Error){
 

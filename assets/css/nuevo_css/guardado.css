@@ -4,16 +4,21 @@
     max-width: 600px;
     min-width: 340px;
     max-height: 800px;
-    margin: auto;
-    /* border: solid black 2px; */
+    margin: 9vh auto;
     overflow: hidden;
 }
+
+
+#errorCampos{
+    text-align: center;
+}
+
 
 #guardado{
     display: inline-block;
     margin: 0;
-    width: 24%;
-    height: 33%;
+    width: 32%;
+    height: 32%;
     
 }
 

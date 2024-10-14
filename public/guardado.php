@@ -8,31 +8,19 @@
 <body>
     <?php include __DIR__. "/_barra_superior.php" ?>
 
-    <div class="guardados">
-        <div id="guardado">
+    <div class="guardados" id="guardados">
+        <p id="errorCampos"></p>
+        <!-- <div id="guardado">
             <a href="inicio.php">
                 <img src="/ForoDeDiscucion/assets/imagenes/no-disponible.png" alt="" id="imagen-guardada">
             </a>
-        </div>
-        <div id="guardado">
-            <a href="inicio.php">
-                <img src="/ForoDeDiscucion/assets/imagenes/lupa.png" alt="" id="imagen-guardada">
-            </a>
-        </div>
-        <div id="guardado">
-            <a href="inicio.php">
-                <img src="/ForoDeDiscucion/assets/imagenes/anadir.png" alt="" id="imagen-guardada">
-            </a>
-        </div>
-        <div id="guardado">
-            <a href="inicio.php">
-                <img src="/ForoDeDiscucion/assets/imagenes/anadir.png" alt="" id="imagen-guardada">
-            </a>
-        </div>
+        </div> -->
 
 
     </div>
     <?php include __DIR__. "/_barra_inferior.php" ?>
-    
+
+
+    <script type="module" src="/ForoDeDiscucion/assets/peticiones.js/SinFormulario.js/guardado.js"></script>
 </body>
 </html>

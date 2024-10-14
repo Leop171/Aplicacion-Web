@@ -2,18 +2,12 @@
     width: 100%;
     height: auto;
     max-width: 600px;
-    min-width: 300px;
+    min-width: 340px;
     max-height: 800px;
     margin: 9vh auto;
     border-radius: 2%;
-    border: solid black 2px;
 }
 
-/*
-    height: auto;
-    width: 100%;
-    margin: 9vh auto;
-*/
 
 .busqueda{
     width: 98%;
@@ -74,24 +68,3 @@
 
 
 
-
-
-
-/*
-
-<div class="notificaciones">
-        <div class="busqueda">
-
-        <input type="search" name="buscar" id="busqueda-texto" placeholder="Buscar Notificacion">
-        <input type="submit" id="busqueda-boton">
-                
-        </div>
-        <div id="notificacion">
-                <img id="imagen" src="/ForoDeDiscucion/assets/imagenes/usuario.png" alt="imagen notificacion">
-                <p id="usuario-nombre">Usuario Nombre</p>
-                <p id="fecha">30/09/2024</p>    
-                        
-        </div>
-    </div>
-
-*/

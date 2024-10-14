@@ -10,21 +10,22 @@ $data = json_decode($input, true);
 
 switch ($_SERVER["REQUEST_METHOD"]){
     case "GET":
-            PeticionSeleccionarAmigo($data);
-            break;
+        PeticionSeleccionarAmigo();
+        break;
     
 }
 
 
-function PeticionSeleccionarAmigo($data){
+function PeticionSeleccionarAmigo(){
     try{
-        $codigo = $data["codigo"] ?? throw new Exception("4014");
+        session_start();
+        $codigo = $_SESSION["__usuario_codigo"] ?? throw new Exception("4017"); // VERIFICAR QUE LA SESSION EXISTA
 
         ValidarCodigo($codigo);
 
-        SeleccionarAmigo($codigo);
+        $respuestaModelo = SeleccionarAmigo($codigo); 
 
-        var_dump(DevolverEstado("4000"));
+        echo json_encode(DevolverEstado("4000", $respuestaModelo));
 
     }catch(Exception $Error){
 
@@ -32,7 +33,7 @@ function PeticionSeleccionarAmigo($data){
             // var_dump(DevolverEstado("5000"));
             echo $Error ->getMessage();
         }else{
-            var_dump(DevolverEstado($Error ->getMessage()));
+            echo json_encode(DevolverEstado($Error -> getMessage()));
         }
 
     }

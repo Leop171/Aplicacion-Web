@@ -40,10 +40,10 @@ function SeleccionarGuardado($codigo){
         $guardadoSeleccionar = $conexion ->prepare("CALL spSelectGuardado(:codigo)");
         $guardadoSeleccionar ->bindParam(":codigo", $codigo);
         $guardadoSeleccionar ->execute();
-        $resultado = $guardadoSeleccionar ->fetch(PDO::FETCH_ASSOC);
+        $resultado = $guardadoSeleccionar ->fetchAll(PDO::FETCH_ASSOC);
         $guardadoSeleccionar ->closeCursor();
         
-        echo json_encode($resultado);
+        return $resultado;
 
     }catch(PDOException $Error){
         echo $Error ->getMessage();

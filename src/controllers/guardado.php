@@ -11,8 +11,8 @@ $data = json_decode($input, true);
 
 switch ($_SERVER["REQUEST_METHOD"]){
     case "GET":
-            PeticionSeleccionarGuardado($data);
-            break;
+        PeticionSeleccionarGuardado();
+        break;
     case "POST":
         PeticionInsertarGuardado($data);
         break;
@@ -34,26 +34,23 @@ Codigo del catch
 */
 
 // Los controladores con metodo GET no pueden recibir $data ya que no se envia en el cuerpo de la peticion
-function PeticionSeleccionarGuardado($data){
+function PeticionSeleccionarGuardado(){
     try{
-        // session_start();
-        $codigo = $_SESSION["codigoUsuario"] ?? throw new Exception("4017");
-        // $codigo = $data["codigo"] ?? throw new Exception("4014");
-
+        session_start();
+        $codigo = $_SESSION["__usuario_codigo"] ?? throw new Exception("4017"); // VERIFICAR QUE LA SESSION EXISTA    
 
         ValidarCodigo($codigo);
 
-        SeleccionarGuardado($codigo);
+        $respuestaModelo = SeleccionarGuardado($codigo);
 
-        echo json_encode(DevolverEstado("4000"));
+        echo json_encode(DevolverEstado("4000", $respuestaModelo));
 
     }catch(Exception $Error){
-        if($Error ->getCode() == 45000){
-
-            echo json_encode($Error -> getMessage());
+        if($Error -> getCode() == 45000){
+            echo json_encode(DevolverEstado("5000")); // SI LA EJECUCION EN EL PROCESO GENERA UN ERROR NO CONTROLADO SE IMRPIME UN ERROR GENERICO
         }else{
-            echo json_encode(DevolverEstado($Error ->getMessage()));
-        } 
+            echo json_encode(DevolverEstado($Error -> getMessage()));
+        }
 
     }
 }
