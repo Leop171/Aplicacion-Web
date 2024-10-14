@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../assets/css/nuevo_css/menu_superior.css">
+<link rel="stylesheet" href="../assets/css/menu_superior.css">
 <div class="barra-superior" id="barra-superior">
     <img src="/ForoDeDiscucion/assets/imagenes/tortuga.png" alt="Logo" class="imagen-menu" id="imagen-logo">
     <img src="/ForoDeDiscucion/assets/imagenes/guardar.png" alt="Guardado" class="imagen-menu" id="imagen-guardado">

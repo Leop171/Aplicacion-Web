@@ -1,10 +1,10 @@
-import { ValidarArchivoExtension, ValidarCorreo } from "../main.js/includes/validacion.js";
-import { ValidarArchivoTamanio } from "../main.js/includes/validacion.js";
-import { ValidarTexto } from "../main.js/includes/validacion.js";
-import { ValidarBusqueda } from "../main.js/includes/validacion.js";
-import { ValidarContrasenia } from "../main.js/includes/validacion.js";
-import { ValidarCodigo } from "../main.js/includes/validacion.js";
-import { DevolverRespuesta } from "../main.js/includes/respuestas.js";
+import { ValidarArchivoExtension, ValidarCorreo } from "assets/peticiones.js/includes/validacion.js";
+import { ValidarArchivoTamanio } from "assets/peticiones.js/includes/validacion.js";
+import { ValidarTexto } from "assets/peticiones.js/includes/validacion.js";
+import { ValidarBusqueda } from "assets/peticiones.js/includes/validacion.js";
+import { ValidarContrasenia } from "assets/peticiones.js/includes/validacion.js";
+import { ValidarCodigo } from "assets/peticiones.js/includes/validacion.js";
+import { DevolverRespuesta } from "assets/peticiones.js/includes/validacion.js";
 
 /*
 ESTA PETICION ESTA ENCARGADA DE EXTRAER DATA EN LAS PETCIONES GET

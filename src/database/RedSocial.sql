@@ -25,13 +25,13 @@ DROP TABLE IF EXISTS `RedSocial`.`usuario` ;
 
 CREATE TABLE IF NOT EXISTS `RedSocial`.`usuario` (
   `codigo` INT  NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `correo` VARCHAR(45) NULL,
+  `nombre` VARCHAR(45) UNIQUE NOT NULL,
+  `correo` VARCHAR(45) UNIQUE NULL,
   `contrasenia` VARCHAR(60) NULL,
   `descripcion` VARCHAR(180) NULL,
   `fecha` DATETIME NULL,
-  PRIMARY KEY (`codigo`))
-ENGINE = InnoDB;
+  PRIMARY KEY (`codigo`, `nombre`, `correo`))
+ENGINE = INNODB;
 
 
 -- -----------------------------------------------------
@@ -41,8 +41,8 @@ DROP TABLE IF EXISTS `RedSocial`.`reaccion` ;
 
 CREATE TABLE IF NOT EXISTS `RedSocial`.`reaccion` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
-  `positivo` INT DEFAULT 0,
-  `negativo` INT DEFAULT 0,
+  `positivo` INT NULL,
+  `negativo` INT NULL,
   PRIMARY KEY (`codigo`))
 ENGINE = InnoDB;
 
@@ -59,8 +59,8 @@ CREATE TABLE IF NOT EXISTS `RedSocial`.`publicacion` (
   `usuario_codigo` INT NOT NULL,
   `reaccion_codigo` INT NOT NULL,
   PRIMARY KEY (`codigo`, `usuario_codigo`, `reaccion_codigo`),
-  -- INDEX `fk_publicacion_usuario1_idx` (`usuario_codigo` ASC) VISIBLE,
-  -- INDEX `fk_publicacion_reaccion1_idx` (`reaccion_codigo` ASC) VISIBLE,
+--   INDEX `fk_publicacion_usuario1_idx` (`usuario_codigo` ASC) VISIBLE,
+--   INDEX `fk_publicacion_reaccion1_idx` (`reaccion_codigo` ASC) VISIBLE,
   CONSTRAINT `fk_publicacion_usuario1`
     FOREIGN KEY (`usuario_codigo`)
     REFERENCES `RedSocial`.`usuario` (`codigo`)
@@ -87,9 +87,9 @@ CREATE TABLE IF NOT EXISTS `RedSocial`.`respuesta` (
   `publicacion_codigo` INT NOT NULL,
   `reaccion_codigo` INT NOT NULL,
   PRIMARY KEY (`codigo`, `usuario_codigo`, `publicacion_codigo`, `reaccion_codigo`),
-  -- INDEX `fk_respuesta_usuario1_idx` (`usuario_codigo` ASC) VISIBLE,
-  -- INDEX `fk_respuesta_publicacion1_idx` (`publicacion_codigo` ASC) VISIBLE,
-  -- INDEX `fk_respuesta_reaccion1_idx` (`reaccion_codigo` ASC) VISIBLE,
+--   INDEX `fk_respuesta_usuario1_idx` (`usuario_codigo` ASC) VISIBLE,
+--   INDEX `fk_respuesta_publicacion1_idx` (`publicacion_codigo` ASC) VISIBLE,
+--   INDEX `fk_respuesta_reaccion1_idx` (`reaccion_codigo` ASC) VISIBLE,
   CONSTRAINT `fk_respuesta_usuario1`
     FOREIGN KEY (`usuario_codigo`)
     REFERENCES `RedSocial`.`usuario` (`codigo`)
@@ -130,10 +130,10 @@ DROP TABLE IF EXISTS `RedSocial`.`imagen_publicacion` ;
 
 CREATE TABLE IF NOT EXISTS `RedSocial`.`imagen_publicacion` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
-  `direccion` VARCHAR(120) NULL,
+  `direccion` VARCHAR(80) NULL,
   `publicacion_codigo` INT NOT NULL,
   PRIMARY KEY (`codigo`, `publicacion_codigo`),
-  -- INDEX `fk_publicacion_imagen_publicacion1_idx` (`publicacion_codigo` ASC) VISIBLE,
+--   INDEX `fk_publicacion_imagen_publicacion1_idx` (`publicacion_codigo` ASC) VISIBLE,
   CONSTRAINT `fk_publicacion_imagen_publicacion1`
     FOREIGN KEY (`publicacion_codigo`)
     REFERENCES `RedSocial`.`publicacion` (`codigo`)
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `RedSocial`.`imagen_usuario` (
   `direccion` VARCHAR(80) NULL,
   `usuario_codigo` INT NOT NULL,
   PRIMARY KEY (`codigo`, `usuario_codigo`),
-  -- INDEX `fk_usuario_imagen_usuario1_idx` (`usuario_codigo` ASC) VISIBLE,
+--   INDEX `fk_usuario_imagen_usuario1_idx` (`usuario_codigo` ASC) VISIBLE,
   CONSTRAINT `fk_usuario_imagen_usuario1`
     FOREIGN KEY (`usuario_codigo`)
     REFERENCES `RedSocial`.`usuario` (`codigo`)
@@ -183,13 +183,13 @@ CREATE TABLE IF NOT EXISTS `RedSocial`.`imagen_respuesta` (
   `direccion` VARCHAR(80) NULL,
   `respuesta_codigo` INT NOT NULL,
   PRIMARY KEY (`codigo`, `respuesta_codigo`),
-  -- INDEX `fk_respuesta_imagen_respuesta1_idx` (`respuesta_codigo` ASC) VISIBLE,
+--   INDEX `fk_respuesta_imagen_respuesta1_idx` (`respuesta_codigo` ASC) VISIBLE,
   CONSTRAINT `fk_respuesta_imagen_respuesta1`
     FOREIGN KEY (`respuesta_codigo`)
     REFERENCES `RedSocial`.`respuesta` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = INNODB;
 
 
 -- -----------------------------------------------------
@@ -198,7 +198,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `RedSocial`.`amigo` ;
 
 CREATE TABLE IF NOT EXISTS `RedSocial`.`amigo` (
-  `codigo` INT NOT NULL AUTO_INCREMENT,
+  `codigo` INT NOT NULL,
   `fecha` DATETIME NULL,
   PRIMARY KEY (`codigo`))
 ENGINE = InnoDB;
@@ -212,30 +212,107 @@ DROP TABLE IF EXISTS `RedSocial`.`usuario_amigo` ;
 CREATE TABLE IF NOT EXISTS `RedSocial`.`usuario_amigo` (
   `usuario_codigo` INT NOT NULL,
   `amigo_codigo` INT NOT NULL,
-  `estado` CHAR(1) NOT NULL ;
   PRIMARY KEY (`usuario_codigo`, `amigo_codigo`),
-  -- INDEX `fk_usuario_has_amigo_amigo1_idx` (`amigo_codigo` ASC) VISIBLE,
-  -- INDEX `fk_usuario_has_amigo_usuario1_idx` (`usuario_codigo` ASC) VISIBLE,
+  UNIQUE INDEX(`usuario_codigo`, `amigo_codigo`),
+--  INDEX `fk_usuario_has_amigo_amigo1_idx` (`amigo_codigo` ASC) VISIBLE,
+--  INDEX `fk_usuario_has_amigo_usuario1_idx` (`usuario_codigo` ASC) VISIBLE,
   CONSTRAINT `fk_usuario_has_amigo_usuario1`
     FOREIGN KEY (`usuario_codigo`)
     REFERENCES `RedSocial`.`usuario` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_has_amigo_amigo1`
+  CONSTRAINT `fk_usuario_has_amigo_usuario2`
     FOREIGN KEY (`amigo_codigo`)
-    REFERENCES `RedSocial`.`amigo` (`codigo`)
+    REFERENCES `RedSocial`.`usuario` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = INNODB;
 
 
-/*Creacion de la consulta de inicio*/
-CREATE VIEW vInicio
-AS
-SELECT u.codigo, u.nombre, u.correo, u.descripcion,  u.fecha, iu.direccion 
-FROM RedSocial.usuario AS u
-JOIN RedSocial.imagen_usuario AS iu ON u.codigo = iu.usuario_codigo
+-- -----------------------------------------------------
+-- Table `RedSocial`.`notificacion`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `RedSocial`.`notificacion` ;
 
+CREATE TABLE IF NOT EXISTS `RedSocial`.`notificacion`(
+	`codigo` INT NOT NULL AUTO_INCREMENT,
+	`texto` VARCHAR(80) NOT NULL,
+	`fecha` DATETIME NULL,
+	`tipo` VARCHAR(20) NULL,
+	`direccion` VARCHAR(80) NULL,
+	`imagen` VARCHAR(80) NULL,
+	`estado` SMALLINT NOT NULL,
+	`usuario_codigo_emisor` INT NOT NULL,
+	`usuario_codigo_receptor` INT NOT NULL,
+	PRIMARY KEY(`codigo`, `usuario_codigo_emisor`, `usuario_codigo_receptor`),
+	CONSTRAINT `fk_usuario_notificacion1` 
+		FOREIGN KEY (`usuario_codigo_emisor`) 
+		REFERENCES `RedSocial`.`usuario` (`codigo`)
+		ON DELETE NO ACTION
+   	ON UPDATE NO ACTION,
+   CONSTRAINT `fk_usuario_notificacion2`
+		FOREIGN KEY (`usuario_codigo_receptor`)
+		REFERENCES `RedSocial`.`usuario`(`codigo`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+		)
+ENGINE = INNODB;
+
+-- -----------------------------------------------------
+-- Table `RedSocial`.`guardado`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `RedSocial`.`guardado` ;
+
+CREATE TABLE IF NOT EXISTS `RedSocial`.`guardado`(
+	`codigo` INT NOT NULL AUTO_INCREMENT,
+	`codigo_usuario` INT NOT NULL,
+	`direccion` VARCHAR(80) NOT NULL,
+	`publicacion_codigo` INT NOT NULL,
+	PRIMARY KEY(`codigo`),
+	UNIQUE INDEX `idx_guardado_evitar_duplicados` (`codigo_usuario`, `publicacion_codigo`),
+	CONSTRAINT `fk_publicacion_guardado`
+		FOREIGN KEY(`publicacion_codigo`)
+		REFERENCES `RedSocial`.`publicacion`(`codigo`)
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION)
+ENGINE = INNODB;
+
+
+-- -----------------------------------------------------
+-- Table `RedSocial`.`solicitud`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `RedSocial`.`solicitud` ;
+
+CREATE TABLE IF NOT EXISTS `RedSocial`.`solicitud`(
+	`codigo`  INT NOT NULL AUTO_INCREMENT,
+	`fecha` DATETIME NOT NULL,
+	`estado` SMALLINT NOT NULL,
+	`usuario_codigo_emisor` INT NOT NULL,
+	`usuario_codigo_receptor` INT NOT NULL,
+	PRIMARY KEY(`codigo`, `usuario_codigo_emisor`, `usuario_codigo_receptor`),
+	UNIQUE INDEX `idx_solicitud_evitar_duplicados`(`usuario_codigo_emisor`, `usuario_codigo_receptor`), 
+	--  INDEX `fk_usuario_has_amigo_usuario1_idx` (`usuario_codigo` ASC) VISIBLE,
+	CONSTRAINT `fk_usuario_solicitud`
+		FOREIGN KEY(`usuario_codigo_emisor`)
+		REFERENCES `RedSocial`.`usuario`(`codigo`)
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION,
+	CONSTRAINT `fk_usuario_solicitud2`
+		FOREIGN KEY(`usuario_codigo_receptor`)
+		REFERENCES `RedSocial`.`usuario`(`codigo`)
+		ON UPDATE NO ACTION
+		ON DELETE NO ACTION)
+ENGINE = INNODB;
+
+
+-- --------------------------------------------------
+--	VISTAS
+-- --------------------------------------------------
+
+-- -----------------------------------------------------
+-- View `RedSocial`.`vPublicacion`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `RedSocial`.`vPublicacion` ;
 
 CREATE VIEW vPublicacion AS
 SELECT i.direccion, p.texto, iu.direccion AS perfil, u.nombre,  
@@ -244,8 +321,12 @@ FROM publicacion AS p JOIN imagen_publicacion AS i
 ON i.publicacion_codigo = p.codigo 
 JOIN usuario AS u ON u.codigo = p.usuario_codigo 
 JOIN reaccion AS r ON r.codigo = p.reaccion_codigo
-JOIN imagen_usuario AS iu ON p.usuario_codigo  = iu.usuario_codigo LIMIT 10
+JOIN imagen_usuario AS iu ON p.usuario_codigo  = iu.usuario_codigo LIMIT 10;
 
+-- -----------------------------------------------------
+-- View `RedSocial`.`vPublicaccionPerfil`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `RedSocial`.`vPublicacionPerfil` ;
 
 CREATE VIEW vPublicacionPerfil AS
 SELECT i.direccion, p.texto, iu.direccion AS perfil, u.nombre,  
@@ -255,6 +336,498 @@ ON i.publicacion_codigo = p.codigo
 JOIN usuario AS u ON u.codigo = p.usuario_codigo 
 JOIN reaccion AS r ON r.codigo = p.reaccion_codigo
 JOIN imagen_usuario AS iu ON p.usuario_codigo  = iu.usuario_codigo LIMIT 10;
+
+-- -----------------------------------------------------
+-- View `RedSocial`.`vInicio`
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS `RedSocial`.`vInicio` ;
+
+CREATE VIEW vInicio
+AS
+SELECT u.codigo, u.nombre, u.correo, u.descripcion,  u.fecha, iu.direccion 
+FROM RedSocial.usuario AS u
+JOIN RedSocial.imagen_usuario AS iu ON u.codigo = iu.usuario_codigo;
+
+-- --------------------------------------------------
+--	PROCESOS ALMACENADOS
+-- --------------------------------------------------
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spUpdateUsuario`
+-- -----------------------------------------------------
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spUpdateUsuario$$
+CREATE PROCEDURE spUpdateUsuario(IN _codigo INT, IN _nombre VARCHAR(45), IN _descripcion VARCHAR(180), IN _direccion VARCHAR(80))
+BEGIN
+	UPDATE usuario SET nombre = COALESCE(_nombre, nombre), descripcion = COALESCE(_descripcion, descripcion) WHERE codigo = _codigo;
+	UPDATE imagen_usuario SET direccion = COALESCE(_direccion, direccion) WHERE usuario_codigo = _codigo;
+END $$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectAmigo`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectAmigo$$
+CREATE PROCEDURE spSelectAmigo(IN _usuario INT)
+BEGIN
+	SELECT u.codigo, u.nombre, iu.direccion FROM usuario AS u 
+	JOIN usuario_amigo AS ua ON u.codigo = ua.usuario_codigo
+	JOIN imagen_usuario AS iu ON u.codigo = iu.usuario_codigo WHERE ua.amigo_codigo = _usuario OR ua.usuario_codigo = _usuario;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectUsuario`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectUsuario$$
+CREATE PROCEDURE spSelectUsuario(IN _entrada VARCHAR(40))
+BEGIN
+	SELECT u.codigo, u.nombre, iu.direccion 
+	FROM usuario AS u 
+	JOIN imagen_usuario AS iu ON u.codigo = iu.usuario_codigo 
+	WHERE u.nombre LIKE CONCAT(_entrada, '%') LIMIT 20;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectPreviewAmigo`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectPreviewAmigo$$
+CREATE PROCEDURE spSelectPreviewAmigo(IN _usuario INT)
+BEGIN
+	SELECT u.codigo, ua.usuario_codigo, u.nombre, iu.direccion FROM usuario AS u 
+	JOIN usuario_amigo AS ua ON u.codigo = ua.usuario_codigo
+	JOIN imagen_usuario AS iu ON u.codigo = iu.usuario_codigo WHERE u.codigo = _usuario LIMIT 6;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectRespuesta`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectRespuesta$$
+CREATE PROCEDURE spSelectRespuesta(IN _publicacion INT)
+BEGIN
+	SELECT rp.usuario_codigo, rp.publicacion_codigo, rp.reaccion_codigo ,iu.direccion, u.nombre, rp.fecha, rp.tema, 
+	ir.direccion, rc.positivo, rc.negativo FROM respuesta AS rp
+	JOIN usuario AS u ON rp.usuario_codigo = u.codigo
+	JOIN imagen_usuario AS iu ON u.codigo = iu.usuario_codigo
+	JOIN imagen_respuesta AS ir ON ir.respuesta_codigo = rp.codigo
+	JOIN reaccion AS rc ON rp.reaccion_codigo = rc.codigo WHERE rp.publicacion_codigo = _publicacion;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectGuardado`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectGuardado$$
+CREATE PROCEDURE spSelectGuardado(IN _usuario INT)
+BEGIN
+	SELECT p.usuario_codigo, g.direccion, g.publicacion_codigo, p.texto, ip.direccion
+	FROM guardado AS g
+	JOIN publicacion AS p ON g.publicacion_codigo = p.codigo
+	JOIN imagen_publicacion AS ip ON ip.publicacion_codigo = g.publicacion_codigo;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectNotificacion`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectNotificacion$$
+CREATE PROCEDURE spSelectNotificacion(IN _codigo INT)
+BEGIN
+	SELECT codigo, fecha, texto, tipo, direccion, imagen, estado FROM notificacion 
+	WHERE codigo = _codigo;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectSolicitud`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectSolicitud$$
+CREATE PROCEDURE spSelectSolicitud(IN _codigo_receptor INT)
+BEGIN
+	SELECT s.estado, s.usuario_codigo_emisor, s.usuario_codigo_receptor, u.nombre, iu.direccion
+	FROM solicitud AS s 
+	JOIN usuario AS u ON s.usuario_codigo_receptor = u.codigo
+	JOIN imagen_usuario AS iu ON s.usuario_codigo_receptor = iu.usuario_codigo
+	WHERE s.usuario_codigo_receptor = _codigo_receptor;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spInsertSolicitud`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spInsertSolicitud$$
+CREATE PROCEDURE spInsertSolicitud(IN _codigo_emisor INT, IN _codigo_receptor INT)
+BEGIN	
+	DECLARE EXIT HANDLER FOR 1062
+	BEGIN
+		ROLLBACK;
+		SELECT "Ya se ha enviado la solicitud";
+	END;
+	DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		ROLLBACK;	
+		SELECT "Algo salio mal, intenta recargar la pagina";
+	END;
+	START TRANSACTION;
+	INSERT INTO solicitud(fecha, estado, usuario_codigo_emisor, usuario_codigo_receptor) 
+	VALUES("2024-01-01", 1, _codigo_emisor, _codigo_receptor);
+	
+	INSERT INTO notificacion(texto, fecha, tipo, direccion, imagen, estado, usuario_codigo_emisor,
+	usuario_codigo_receptor) VALUES("Una notificacion", "2024-01-01", "Solicitud", 
+	"direccion/donde/ocurrio/notificacion", "../assets/imagen/notificacion/solicitud.png", 1,
+	_codigo_emisor, _codigo_receptor);
+	COMMIT;
+END$$ 
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spInsertPublicacion`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spInsertPublicacion$$
+CREATE PROCEDURE spInsertPublicacion(IN _usuario_codigo INT, IN _texto VARCHAR(200), IN _imagen VARCHAR(80))
+BEGIN	
+	
+	DECLARE __reaccion_codigo INT;
+	DECLARE __publicacion_codigo INT;
+	DECLARE __fecha DATETIME;
+	
+ 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+ 	BEGIN
+ 		SELECT "Algo salio mal, recarga la pagina y vuelve a intertalo";
+ 		ROLLBACK;
+ 	END;
+
+ 	DECLARE EXIT HANDLER FOR 1452
+	 	BEGIN
+		SELECT "Usuario incorrecto, recarga la pagina y vuelve a intentarlo";
+ 		ROLLBACK;
+ 	END;
+		
+	START TRANSACTION;
+	
+	INSERT INTO reaccion(positivo, negativo) VALUES(0, 0);
+	
+	SET __reaccion_codigo := LAST_INSERT_ID();
+	SET __fecha := NOW();
+	
+	INSERT INTO publicacion(fecha, texto, usuario_codigo, reaccion_codigo)
+	VALUES(__fecha, _texto, _usuario_codigo, __reaccion_codigo);	
+	
+	SET __publicacion_codigo := LAST_INSERT_ID();
+				
+	INSERT INTO imagen_publicacion(direccion, publicacion_codigo) 
+	VALUES(_imagen, __publicacion_codigo);
+
+	COMMIT;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spInsertRespuesta`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spInsertRespuesta$$
+CREATE PROCEDURE spInsertRespuesta(IN _usuario_codigo INT, IN _publicacion_codigo INT, 
+IN _tema VARCHAR(200), IN _imagen VARCHAR(80))
+BEGIN	
+	
+	DECLARE __reaccion_codigo INT;
+	DECLARE __respuesta_codigo INT;
+	DECLARE __fecha DATETIME;
+	
+	-- EXCEPCION CUANDO LA PUBLICACION YA NO EXISTA	
+	DECLARE EXIT HANDLER FOR 1452
+	BEGIN
+		SELECT "La publicacion ya no xiste";
+		ROLLBACK;
+	END;
+
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		SELECT "Algo salio mal, recarga la pagina y vuelve a intertalo";
+		ROLLBACK;
+	END;
+	
+	
+	START TRANSACTION;
+	-- INSERTAR EN LA TABLA
+	
+	INSERT INTO reaccion(positivo, negativo) VALUES(0, 0);
+	
+	SET __reaccion_codigo := LAST_INSERT_ID();
+	SET __fecha := NOW();
+	
+	INSERT INTO respuesta(fecha, tema, usuario_codigo, publicacion_codigo, reaccion_codigo)
+	VALUES(__fecha, _tema, _usuario_codigo, _publicacion_codigo, __reaccion_codigo);	
+	
+	SET __respuesta_codigo := LAST_INSERT_ID();
+				
+	INSERT INTO imagen_respuesta(direccion, respuesta_codigo) 
+	VALUES(_imagen, __respuesta_codigo);
+
+	COMMIT;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spInsertGuardado`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spInsertGuardado$$
+CREATE PROCEDURE spInsertGuardado(IN _codigo_usuario INT, IN _direccion VARCHAR(80), IN _codigo_publicacion INT)
+BEGIN	
+	DECLARE EXIT HANDLER FOR 1452
+	BEGIN
+		SELECT "La publicacion ya no existe";
+		ROLLBACK;
+	
+	END;
+	
+	DECLARE EXIT HANDLER FOR 1062
+	BEGIN
+		SELECT "Ya has guardado esta publicacion";
+		ROLLBACK;
+	END;
+	
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		SELECT "Algo salio mal, recarga la pagina y vuelve a intertalo";
+		ROLLBACK;
+	END;
+
+	START TRANSACTION;
+		INSERT INTO guardado (codigo_usuario, direccion, publicacion_codigo) VALUES(_codigo_usuario, _direccion, _codigo_publicacion);
+	COMMIT;
+END$$ 
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectGuardado`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectGuardado$$
+CREATE PROCEDURE spSelectGuardado(IN _usuario INT)
+BEGIN
+	SELECT g.codigo_usuario, g.direccion, g.publicacion_codigo, p.texto, ip.direccion
+	FROM guardado AS g
+	JOIN publicacion AS p ON g.publicacion_codigo = p.codigo
+	JOIN imagen_publicacion AS ip ON ip.publicacion_codigo = g.publicacion_codigo
+	WHERE g.codigo_usuario = _usuario;
+	END$$	
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spInsertNotificacion`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spInsertNotificacion$$
+CREATE PROCEDURE spInsertNotificacion(IN _codigo_receptor INT, IN _codigo_emisor INT, 
+IN _texto VARCHAR(80), IN _tipo VARCHAR(20), IN _direccion VARCHAR(80), IN _imagen VARCHAR(80))
+BEGIN	
+	DECLARE __fecha DATETIME;
+
+	DECLARE EXIT HANDLER FOR 1452
+	BEGIN
+		SELECT "El usuario ya no existe";
+		ROLLBACK;
+	END;
+ 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		SELECT "Algo salio mal, recarga la pagina y vuelve a intertalo";
+		ROLLBACK;
+	END;
+	
+	START TRANSACTION;
+	SET __fecha := NOW();
+	
+		INSERT INTO notificacion(texto, fecha, tipo, direccion, imagen, estado, 
+		usuario_codigo_emisor, usuario_codigo_receptor) 
+		VALUES(_texto, __fecha, _tipo, _direccion, _imagen, 1, _codigo_emisor,
+		_codigo_receptor);
+	COMMIT;
+END$$ 
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spInsertUsuario`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spInsertUsuario$$
+CREATE PROCEDURE spInsertUsuario(IN _nombre VARCHAR(45), IN _correo VARCHAR(45), 
+IN _contrasenia VARCHAR(60), OUT __usuario_codigo INT)
+BEGIN
+	DECLARE __fecha DATETIME;
+	-- DECLARE __usuario_codigo INT;	
+	
+	DECLARE EXIT HANDLER FOR 1062
+	BEGIN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El correo ya está registrado';
+		ROLLBACK;
+	END;
+	
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		SELECT "Algo salio mal, recarga la pagina y vuelve a intertalo";
+		ROLLBACK;
+	END;
+	
+	START TRANSACTION;
+	
+	SET __fecha := NOW();
+	INSERT INTO usuario (nombre, correo, contrasenia, descripcion, fecha) 
+	VALUES(_nombre, _correo, _contrasenia, NULL, __fecha);
+	
+
+	SET __usuario_codigo := LAST_INSERT_ID();	
+	INSERT INTO imagen_usuario(direccion, usuario_codigo) 
+	VALUES("/imagen_perfil/default/icono-usuario.png", __usuario_codigo);
+
+	SELECT __usuario_codigo;
+	
+	COMMIT;
+	
+	-- SELECT __usuario_codigo;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectUsuarioCorreo`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectUsuarioCorreo$$
+CREATE PROCEDURE spSelectUsuarioCorreo(IN _correo VARCHAR(45))
+BEGIN
+	SELECT codigo, correo FROM usuario WHERE correo = _correo;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectUsuarioNombre`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectUsuarioNombre$$
+CREATE PROCEDURE spSelectUsuarioNombre(IN _nombre VARCHAR(45))
+BEGIN
+	SELECT correo FROM usuario WHERE nombre = _nombre;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectAcceso`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectAcceso$$
+CREATE PROCEDURE spSelectAcceso(IN _correo VARCHAR(45), IN _contrasenia VARCHAR(65))
+BEGIN
+	SELECT codigo, correo, contrasenia FROM usuario WHERE correo = _correo;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectPublicacion`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectPublicacion$$
+CREATE PROCEDURE spSelectPublicacion()
+BEGIN
+	SELECT u.nombre, p.codigo, p.fecha, p.texto, p.reaccion_codigo, ip.direccion, rcc.positivo, rcc.negativo 
+	FROM publicacion AS p 
+	JOIN usuario AS u ON p.usuario_codigo = u.codigo
+	JOIN imagen_publicacion AS ip ON p.codigo = ip.publicacion_codigo
+	JOIN reaccion AS rcc ON p.reaccion_codigo = rcc.codigo LIMIT 6;
+END$$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spEliminarSolicitud`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spEliminarSolicitud$$
+CREATE PROCEDURE spEliminarSolicitud(IN _codigo_receptor INT, IN _codigo_emisor INT)
+BEGIN	
+	DECLARE EXIT HANDLER FOR 1452
+	BEGIN
+		SELECT "El usuario ya no existe";
+		ROLLBACK;
+	END;
+ 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		SELECT "Algo salio mal, recarga la pagina y vuelve a intertalo";
+		ROLLBACK;
+	END;
+	START TRANSACTION;		
+		DELETE FROM solicitud WHERE usuario_codigo_emisor = _codigo_emisor 
+		AND usuario_codigo_receptor = _codigo_receptor;
+	COMMIT;
+END$$ 
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spEliminarGuardado`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spEliminarGuardado$$
+CREATE PROCEDURE spEliminarGuardado(IN _codigo_usuario INT, IN _codigo_publicacion INT)
+BEGIN	
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		SELECT "Algo salio mal, recarga la pagina y vuelve a intertalo";
+		ROLLBACK;
+	END;
+
+	START TRANSACTION;		
+		DELETE FROM guardado WHERE codigo_usuario = _codigo_usuario 
+		AND publicacion_codigo = _codigo_publicacion;
+	COMMIT;
+END$$ 
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Store Procedure `RedSocial`.`spSelectUsuarioCodigo`
+-- -----------------------------------------------------
+DELIMITER $$
+DROP PROCEDURE IF EXISTS spSelectUsuarioCodigo$$
+CREATE PROCEDURE spSelectUsuarioCodigo(IN _codigo INT)
+BEGIN
+	SELECT codigo, nombre, correo, descripcion FROM usuario WHERE codigo = _codigo;
+END$$
+DELIMITER ;
+
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

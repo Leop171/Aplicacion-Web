@@ -19,7 +19,7 @@ try{
                 console.log(element); // Se debe eliminar cuando todo funcione al 100 solo sirve para ver las iteraciones del bucle sobre la data
 
                 const publicacionHtml = `
-                        <div id="guardado">
+                        <div id="amigo">
                             <img src="${(rutaBase + element["direccion"])}" alt="Elementos Guardado id="imagen-guardada">                        
                         </div>
                 `;

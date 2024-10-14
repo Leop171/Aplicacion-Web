@@ -1,9 +1,0 @@
-Cuando envio una peticion GET no puedo enviar cuerpo en el fecth
-
-Para el controlador como amigos que es GET y requiere el codigo de session del usuario, el controlador debe tomar
-como parametro el codigo de session del usuario 
-
-Deberia crear un script global que una vez creada la session sea ahi de donde se obtiene el usuario que esta 
-controlando la web
-
-El codigo de session se guarda en una tabla?

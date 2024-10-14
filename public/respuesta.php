@@ -18,10 +18,6 @@
             <img id="imagen-publicacion"src="/ForoDeDiscucion/assets/imagenes/tortuga.png" alt="image publicacion">
             <div class="reacciones">
                 <?php include __DIR__. "/_barra_reacciones.php" ?>
-                <!-- <input type="submit" class="reaccion" value="Subir" id="reaccion-subir">
-                <input type="submit" class="reaccion" value="Bajar" id="reaccion-bajar">
-                <input type="submit" class="reaccion" value="comentario" id="reaccion-comentario">
-                <input type="submit" class="reaccion" value="Guardar" id="reaccion-guardar"> -->
             </div>
         </div>        
 

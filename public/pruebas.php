@@ -13,6 +13,6 @@
     <p><?php session_start(); var_dump($_SESSION["__usuario_codigo"])?></p>
    
     <script type="module" src="../assets/peticiones.js/nuevaPrueba.js"></script>
-    <!-- <script  type="module" src="./assets/main.js/pruebas.js"></script> -->
+    
 </body>
 </html>

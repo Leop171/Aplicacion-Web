@@ -17,14 +17,6 @@
         </div>
         <p id="errorCampos"></p> 
         <div class="solicitudes" id="solicitudes">
-            <!-- <div id="solicitud"> -->
-                    <!-- <img id="imagen" src="/ForoDeDiscucion/assets/imagenes/usuario.png" alt="imagen solicitud">
-                    <p id="usuario-nombre">Usuario Nombre</p>
-                    <p id="fecha">30/09/2024</p>
-                    <input type="submit" value="Aceptar" class="botones" id="aceptar">
-                    <input type="submit" value="Rechazar" class="botones" id="rechazar"> -->
-                            
-            <!-- </div> -->
 
         </div>
  

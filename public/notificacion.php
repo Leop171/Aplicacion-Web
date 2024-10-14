@@ -17,12 +17,7 @@
         <p id="errorCampos"></p>            
         
         <div class="notificaciones" id="notificaciones">
-            <!-- <div id="notificacion"> -->
-            <!-- <p id="mensaje-vacio">Cuando tengas una notificacion aparecera aqui</p> -->            
-            <!-- <img id="imagen" src="/ForoDeDiscucion/assets/imagenes/usuario.png" alt="imagen notificacion">
-            <p id="usuario-nombre">Usuario Nombre</p>
-            <p id="fecha">30/09/2024</p> -->                            
-            <!-- </div> -->
+
         </div>
         
     </div>
